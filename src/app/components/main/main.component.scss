@@ -1,0 +1,19 @@
+@import '../../../assets/css/variables';
+.main-wrapper {
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: min-content 1fr;
+
+    height: 100%;
+}
+
+.drawer {
+    &-container {
+        height: 100%;
+    }
+    &-sidenav {
+        &-content {
+            padding: 0rem;
+        }
+    }
+}

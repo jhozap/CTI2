@@ -1,0 +1,48 @@
+@import '../../../../../assets/css/variables';
+
+.toolbar {
+    z-index: 100;
+    display: grid;
+    grid-template-columns: min-content 1fr auto min-content;
+    grid-gap: 1rem;
+    position: sticky;
+    top: 0;
+    padding-right: 0 !important;
+    border-bottom: 1px solid rgba($gris-claro, .2);
+    &::after {
+        position: absolute;
+        // content: '';
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 3px;
+        background: $primario;
+    }
+    & span {
+        &:nth-child(3) {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 1rem;
+            justify-items: flex-end;
+            font-weight: lighter;
+            font-size: 60%;
+        }
+        &:last-child {
+            height: 100%;
+            display: flex;
+            padding: 0 1rem;
+            justify-content: flex-end;
+            align-items: center;
+            position: relative;
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 1px;
+                background: radial-gradient($gris-claro 1%, transparent 40%);
+            }
+        }
+    }
+}

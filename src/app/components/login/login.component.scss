@@ -1,0 +1,55 @@
+.container {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    // background-image: url('../../../assets/images/fondos/background-social-home.png')
+    // background-attachment: url('https://www.youtube.com/watch?v=ZDvuqkBuqbY');
+}
+
+.login {
+    min-width: 400px;
+    background: rgba(255, 255, 255, 0.541);
+    padding: 2rem;
+    border-radius: 5px;
+    display: flex;
+    flex-flow: column nowrap;
+    & form {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, auto);
+        grid-gap: 1rem;
+        & a {
+            color: #2e7d32;
+            text-decoration: none;
+            text-shadow: 0 0 5px rgba(100, 100, 100, .6);
+            text-align: center;
+        }
+    }
+    & .title {
+        margin: 2px;
+        font-size: 18pt;
+    }
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin: -7rem 1rem 1rem 1rem;
+    filter: drop-shadow(0 8px 10px rgba(100, 100, 100, 0.8));
+    & img {
+        width: 100%;
+        max-width: 150px;
+    }
+}
+
+#Video {
+  filter: opacity(0.5);
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}

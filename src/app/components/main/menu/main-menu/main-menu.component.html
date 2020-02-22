@@ -1,0 +1,21 @@
+<div class="menu-wrapper">
+  <div class="menu-wrapper__inner">
+    <span
+      *ngFor="let item of items; let i = index"
+      [routerLink]="item.submenu === undefined ? item.link : null"
+    >
+      <app-main-menu-item
+        [index]="i"
+        [icon]="item.icon"
+        [width]="item.width"
+        [heigth]="item.heigth"
+        [title]="item.title"
+        [link]="item.link"
+        [submenu]="item.submenu"
+        (expansionPanel)="getPanel($event)"
+        (clicked)="closePanels($event)"
+        (closeDrawer)="closeDrawer()"
+      ></app-main-menu-item>
+    </span>
+  </div>
+</div>

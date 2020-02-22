@@ -1,1 +1,11 @@
-<p>main works!</p>
+<mat-drawer-container class="drawer-container" autosize>
+  <mat-drawer #drawer class="drawer-sidenav" mode="side" [opened]="toggle">
+    <app-main-menu></app-main-menu>
+  </mat-drawer>
+
+  <div class="drawer-sidenav-content">
+    <app-nav-bar></app-nav-bar>
+    <router-outlet></router-outlet>
+  </div>
+  <app-footer></app-footer>
+</mat-drawer-container>

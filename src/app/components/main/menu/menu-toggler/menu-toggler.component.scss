@@ -1,0 +1,47 @@
+@import '../../../../../assets/css/variables';
+
+.toggler {
+  &-wrapper {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    &:hover span:not(.toggler-bar_open) {
+      width: 30px;
+    }
+  }
+  &-bar {
+    width: 30px;
+    height: 3px;
+    background: $gris-claro;
+    border-radius: 15px;
+
+    transition: .2s all cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    &:nth-child(2) {
+      margin: 5px 0;
+      width: 30px;
+    }
+    &:nth-child(3) {
+      width: 10px;
+    }
+
+    &_open {
+        &:nth-child(1), &:nth-child(3) {
+            transform-origin: right;
+            width: 15px;
+        }
+        &:nth-child(1) {
+            transform: rotateZ(-34deg) translateX(-5px) translateY(-3px);
+        }
+        &:nth-child(2) {
+            width: 30px;
+            transform: translateX(-2px);
+        }
+        &:nth-child(3) {
+            transform: rotateZ(34deg) translateX(-5px) translateY(3px);
+        }
+    }
+  }
+}
