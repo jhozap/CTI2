@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate {
   }
 
   async canActivate() {
-    const isUserLoggedIn = await false;
+    const isUserLoggedIn = await sessionStorage.getItem("isUserLoggedIn");
     if (isUserLoggedIn) {
       return true;
     } else {
