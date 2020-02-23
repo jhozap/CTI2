@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ComponentsService } from 'src/app/services/components.service';
 import { User } from 'src/app/models/user.class';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -14,7 +15,8 @@ export class NavBarComponent implements OnInit {
   public cargo: string = "";
   
   constructor(private _componentservice: ComponentsService,
-              private toastr: ToastrService) { }
+              private toastr: ToastrService,
+              private router: Router,) { }
 
   ngOnInit(): void {
     debugger;
@@ -35,6 +37,10 @@ export class NavBarComponent implements OnInit {
         this.cargo = user.DESC_GRADO;
       }
     });
+  }
+
+  goToHome() {
+    this.router.navigateByUrl("/home");
   }
 
 }

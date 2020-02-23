@@ -97,7 +97,7 @@ export const REAL_MENU_ITEMS: MenuItem[] = [
         heigth: 24,
         icon: 'settings_applications',
         width: 24,
-        link: 'administracion',
+        link: '/administracion',
         perfilDenied: 2
     }
 ];

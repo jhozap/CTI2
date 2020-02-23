@@ -7,6 +7,10 @@ import { CasoEmblematicoComponent } from './GRIFT/caso-emblematico/caso-emblemat
 import { SemillerosComponent } from './GRIFT/semilleros/semilleros.component';
 import { RedesComponent } from './GRIFT/redes/redes.component';
 import { GraficaProductoComponent } from './GRIFT/grafica-producto/grafica-producto.component';
+import { AdministracionComponent } from './administracion/administracion.component';
+import { UsuariosComponent } from './administracion/usuarios/usuarios.component';
+import { NewInvestigadoresComponent } from './administracion/new-investigadores/new-investigadores.component';
+import { UnidadesComponent } from './administracion/unidades/unidades.component';
 
 
 const routes: Routes = [
@@ -18,6 +22,10 @@ const routes: Routes = [
   { path: 'redes-investigacion', component: RedesComponent },
   { path: 'grafica-productos', component: GraficaProductoComponent },
   { path: 'grafica-investigaciones', component: GraficaProductoComponent },
+  { path: 'administracion', component: AdministracionComponent },
+  { path: 'administracion/usuarios', component: UsuariosComponent },
+  { path: 'administracion/newinvestigadores', component: NewInvestigadoresComponent },
+  { path: 'administracion/unidades', component: UnidadesComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' }  
 ];
 

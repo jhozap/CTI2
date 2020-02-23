@@ -39,6 +39,10 @@ import { SemillerosComponent } from "./GRIFT/semilleros/semilleros.component";
 import { RedesComponent } from "./GRIFT/redes/redes.component";
 import { GraficaProductoComponent } from "./GRIFT/grafica-producto/grafica-producto.component";
 import { GraficaInvestigacionComponent } from "./GRIFT/grafica-investigacion/grafica-investigacion.component";
+import { AdministracionComponent } from './administracion/administracion.component';
+import { UsuariosComponent } from './administracion/usuarios/usuarios.component';
+import { NewInvestigadoresComponent } from './administracion/new-investigadores/new-investigadores.component';
+import { UnidadesComponent } from './administracion/unidades/unidades.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +55,11 @@ import { GraficaInvestigacionComponent } from "./GRIFT/grafica-investigacion/gra
     SemillerosComponent,
     RedesComponent,
     GraficaProductoComponent,
-    GraficaInvestigacionComponent
+    GraficaInvestigacionComponent,
+    AdministracionComponent,
+    UsuariosComponent,
+    NewInvestigadoresComponent,
+    UnidadesComponent
   ],
   imports: [
     CommonModule,
