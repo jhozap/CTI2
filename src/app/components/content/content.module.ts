@@ -43,6 +43,10 @@ import { AdministracionComponent } from './administracion/administracion.compone
 import { UsuariosComponent } from './administracion/usuarios/usuarios.component';
 import { NewInvestigadoresComponent } from './administracion/new-investigadores/new-investigadores.component';
 import { UnidadesComponent } from './administracion/unidades/unidades.component';
+import { AutocompleteComponent } from './commonComponents/autocomplete/autocomplete.component';
+import { ChipAutocompleteComponent } from './commonComponents/chip-autocomplete/chip-autocomplete.component';
+import { SelectComponent } from './commonComponents/select/select.component';
+import { SimpleInputComponent } from './commonComponents/simple-input/simple-input.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +63,11 @@ import { UnidadesComponent } from './administracion/unidades/unidades.component'
     AdministracionComponent,
     UsuariosComponent,
     NewInvestigadoresComponent,
-    UnidadesComponent
+    UnidadesComponent,
+    AutocompleteComponent,
+    ChipAutocompleteComponent,
+    SelectComponent,
+    SimpleInputComponent
   ],
   imports: [
     CommonModule,
