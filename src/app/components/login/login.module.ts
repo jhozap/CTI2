@@ -29,6 +29,7 @@ import { MatCardModule,
   MatPaginatorModule
  } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from "ngx-toastr";
 
 
 @NgModule({
@@ -62,6 +63,7 @@ import { ReactiveFormsModule } from '@angular/forms';
      MatPaginatorModule,
  
      ReactiveFormsModule,
+     ToastrModule.forRoot()
   ]
 })
 export class LoginModule { }

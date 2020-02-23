@@ -30,6 +30,7 @@ import {
   MatPaginatorModule
 } from "@angular/material";
 import { ReactiveFormsModule } from "@angular/forms";
+import { ToastrModule } from "ngx-toastr";
 import { MainMenuComponent } from './menu/main-menu/main-menu.component';
 import { NavBarComponent } from './menu/nav-bar/nav-bar.component';
 import { MenuTogglerComponent } from './menu/menu-toggler/menu-toggler.component';
@@ -77,7 +78,9 @@ import { FooterComponent } from './footer/footer.component';
     MatPaginatorModule,
     MatSidenavModule,
 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
+    ToastrModule.forRoot()
   ]
 })
 export class MainModule { }

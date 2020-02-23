@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ComponentsService } from 'src/app/services/components.service';
+import { User } from 'src/app/models/user.class';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-nav-bar',
@@ -11,12 +13,20 @@ export class NavBarComponent implements OnInit {
   public user: string = "";
   public cargo: string = "";
   
-  constructor(private _componentservice: ComponentsService) { }
+  constructor(private _componentservice: ComponentsService,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
     debugger;
-    let values = JSON.parse(sessionStorage.getItem("user"));
+    let datosUser = atob(sessionStorage.getItem("user"));
+    let values: User = JSON.parse(datosUser);
     this.user = values.NOMBRES + " " + values.APELLIDOS;
+    let welcome = sessionStorage.getItem("welcome");
+    if(welcome == "true") {
+      this.toastr.success("Bienvenido " + this.user);
+      sessionStorage.setItem("welcome", "false");
+    }
+    
     this.cargo = values.DESC_GRADO;
     console.log(values);
     this._componentservice.user.subscribe(user => {     

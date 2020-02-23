@@ -34,18 +34,19 @@ export class LoginComponent implements OnInit {
   }
 
   submitForm = () => {
-    debugger;
     if (this.myForm.valid) {
       this.user.Username = this.myForm.controls.usuario.value;
       this.user.Password = this.myForm.controls.contraseña.value;
       this._auth.login(this.user).subscribe((data: any) => {
-        if (data) {
+        if (data != null) {
+          debugger;
           this.usuariologin = data;
           sessionStorage.setItem('user', btoa(JSON.stringify(this.usuariologin)));
           sessionStorage.setItem('isLogged', 'true');
+          sessionStorage.setItem("welcome", "true");
           this.router.navigateByUrl("/");
         } else {
-          this.toastr.warning('Datos inválidos');
+          this.toastr.warning('Usuario o contraseña incorrectos');
         }
       });
     } else {
