@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MenuItem } from 'src/app/models/interfaces.class';
 import { MatExpansionPanel } from '@angular/material';
 import { ComponentsService } from 'src/app/services/components.service';
+import { User } from 'src/app/models/user.class';
 
 @Component({
   selector: 'app-main-menu',
@@ -12,10 +13,15 @@ import { ComponentsService } from 'src/app/services/components.service';
 export class MainMenuComponent implements OnInit {
   items: MenuItem[] = [];
   panels: MatExpansionPanel[] = [];
+  usr: User
+  perfilDenied: number;
 
   constructor(private componentService: ComponentsService) { }
 
   ngOnInit(): void {
+    this.usr = JSON.parse(atob(sessionStorage.getItem("user")));
+    this.perfilDenied = this.usr.PERFIL;
+    debugger;
     this.items = this.componentService.menuItems.value;
   }
 

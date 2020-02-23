@@ -6,7 +6,8 @@ export const REAL_MENU_ITEMS: MenuItem[] = [
         heigth: 24,
         icon: 'home',
         width: 24,
-        link: 'home'
+        link: 'home',
+        perfilDenied: 0
     },
     {
         title: 'GRIFT',
@@ -14,6 +15,7 @@ export const REAL_MENU_ITEMS: MenuItem[] = [
         icon: 'playlist_add_check',
         width: 24,
         link: 'investigacion-institucional',
+        perfilDenied: 0,
         submenu: [
             {
                 link: 'investigacion-institucional',
@@ -51,6 +53,7 @@ export const REAL_MENU_ITEMS: MenuItem[] = [
         icon: 'fingerprint',
         width: 24,
         link: 'propiedad-intelectual',
+        perfilDenied: 0,
         submenu: [
             {
                 link: 'propiedad-intelectual',
@@ -72,6 +75,7 @@ export const REAL_MENU_ITEMS: MenuItem[] = [
         icon: 'local_library',
         width: 24,
         link: 'rlct',
+        perfilDenied: 0,
         submenu: [
             {
                 title: 'Revistas, logos, ciencia y tecnología',
@@ -93,6 +97,7 @@ export const REAL_MENU_ITEMS: MenuItem[] = [
         heigth: 24,
         icon: 'settings_applications',
         width: 24,
-        link: 'administracion'
+        link: 'administracion',
+        perfilDenied: 2
     }
 ];

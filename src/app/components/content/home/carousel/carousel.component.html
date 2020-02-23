@@ -1,0 +1,23 @@
+<div class="carousel-wrapper">
+  <div class="carousel-buttons">
+    <button mat-mini-fab (click)="prev()">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+    <button mat-mini-fab (click)="next()">
+      <mat-icon>keyboard_arrow_right </mat-icon>
+    </button>
+  </div>
+  <span *ngFor="let item of items; let i = index" class="carousel-inner">
+    <div class="carousel-items" [ngClass]="{ active: active === i }">
+      <app-carousel-item [data]="item"></app-carousel-item>
+    </div>
+  </span>
+  <span class="carousel-indicators-container">
+    <span
+      class="carousel-indicators-bullet"
+      *ngFor="let bullet of items; let i = index"
+      (click)="gotoItem(bullet, i)"
+      [ngClass]="{ current: active === i }"
+    ></span>
+  </span>
+</div>

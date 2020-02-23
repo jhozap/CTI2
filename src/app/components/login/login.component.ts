@@ -44,10 +44,12 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem('user', btoa(JSON.stringify(this.usuariologin)));
           sessionStorage.setItem('isLogged', 'true');
           sessionStorage.setItem("welcome", "true");
-          this.router.navigateByUrl("/");
+          this.router.navigateByUrl("/home");
         } else {
           this.toastr.warning('Usuario o contraseña incorrectos');
         }
+      }, (error) => {
+        this.toastr.error('Error de conexion');
       });
     } else {
       this.toastr.error('Ingrese todos los campos');

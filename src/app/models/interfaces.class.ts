@@ -8,6 +8,7 @@ export interface Submenu {
     title: string;
     width: number;
     heigth: number;
+    perfilDenied?: number;
     link?: string;
     submenu?: Submenu[];
   }

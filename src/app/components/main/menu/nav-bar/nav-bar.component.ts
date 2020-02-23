@@ -23,7 +23,7 @@ export class NavBarComponent implements OnInit {
     this.user = values.NOMBRES + " " + values.APELLIDOS;
     let welcome = sessionStorage.getItem("welcome");
     if(welcome == "true") {
-      this.toastr.success("Bienvenido " + this.user);
+      this.toastr.success("Bienvenido " + values.DESC_GRADO + " - " + this.user + "/" + values.PERFIL);
       sessionStorage.setItem("welcome", "false");
     }
     

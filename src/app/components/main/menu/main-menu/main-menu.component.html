@@ -5,6 +5,7 @@
       [routerLink]="item.submenu === undefined ? item.link : null"
     >
       <app-main-menu-item
+        *ngIf="perfilDenied != item.perfilDenied"
         [index]="i"
         [icon]="item.icon"
         [width]="item.width"

@@ -1,0 +1,7 @@
+.carousel-item__wrapper {
+    height: 100% !important;
+    & img {
+        width: 100% !important;
+        height: 100%;
+    }
+}
