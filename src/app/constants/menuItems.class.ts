@@ -18,31 +18,31 @@ export const REAL_MENU_ITEMS: MenuItem[] = [
         perfilDenied: 0,
         submenu: [
             {
-                link: 'investigacion-institucional',
+                link: '/investigacion-institucional',
                 title: 'Investigación Institucional'
             },
             {
-                link: 'investigacion-implementada',
+                link: '/investigacion-implementada',
                 title: 'Investigación Implementada'
             },
             {
-                link: 'caso-emblematico',
+                link: '/caso-emblematico',
                 title: 'Caso emblemático'
             },
             {
-                link: 'semilleros-investigacion',
+                link: '/semilleros-investigacion',
                 title: 'Semilleros de investigación'
             },
             {
-                link: 'redes-investigacion',
+                link: '/redes-investigacion',
                 title: 'Redes de investigación'
             },            
             {
-                link: 'grafica-productos',
+                link: '/grafica-productos',
                 title: 'Grafica Producto Investigacion'
             },
             {
-                link: 'grafica-investigaciones',
+                link: '/grafica-investigaciones',
                 title: 'Grafica Investigaciones Institucionales'
             },
         ]

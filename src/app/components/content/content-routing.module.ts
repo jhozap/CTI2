@@ -10,8 +10,8 @@ import { GraficaProductoComponent } from './GRIFT/grafica-producto/grafica-produ
 
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'prueba', component: InvestigacionInstitucionalComponent },
+  { path: '', component: HomeComponent },
+  { path: 'investigacion-institucional', component: InvestigacionInstitucionalComponent },
   { path: 'investigacion-implementada', component: InvestigacionImplementadaComponent },
   { path: 'caso-emblematico', component: CasoEmblematicoComponent },
   { path: 'semilleros-investigacion', component: SemillerosComponent },

@@ -20,7 +20,7 @@ export class UserMenuComponent implements OnInit {
 
   logout() {
     sessionStorage.clear();  
-    // this.router.navigateByUrl("/login");
+    this.router.navigateByUrl("/login");
   }
 
 }
