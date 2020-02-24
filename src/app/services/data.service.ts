@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Usuario } from '../models/requestUser.class';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class DataService {
 
   constructor(private http: HttpClient) { }
 
@@ -16,10 +15,10 @@ export class AuthService {
     });
   }
 
-  public login(user: Usuario) {
-    // return of(true);
-    return this.http.post(environment.pathApi + '/Usuario/Login', user, {
+  public getUsers() {    
+    return this.http.get(environment.pathApi + '/Usuario/ConsultaUsuarios', {
       headers: this.generateBasicHeaders()
     });
   }
+  
 }

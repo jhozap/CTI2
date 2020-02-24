@@ -23,7 +23,8 @@ import {
   MatSlideToggleModule,
   MatSnackBarModule,
   MatDialogModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatTableModule
 } from "@angular/material";
 import { ReactiveFormsModule } from "@angular/forms";
 import { ToastrModule } from "ngx-toastr";
@@ -43,10 +44,6 @@ import { AdministracionComponent } from './administracion/administracion.compone
 import { UsuariosComponent } from './administracion/usuarios/usuarios.component';
 import { NewInvestigadoresComponent } from './administracion/new-investigadores/new-investigadores.component';
 import { UnidadesComponent } from './administracion/unidades/unidades.component';
-import { AutocompleteComponent } from './commonComponents/autocomplete/autocomplete.component';
-import { ChipAutocompleteComponent } from './commonComponents/chip-autocomplete/chip-autocomplete.component';
-import { SelectComponent } from './commonComponents/select/select.component';
-import { SimpleInputComponent } from './commonComponents/simple-input/simple-input.component';
 
 @NgModule({
   declarations: [
@@ -64,10 +61,6 @@ import { SimpleInputComponent } from './commonComponents/simple-input/simple-inp
     UsuariosComponent,
     NewInvestigadoresComponent,
     UnidadesComponent,
-    AutocompleteComponent,
-    ChipAutocompleteComponent,
-    SelectComponent,
-    SimpleInputComponent
   ],
   imports: [
     CommonModule,
@@ -95,6 +88,7 @@ import { SimpleInputComponent } from './commonComponents/simple-input/simple-inp
     MatSnackBarModule,
     MatDialogModule,
     MatPaginatorModule,
+    MatTableModule,
 
     ReactiveFormsModule,
 
