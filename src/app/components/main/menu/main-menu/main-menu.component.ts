@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MenuItem } from 'src/app/models/interfaces.class';
-import { MatExpansionPanel } from '@angular/material';
+import { MatExpansionPanel } from '@angular/material/expansion';
 import { ComponentsService } from 'src/app/services/components.service';
 import { User } from 'src/app/models/user.class';
 
