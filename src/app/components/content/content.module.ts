@@ -44,6 +44,13 @@ import { AdministracionComponent } from './administracion/administracion.compone
 import { UsuariosComponent } from './administracion/usuarios/usuarios.component';
 import { NewInvestigadoresComponent } from './administracion/new-investigadores/new-investigadores.component';
 import { UnidadesComponent } from './administracion/unidades/unidades.component';
+import { SelectComponent } from './formsComponents/select/select.component';
+import { TextComponent } from './formsComponents/text/text.component';
+import { DateComponent } from './formsComponents/date/date.component';
+import { NumberComponent } from './formsComponents/number/number.component';
+import { EmailComponent } from './formsComponents/email/email.component';
+import { MultiSelectComponent } from './formsComponents/multi-select/multi-select.component';
+import { PasswordComponent } from './formsComponents/password/password.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +68,13 @@ import { UnidadesComponent } from './administracion/unidades/unidades.component'
     UsuariosComponent,
     NewInvestigadoresComponent,
     UnidadesComponent,
+    SelectComponent,
+    TextComponent,
+    DateComponent,
+    NumberComponent,
+    EmailComponent,
+    MultiSelectComponent,
+    PasswordComponent,
   ],
   imports: [
     CommonModule,

@@ -10,11 +10,11 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$sicei-primary: mat-palette($mat-blue, 700);
-$sicei-accent:  mat-palette($mat-grey, 600);
+$sicei-primary: mat-palette($mat-green, 600);
+$sicei-accent:  mat-palette($mat-orange, 800);
 
 // The warn palette is optional (defaults to red).
-$sicei-warn:    mat-palette($mat-orange, 800);
+$sicei-warn: mat-palette($mat-red, 800);
 
 // Create the theme object (a Sass map containing all of the palettes).
 $sicei-theme: mat-light-theme($sicei-primary, $sicei-accent, $sicei-warn);
