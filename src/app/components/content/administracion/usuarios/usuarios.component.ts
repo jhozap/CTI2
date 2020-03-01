@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import * as constants from '../../../../constants/constants.class';
 import { DataService } from 'src/app/services/data.service';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 import { User } from 'src/app/models/user.class';
 import { FormGroup } from '@angular/forms';
 
@@ -16,7 +17,6 @@ export class UsuariosComponent implements OnInit {
   dataSource: MatTableDataSource<User>;
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   public constantes = constants;
   public new = false;

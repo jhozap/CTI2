@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewEncapsulation, Output, EventEmitter, ViewChild, AfterViewInit } from '@angular/core';
 import { Submenu } from 'src/app/models/interfaces.class';
-import { MatExpansionPanel } from '@angular/material';
+import { MatExpansionPanel } from '@angular/material/expansion';
 
 @Component({
   selector: 'app-main-menu-item',
