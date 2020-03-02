@@ -104,24 +104,26 @@
   <!-- Fin Table -->
   <!-- Form Usuarios -->
   <ng-template #form>
-    <form [formGroup]="newUser">
+    <div [formGroup]="formulario">
       <div class="group">
         <div class="doc-group">
           <!-- Tipo documento -->
-          <app-select
+    <!--      <app-select
             [placeholder]="'Tipo Doc.'"
             [data]="tipoDoc"
             [argument]="'DESCRIPCION'"
-          ></app-select>
+            [formControlName] = "tipoDocForm"
+          ></app-select>-->
 
           <!-- Número documento -->
-          <app-number></app-number>
+          <app-number [nombreCampo]="nombreForms[0]" [placeHolder]="placeholders[0]" [form]="formulario"></app-number>
         </div>
         <!-- Nombres -->
-        <app-text></app-text>
+        <app-number [nombreCampo]="nombreForms[1]" [placeHolder]="placeholders[1]" [form]="formulario"></app-number>
 
         <!-- Apellidos -->
-        <app-text></app-text>
+        <app-number [nombreCampo]="nombreForms[2]" [placeHolder]="placeholders[2]" [form]="formulario"></app-number>
+
       </div>
 
       <div class="group">
@@ -161,7 +163,7 @@
         <!-- <button mat-flat-button (click)="closeTheForm()">Cancelar</button> -->
         <button mat-raised-button color="primary">Guardar</button>
       </div>
-    </form>
+    </div>
   </ng-template>
   <!-- Fin Form Usuarios -->
 </div>

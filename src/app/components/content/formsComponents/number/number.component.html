@@ -1,1 +1,14 @@
-<p>number works!</p>
+
+
+<div [formGroup]="form">
+    <div class="containerElement">
+      <mat-form-field>
+        <input matInput placeholder="{{placeHolder | titlecase}}"
+         [formControlName]="nombreCampo" class="form-control"
+          name="{{nombreCampo}}" id="{{nombreCampo}}">
+        <button tabindex="-1" class="mat-icon" mat-button matSuffix mat-icon-button>
+          <mat-icon>short_text</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+  </div>

@@ -4,7 +4,8 @@ import { DataService } from 'src/app/services/data.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { User } from 'src/app/models/user.class';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormControlService } from 'src/app/services/form-control.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -33,7 +34,22 @@ export class UsuariosComponent implements OnInit {
     {ID_TIPO_DOCUMENTO: '4', DESCRIPCION: 'CEDULA EXTRANJERIA'}
     ];
 
-  constructor(private _dataService: DataService) {}
+    formulario: FormGroup;
+    placeholders = ["Número de Documento", "Nombres", "Apellidos"];
+    nombreForms = ["numeroDocumento", "NombreForm", "Apellidos"];
+
+
+  constructor(private _dataService: DataService,
+    private formBuilder: FormBuilder,
+    private formGroup: FormControlService) {
+      this.formulario = new FormGroup({
+        numeroDocumento: new FormControl('', Validators.required),
+        NombreForm: new FormControl('', Validators.required),
+        Apellidos: new FormControl('', Validators.required),
+        tipoDocForm: new FormControl('', Validators.required)
+      });
+   
+  }
 
   ngOnInit(): void {
     this.getUsers();    
