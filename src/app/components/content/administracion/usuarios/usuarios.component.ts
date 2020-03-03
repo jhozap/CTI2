@@ -6,6 +6,15 @@ import { MatPaginator } from '@angular/material/paginator';
 import { User } from 'src/app/models/user.class';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { FormControlService } from 'src/app/services/form-control.service';
+import Swal from 'sweetalert2';
+
+const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+    confirmButton: 'btn btn-success mybtn',
+    cancelButton: 'btn btn-danger mybtn'
+  },
+  buttonsStyling: false
+})
 
 @Component({
   selector: 'app-usuarios',
@@ -61,14 +70,35 @@ export class UsuariosComponent implements OnInit {
   }
 
   closeTheForm() {
+
     if(this.new) {
-      this.titleForm = 'Usuarios';
-      this.getUsers();   
+      swalWithBootstrapButtons.fire({
+        title: '¿Esta seguro que desea cancelar la creación del usuario?',
+        text: "si acepta se perderan todos los datos ya diligenciados",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Aceptar',
+        cancelButtonText: 'Cancelar',
+        reverseButtons: true,
+        allowOutsideClick: false,
+        allowEscapeKey: false
+      }).then((result) => {
+        if (result.value) {
+          console.log('cancel aceptado');
+          this.new = !this.new;
+          this.titleForm = 'Usuarios';
+          this.getUsers();   
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {}
+      })
     } else {
       this.titleForm = 'Nuevo Usuario';
+      this.new = !this.new;
     }
     
-    this.new = !this.new;
+    
   }
 
   getUsers() {
@@ -85,5 +115,39 @@ export class UsuariosComponent implements OnInit {
         .catch((error) => {
           console.log(error);
         });
+  }
+
+  updateUser(user) {
+    console.log("Update", user);
+  }
+
+  deleteUser(user: User) {
+    console.log("delete", user);
+    swalWithBootstrapButtons.fire({
+      title: 'Eliminar Usuario',
+      text: "¿Esta seguro que desea eliminar el usuario " + user.NOMBRES +  " " + user.APELLIDOS + "?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true,
+      allowOutsideClick: false,
+      allowEscapeKey: false
+    }).then((result) => {
+      if (result.value) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Usuario eliminado correctamente',
+          showConfirmButton: false,
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          timer: 1500
+        })
+        this.getUsers();   
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {}
+    })
   }
 }
