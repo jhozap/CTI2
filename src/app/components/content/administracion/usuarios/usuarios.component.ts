@@ -126,6 +126,7 @@ export class UsuariosComponent implements OnInit {
             this.new = !this.new;
             this.titleForm = "Usuarios";
             this.getUsers();
+            this.formulario.reset();
           } else if (
             /* Read more about handling dismissals below */
             result.dismiss === Swal.DismissReason.cancel
@@ -176,6 +177,10 @@ export class UsuariosComponent implements OnInit {
       .catch(error => {
         console.log(error);
       });
+  }
+
+  guardar() {
+    console.log(this.formulario.value);
   }
 
   updateUser(user) {
