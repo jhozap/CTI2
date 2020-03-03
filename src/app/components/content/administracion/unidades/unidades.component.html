@@ -2,7 +2,7 @@
     <div class="title-wrapper">
         <h1>{{ titleForm }}</h1>
         <button mat-raised-button [color]="new ? 'warn' : 'primary'" (click)="closeTheForm()">
-            <mat-icon>{{ new ? "close" : "add" }}</mat-icon>{{ new ? "Cancelar" : "Nuevo Investigador" }}
+            <mat-icon>{{ new ? "close" : "add" }}</mat-icon>{{ new ? "Cancelar" : "Nueva Unidad" }}
         </button>
     </div>
     <ng-container *ngIf="new; then form; else table"></ng-container>
