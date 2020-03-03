@@ -19,68 +19,70 @@
         <form [formGroup]="formulario">
             <div class="group">
                 <!-- Número documento -->
-                <app-simple-input [data]="{
-                        placeholder: 'Cédula de Ciudadanía',
-                        data: null,
-                        icon: null
-                    }" [type]="'number'" (formReady)="formInitialized('Documento', $event)">
-                </app-simple-input>
+                <app-number
+            [nombreCampo]="nombreForms[0]"
+            [placeHolder]="placeholders[0]"
+            [form]="formulario"
+          ></app-number>
                 <!-- Nombres -->
-                <app-simple-input [data]="{
-                        placeholder: 'Nombres',
-                        data: null,
-                        icon: null
-                    }" (formReady)="formInitialized('Nombres', $event)">
-                </app-simple-input>
+                <app-number
+                [nombreCampo]="nombreForms[1]"
+                [placeHolder]="placeholders[1]"
+                [form]="formulario"
+              ></app-number>
         
                 <!-- Apellidos -->
-                <app-simple-input [data]="{
-                        placeholder: 'Apellidos',
-                        data: null,
-                        icon: null
-                    }" (formReady)="formInitialized('Apellidos', $event)">
-                </app-simple-input>
+                <app-number
+                [nombreCampo]="nombreForms[2]"
+                [placeHolder]="placeholders[2]"
+                [form]="formulario"
+              ></app-number>
             </div>
         
             <div class="group">
                 <!-- Teléfono -->
-                <app-simple-input [data]="{
-                        placeholder: 'Teléono',
-                        data: null,
-                        icon: 'local_phone'
-                    }" (formReady)="formInitialized('Tlf', $event)">
-                </app-simple-input>
+                <app-number
+            [nombreCampo]="nombreForms[3]"
+            [placeHolder]="placeholders[3]"
+            [form]="formulario"
+          ></app-number>
         
                 <!-- Dirección -->
-                <mat-form-field class="full-width">
-                    <textarea matInput placeholder="Dirección" formControlName="Dir"></textarea>
-                </mat-form-field>
+                <app-number
+                [nombreCampo]="nombreForms[4]"
+                [placeHolder]="placeholders[4]"
+                [form]="formulario"
+              ></app-number>
         
                 <!-- Email -->
-                <app-simple-input [data]="{
-                        placeholder: 'Email',
-                        data: null,
-                        icon: 'local_post_office'
-                    }" (formReady)="formInitialized('Email', $event)" [type]="'email'">
-                </app-simple-input>
+                <app-number
+                [nombreCampo]="nombreForms[5]"
+                [placeHolder]="placeholders[5]"
+                [form]="formulario"
+              ></app-number>
             </div>
         
             <div class="group">
                 <!-- Grado -->
-                <app-select [placeholder]="'Grado'" [data]="grado" (formReady)="formInitialized('Grado', $event)">
-                </app-select>
-        
+                <app-select
+                [placeholder]="'Grado'"
+                [data]="grado"
+                [argument]="'DESCRIPCION'"
+                [nombreCampo]="nombreForms[6]"
+                [form]="formulario"
+              ></app-select>
                 <!-- Estudios -->
-                <mat-form-field>
-                    <mat-label>Estudios Academicos</mat-label>
-                    <mat-select formControlName="Estudios" multiple>
-                        <mat-option *ngFor="let estudio of estudios" [value]="estudio">{{estudio}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
+                <app-select
+          [placeholder]="'Estudios Acádemicos'"
+          [data]="estudiosAcademicos"
+          [argument]="'DESCRIPCION'"
+          [nombreCampo]="nombreForms[7]"
+          [form]="formulario"
+        ></app-select>
         
                 <!-- Otros estudios -->
                 <mat-form-field *ngIf="!checkOthers()">
-                    <input matInput placeholder="Otros estudios" formControlName="Otros">
+                    <input matInput placeholder="Otros estudios" formControlName="OtrosForm">
                 </mat-form-field>
             </div>
         
@@ -89,7 +91,7 @@
                 <div class="sub-group">
                     <div>
                         <mat-label>Categorización Colciencias?</mat-label>
-                        <mat-radio-group (change)="enableTipo($event.value)" formControlName="Categ"
+                        <mat-radio-group (change)="enableTipo($event.value)" formControlName="CategForm"
                             class="sub-group__radio-group" aria-labelledby="example-radio-group-label">
                             <mat-radio-button [value]="true">
                                 Si
@@ -147,7 +149,7 @@
         
             <div class="buttons">
                 <button mat-flat-button (click)="closeTheForm()">Cancelar</button>
-                <button (click)="sendData()" mat-raised-button color="primary" [disabled]="newInvestigator.invalid">Guardar</button>
+                <button  mat-raised-button color="primary">Guardar</button>
             </div>
         </form>
         <!-- <div>{{ formulario | json }}</div> -->

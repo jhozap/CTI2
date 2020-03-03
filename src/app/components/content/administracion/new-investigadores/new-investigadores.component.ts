@@ -39,6 +39,8 @@ export class NewInvestigadoresComponent implements OnInit {
 
   grado = [];
   estudiosAcademicos = [];
+  
+  tipoCategorizacion = [];
 
   formulario: FormGroup;
   placeholders = ["Cédula de Ciudadanía", "Nombres", "Apellidos", "Teléfono", "Dirección","Email", "Grado", "Estudios Acádemicos"];
@@ -64,7 +66,13 @@ export class NewInvestigadoresComponent implements OnInit {
           ])
         ),
         gradoForm: new FormControl('', Validators.required),
-        estudiosAcademicosForm: new FormControl('', Validators.required)
+        estudiosAcademicosForm: new FormControl('', Validators.required),
+        OtrosForm: new FormControl(''),
+        CategForm: new FormControl('', Validators.required),
+        Tipo: new FormControl('', Validators.required),
+        Investigador: new FormControl('', Validators.required),
+        Estudiante: new FormControl('', Validators.required),
+        
         });
     }
 
@@ -104,4 +112,15 @@ export class NewInvestigadoresComponent implements OnInit {
     }
   }
 
+  enableTipo(event){
+
+
+    
+  }
+
+  
+
+  checkOthers(){
+    return false;
+  }
 }
