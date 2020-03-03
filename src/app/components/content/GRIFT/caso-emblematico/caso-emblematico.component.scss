@@ -1,0 +1,17 @@
+.title-wrapper {
+  display: grid;
+  grid-template-columns: 1fr min-content;
+  & button {
+    height: 50px;
+    align-self: center;
+    margin-right: 1rem;
+  }
+}
+.main-text {
+  padding: 1rem;
+  text-align: justify;
+  max-width: 600px;
+}
+.content {
+  padding: 2rem;
+}
