@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ChartDTO, DataChart, DataSet, OptionsChart, labels, titleChart, legend } from 'src/app/models/chart.model';
 
 import Chart from "chart.js";
-
+  
 @Component({
   selector: 'app-grafica-investigacion',
   templateUrl: './grafica-investigacion.component.html',
@@ -10,16 +10,20 @@ import Chart from "chart.js";
 })
 export class GraficaInvestigacionComponent implements OnInit {
   titleForm = "Grafica de investigacion";
+  public myChart: Chart
 
   graficas: any;
   tipo: any[];
   datos: any[];
+
+  
 
   constructor(
     private cd: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
+    
     this.graficas = new Array<ChartDTO>();
     this.tipo = ["Barras", "Tortas"];
     this.graficarInvestigacionesInstitucionales();
@@ -28,6 +32,7 @@ export class GraficaInvestigacionComponent implements OnInit {
 
 
   graficarInvestigacionesInstitucionales(){
+   
     this.cd.detectChanges();
     this.graficas[0] = new ChartDTO();
     this.graficas[0].canvas = document.getElementById("investigacionesInstitucionalesChart");
@@ -36,7 +41,12 @@ export class GraficaInvestigacionComponent implements OnInit {
     this.graficas[0].data = this.generarDataSetInvestigaciones();
     this.graficas[0].options = this.generarOpciones();
 
-    let myChart = new Chart(this.graficas[0].ctx, this.graficas[0]);
+    if(this.myChart != undefined){
+      this.myChart.destroy();
+    }
+    
+     this.myChart = new Chart(this.graficas[0].ctx, this.graficas[0]);
+     this.myChart.update();
     this.cd.detectChanges();
   }
 
@@ -136,36 +146,38 @@ export class GraficaInvestigacionComponent implements OnInit {
   }
 
   buscar() {
-
+   
     this.ngOnInit();
   }
 
   cambiar(tipo) {
-    console.log(tipo);
-    if(tipo === 'Barras'){
-      this.cd.detectChanges();
-      this.graficas[0] = new ChartDTO();
-      this.graficas[0].canvas = document.getElementById("investigacionesInstitucionalesChart");
-      this.graficas[0].ctx = this.graficas[0].canvas.getContext("2d");
-      this.graficas[0].type = "bar";
-      this.graficas[0].data = this.generarDataSetInvestigacionesBarras();
-      this.graficas[0].options = this.generarOpciones();
-
-      let myChart = new Chart(this.graficas[0].ctx, this.graficas[0]);
-      this.cd.detectChanges();
-    } else{
-      this.cd.detectChanges();
-      this.graficas[0] = new ChartDTO();
-      this.graficas[0].canvas = document.getElementById("investigacionesInstitucionalesChart");
-      this.graficas[0].ctx = this.graficas[0].canvas.getContext("2d");
-      this.graficas[0].type = "pie";
-      this.graficas[0].data = this.generarDataSetInvestigacionesTorta();
-      this.graficas[0].options = this.generarOpciones();
-
-      let myChart = new Chart(this.graficas[0].ctx, this.graficas[0]);
-      this.cd.detectChanges();
-    }
-
+   
+      console.log(tipo);
+      if(tipo === 'Barras'){
+        this.graficas[0] = new ChartDTO();
+        this.graficas[0].canvas = document.getElementById("investigacionesInstitucionalesChart");
+        this.graficas[0].ctx = this.graficas[0].canvas.getContext("2d");
+        this.graficas[0].type = "bar";
+        this.graficas[0].data = this.generarDataSetInvestigacionesBarras();
+        this.graficas[0].options = this.generarOpciones();
+       this.myChart.destroy();
+        this.myChart = new Chart(this.graficas[0].ctx, this.graficas[0]);
+        this.myChart.update();
+        this.cd.detectChanges();
+      } else{
+        this.graficas[0] = new ChartDTO();
+        this.graficas[0].canvas = document.getElementById("investigacionesInstitucionalesChart");
+        this.graficas[0].ctx = this.graficas[0].canvas.getContext("2d");
+        this.graficas[0].type = "pie";
+        this.graficas[0].data = this.generarDataSetInvestigacionesTorta();
+        this.graficas[0].options = this.generarOpciones();
+        this.myChart.destroy();
+        this.myChart = new Chart(this.graficas[0].ctx, this.graficas[0]);
+        this.myChart.update();
+  
+        this.cd.detectChanges();
+      }
+   
   }
 
 
