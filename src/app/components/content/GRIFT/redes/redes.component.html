@@ -1,1 +1,23 @@
-<p>redes works!</p>
+<div class="content">
+  <div class="title-wrapper">
+    <h1>{{ titleForm }}</h1>
+    <button
+      mat-raised-button
+      [color]="new ? 'warn' : 'primary'"
+      (click)="closeTheForm()"
+    >
+      <mat-icon>{{ new ? "close" : "add" }}</mat-icon
+      >{{ new ? "Cancelar" : "Nuevo Red de Investigacion" }}
+    </button>
+  </div>
+  <ng-container *ngIf="new; then form; else table"></ng-container>
+
+  <!-- Table -->
+  <ng-template #table>
+    <div class="table-container"></div>
+  </ng-template>
+  <!-- Fin Table -->
+  <!-- Form Red de Investigacion -->
+  <ng-template #form></ng-template>
+  <!-- Fin Red de Investigacion -->
+</div>
