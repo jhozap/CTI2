@@ -26,5 +26,11 @@ export class DataService {
       headers: this.generateBasicHeaders()
     });
   }
+
+  public getUnidades() {
+    return this.http.get(environment.pathApi + '/Unidad/ConsultaUnidades', {
+      headers: this.generateBasicHeaders()
+    });
+  }
   
 }
