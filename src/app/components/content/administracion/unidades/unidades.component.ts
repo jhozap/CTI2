@@ -28,6 +28,14 @@ const swalWithBootstrapButtons = Swal.mixin({
 })
 export class UnidadesComponent implements OnInit {
 
+  displayedColumns: string[] = [
+    "ID_UNIDAD",
+    "SIGLA",
+    "DESCRIPCION",
+    "ID_TIPO",
+    "ACCIONES"
+  ];
+
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
   public constantes = constants;
