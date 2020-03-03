@@ -27,6 +27,12 @@ export class DataService {
     });
   }
 
+  public getCasoEmblematico() {    
+    return this.http.get(environment.pathApi + '/casoEmblem/ConsultarCasosEmblem', {
+      headers: this.generateBasicHeaders()
+    });
+  }
+
   public getGrados() {
     return this.http.get(environment.pathApi + '/Grado/ConsultaGrados', {
       headers: this.generateBasicHeaders()
