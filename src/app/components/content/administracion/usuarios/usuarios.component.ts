@@ -220,8 +220,25 @@ export class UsuariosComponent implements OnInit {
       this.formulario.get("passwordForm").setValue(user.CONTRASENA);
       this.formulario.get("tipoDocForm").setValue(this.consultarTipo(user.ID_TIPO_DOCUMENTO));
       this.formulario.get("gradoForm").setValue(this.consultarGrado(user.ID_GRADO));
+      this.formulario.get("unidadForm").setValue(this.consultarUnidad(user.ID_UNIDAD));
+
+      this.formulario.get("perfilForm").setValue(this.consultarPerfil(user.PERFIL));
+      
       
     } 
+  }
+
+  
+
+  consultarUnidad(idUnidad) {
+    let unidad = this.unidad.find(x=> x.ID_UNIDAD == idUnidad);
+    return unidad;
+  }
+
+
+  consultarPerfil(idPerfil){
+    let perfil = this.perfil.find(x=> x.ID_TIPO_PERFIL == idPerfil);
+    return perfil;
   }
 
   consultarGrado(idGrado){
