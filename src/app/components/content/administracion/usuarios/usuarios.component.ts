@@ -218,7 +218,20 @@ export class UsuariosComponent implements OnInit {
       this.formulario.get("emailForm").setValue(user.EMAIL);
       this.formulario.get("PSIForm").setValue(user.USUARIO);
       this.formulario.get("passwordForm").setValue(user.CONTRASENA);
+      this.formulario.get("tipoDocForm").setValue(this.consultarTipo(user.ID_TIPO_DOCUMENTO));
+      this.formulario.get("gradoForm").setValue(this.consultarGrado(user.ID_GRADO));
+      
     } 
+  }
+
+  consultarGrado(idGrado){
+    let grado = this.grado.find(x=> x.ID_GRADO == idGrado);
+    return grado;
+  }
+
+  consultarTipo(idTipoDocumento) {
+    let tipo = this.tipoDoc.find(x=> x.ID_TIPO_DOCUMENTO == idTipoDocumento);
+    return tipo;
   }
 
   deleteUser(user: User) {
