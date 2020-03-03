@@ -15,6 +15,14 @@
   <!-- Table -->
   <ng-template #table>
     <div class="table-container">
+      <mat-form-field>
+        <mat-label>Filtro</mat-label>
+        <input
+          matInput
+          (keyup)="applyFilter($event)"
+          placeholder="Red de Investigacion"
+        />
+      </mat-form-field>
       
     </div>
   </ng-template>

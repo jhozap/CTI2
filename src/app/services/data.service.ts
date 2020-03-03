@@ -33,6 +33,12 @@ export class DataService {
     });
   }
 
+  getRedes() {
+    return this.http.get(environment.pathApi + '/Redes/ConsultaRedes', {
+      headers: this.generateBasicHeaders()
+    });
+  }
+
   public getGrados() {
     return this.http.get(environment.pathApi + '/Grado/ConsultaGrados', {
       headers: this.generateBasicHeaders()
