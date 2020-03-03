@@ -206,8 +206,19 @@ export class UsuariosComponent implements OnInit {
 
   }
 
-  updateUser(user) {
+  updateUser(user: User) {
     console.log("Update", user);
+    if (!this.new) {
+      this.titleForm = "Actualizar Usuario";
+      this.new = !this.new;
+      this.formulario.get("numeroDocumento").setValue(user.DOCUMENTO);
+      this.formulario.get("NombreForm").setValue(user.NOMBRES);
+      this.formulario.get("Apellidos").setValue(user.APELLIDOS);
+      this.formulario.get("telefonoForm").setValue(user.TELEFONO);
+      this.formulario.get("emailForm").setValue(user.EMAIL);
+      this.formulario.get("PSIForm").setValue(user.USUARIO);
+      this.formulario.get("passwordForm").setValue(user.CONTRASENA);
+    } 
   }
 
   deleteUser(user: User) {
