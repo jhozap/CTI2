@@ -97,6 +97,8 @@ export class UsuariosComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUsers();
+    this.getGrados();
+    this.getUnidades();
   }
 
   applyFilter(event: Event) {
@@ -158,6 +160,18 @@ export class UsuariosComponent implements OnInit {
       .toPromise()
       .then((data: any[]) => {
         this.grado = data;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  getUnidades() {
+    this._dataService
+      .getUnidades()
+      .toPromise()
+      .then((data: any[]) => {
+        this.unidad = data;
       })
       .catch(error => {
         console.log(error);
