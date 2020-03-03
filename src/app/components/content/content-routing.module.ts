@@ -11,6 +11,7 @@ import { AdministracionComponent } from './administracion/administracion.compone
 import { UsuariosComponent } from './administracion/usuarios/usuarios.component';
 import { NewInvestigadoresComponent } from './administracion/new-investigadores/new-investigadores.component';
 import { UnidadesComponent } from './administracion/unidades/unidades.component';
+import { GraficaInvestigacionComponent } from './GRIFT/grafica-investigacion/grafica-investigacion.component';
 
 
 const routes: Routes = [
@@ -21,7 +22,7 @@ const routes: Routes = [
   { path: 'semilleros-investigacion', component: SemillerosComponent },
   { path: 'redes-investigacion', component: RedesComponent },
   { path: 'grafica-productos', component: GraficaProductoComponent },
-  { path: 'grafica-investigaciones', component: GraficaProductoComponent },
+  { path: 'grafica-investigaciones', component: GraficaInvestigacionComponent },
   { path: 'administracion', component: AdministracionComponent },
   { path: 'administracion/usuarios', component: UsuariosComponent },
   { path: 'administracion/newinvestigadores', component: NewInvestigadoresComponent },

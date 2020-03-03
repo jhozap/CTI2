@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./grafica-producto.component.scss']
 })
 export class GraficaProductoComponent implements OnInit {
+  titleForm = "Grafica de producto investigacion";
 
   constructor() { }
 
