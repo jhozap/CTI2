@@ -1,1 +1,22 @@
 
+<mat-form-field class="unidad-field__sigla">
+    <input matInput formControlName="Sigla" placeholder="Sigla" type="text">
+</mat-form-field>
+<mat-form-field class="unidad-field__descripcion">
+    <textarea matInput formControlName="Descripcion" placeholder="Descripción" cdkTextareaAutosize
+    cdkAutosizeMinRows="0"
+    cdkAutosizeMaxRows="5">
+    </textarea>
+</mat-form-field>
+<mat-form-field class="unidad-field__tipo">
+    <mat-label>Tipo</mat-label>
+    <mat-select formControlName="Tipo">
+        <mat-option *ngFor="let tipo of tipos" [value]="tipo">
+            {{tipo.DESCRIPCION}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+<div class="buttons">
+    <button mat-flat-button (click)="reset()">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="enviarSigla()" [disabled]="newUnidad.invalid">Crear</button>
+</div>

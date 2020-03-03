@@ -28,6 +28,17 @@ const swalWithBootstrapButtons = Swal.mixin({
 })
 export class NewInvestigadoresComponent implements OnInit {
 
+  displayedColumns: string[] = [
+    "DOCUMENTO",
+    "NOMBRES",
+    "APELLIDOS",
+    "DESC_GRADO",
+    "USUARIO",
+    "EMAIL",
+    "PERFIL",
+    "ACCIONES"
+  ];
+
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
   public constantes = constants;
@@ -100,7 +111,7 @@ export class NewInvestigadoresComponent implements OnInit {
     if (this.new) {
       swalWithBootstrapButtons
         .fire({
-          title: "¿Esta seguro que desea cancelar",
+          title: "¿Esta seguro que desea cancelar?",
           text: "si acepta se perderan todos los datos ya diligenciados",
           icon: "warning",
           showCancelButton: true,
