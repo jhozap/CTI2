@@ -1,0 +1,36 @@
+.unidad {
+    &-form {
+      padding: 1rem;
+      max-width: 800px;
+      margin: auto;
+      grid-template-columns: repeat(3, 1fr);
+      display: grid;
+      grid-gap: 1rem;
+      grid-template-areas:
+        'sigla descripcion descripcion'
+        'tipo botones botones';
+    }
+    &-field {
+      &__sigla {
+        grid-area: sigla;
+      }
+      &__descripcion {
+        grid-area: descripcion;
+      }
+      &__tipo {
+        grid-area: tipo;
+      }
+    }
+  }
+  .buttons {
+    grid-area: botones;
+    justify-content: end;
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: auto auto;
+    & button {
+        height: 50px;
+        width: 100px;
+    }
+  }
+  
