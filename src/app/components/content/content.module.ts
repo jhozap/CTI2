@@ -53,7 +53,7 @@ import { NumberComponent } from './formsComponents/number/number.component';
 import { EmailComponent } from './formsComponents/email/email.component';
 import { MultiSelectComponent } from './formsComponents/multi-select/multi-select.component';
 import { PasswordComponent } from './formsComponents/password/password.component';
-import { DateAdapter, MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -106,7 +106,10 @@ import { DateAdapter, MatNativeDateModule } from '@angular/material/core';
     MatDialogModule,
     MatPaginatorModule,
     MatTableModule,
-
+    MatDatepickerModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatNativeDateModule, MatMomentDateModule,
     ReactiveFormsModule,
     SweetAlert2Module.forRoot(),
 
@@ -114,9 +117,9 @@ import { DateAdapter, MatNativeDateModule } from '@angular/material/core';
   ],
   providers: [    
     MatDatepickerModule,
-    MatMomentDateModule,
+    MatButtonModule,
     MatFormFieldModule,
-    MatNativeDateModule,
+    MatNativeDateModule, MatMomentDateModule,
   ],
 })
 export class ContentModule {}
