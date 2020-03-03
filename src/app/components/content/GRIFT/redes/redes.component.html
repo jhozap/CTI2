@@ -23,6 +23,25 @@
           placeholder="Red de Investigacion"
         />
       </mat-form-field>
+      
+    </div>
+  </ng-template>
+  <!-- Fin Table -->
+  <!-- Form Red de Investigacion -->
+  <ng-template #form>
+    <form [formGroup]="formulario">
+      <div class="group">
+        <div class="doc-group">
+         
+          <app-number
+          [nombreCampo]="nombreForms[0]"
+          [placeHolder]="placeholders[0]"
+          [form]="formulario"
+        ></app-number>
+
+        </div>
+        
+      </div>
 
       <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource">
@@ -33,6 +52,7 @@
               {{ row.ID_RED }}
             </td>
           </ng-container>
+      <div class="group">
 
           <!-- NOMBRE_RED Column -->
           <ng-container matColumnDef="NOMBRE_RED">
@@ -90,11 +110,58 @@
         </table>
 
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+        <app-number
+          [nombreCampo]="nombreForms[1]"
+          [placeHolder]="placeholders[1]"
+          [form]="formulario"
+        ></app-number>
+
+        <mat-form-field>
+          <mat-label>Seleccione una fecha</mat-label>
+          <input matInput [matDatepicker]="picker">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      
       </div>
+
+      <div class="group">
+
+        <div class="doc-group">
+          <div *ngIf="colombia.length>0">
+          <mat-form-field class="input-width">
+            <mat-select placeholder="Departamento" #departamento [formControlName]="departamentoForm" 
+            (selectionChange)="departamentoSeleccionado(departamento.value)"  required>
+                <mat-option *ngFor="let departamento of colombia" [value]="departamento.id">
+                  {{ departamento.departamento }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+      </div>
+      <div *ngIf="ciudades.length>0">
+        <mat-form-field class="input-width">
+          <mat-select placeholder="Ciudad" #ciudad [formControlName]="ciudadForm" 
+          (selectionChange)="seleccionarCiudad(ciudad.value)"  required>
+              <mat-option *ngFor="let ciudad of ciudades" [value]="ciudad">
+                {{ ciudad }}
+              </mat-option>
+          </mat-select>
+      </mat-form-field>
     </div>
+     
+
+          </div>
+      </div>
+
+      
+
+      <div class="buttons">
+        <!-- <button mat-flat-button (click)="closeTheForm()">Cancelar</button> -->
+        <button mat-raised-button color="primary"  [disabled]="formulario.invalid">Guardar</button>
+      </div>
+    </form>
+    <!-- <div>{{ formulario | json }}</div> -->
+ 
   </ng-template>
-  <!-- Fin Table -->
-  <!-- Form Red de Investigacion -->
-  <ng-template #form></ng-template>
   <!-- Fin Red de Investigacion -->
 </div>
