@@ -18,12 +18,22 @@
     <ng-template #form>
         <form [formGroup]="formulario">
             <div class="group">
+                <div class="doc-group">
+                 <!-- Tipo documento -->
+          <app-select
+          [placeholder]="'Tipo Doc.'"
+          [data]="tipoDoc"
+          [argument]="'DESCRIPCION'"
+          [nombreCampo]="nombreForms[8]"
+          [form]="formulario"
+        ></app-select>
                 <!-- Número documento -->
                 <app-number
             [nombreCampo]="nombreForms[0]"
             [placeHolder]="placeholders[0]"
             [form]="formulario"
           ></app-number>
+          </div>
                 <!-- Nombres -->
                 <app-number
                 [nombreCampo]="nombreForms[1]"
