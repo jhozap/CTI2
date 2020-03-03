@@ -181,6 +181,28 @@ export class UsuariosComponent implements OnInit {
 
   guardar() {
     console.log(this.formulario.value);
+    const newUser = this.formulario.value;
+    const query = {
+      ID_USUARIO: 0,
+      ID_TIPO_DOCUMENTO: newUser.tipoDocForm.ID_TIPO_DOCUMENTO,
+      DOCUMENTO: newUser.numeroDocumento,
+      NOMBRES: newUser.NombreForm,
+      APELLIDOS: newUser.Apellidos,
+      ID_GRADO: newUser.gradoForm.ID_GRADO,
+      ID_UNIDAD: newUser.unidadForm.ID_UNIDAD,
+      EMAIL: newUser.emailForm,
+      CONTRASENA: newUser.passwordForm,
+      TELEFONO: newUser.telefonoForm, 
+      USUARIO: newUser.PSIForm,
+      PERFIL: newUser.perfilForm.ID_TIPO_PERFIL
+    };
+    debugger;
+    this._dataService.newUser(query)
+      .subscribe((data) => {
+        debugger;
+        console.log(data);
+      });
+
   }
 
   updateUser(user) {
