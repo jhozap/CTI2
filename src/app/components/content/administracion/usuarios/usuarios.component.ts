@@ -47,6 +47,7 @@ export class UsuariosComponent implements OnInit {
   public new = false;
   public tableData = [];
   resultsLength = 0;
+  idUsuario = 0;
 
   titleForm: string = "Usuarios";
 
@@ -136,6 +137,7 @@ export class UsuariosComponent implements OnInit {
         });
     } else {
       this.titleForm = "Nuevo Usuario";
+      this.idUsuario = 0;
       this.new = !this.new;
     }
   }
@@ -184,7 +186,7 @@ export class UsuariosComponent implements OnInit {
     console.log(this.formulario.value);
     const newUser = this.formulario.value;
     const query = {
-      ID_USUARIO: 0,
+      ID_USUARIO: this.idUsuario,
       ID_TIPO_DOCUMENTO: newUser.tipoDocForm.ID_TIPO_DOCUMENTO,
       DOCUMENTO: newUser.numeroDocumento,
       NOMBRES: newUser.NombreForm,
@@ -211,6 +213,7 @@ export class UsuariosComponent implements OnInit {
     if (!this.new) {
       this.titleForm = "Actualizar Usuario";
       this.new = !this.new;
+      this.idUsuario = user.ID_USUARIO;
       this.formulario.get("numeroDocumento").setValue(user.DOCUMENTO);
       this.formulario.get("NombreForm").setValue(user.NOMBRES);
       this.formulario.get("Apellidos").setValue(user.APELLIDOS);
