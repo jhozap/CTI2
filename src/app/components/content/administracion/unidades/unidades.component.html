@@ -1,0 +1,41 @@
+<div class="content">
+    <div class="title-wrapper">
+        <h1>{{ titleForm }}</h1>
+        <button mat-raised-button [color]="new ? 'warn' : 'primary'" (click)="closeTheForm()">
+            <mat-icon>{{ new ? "close" : "add" }}</mat-icon>{{ new ? "Cancelar" : "Nueva Unidad" }}
+        </button>
+    </div>
+    <ng-container *ngIf="new; then form; else table"></ng-container>
+
+    <!-- Table -->
+    <ng-template #table>
+        <div class="table-container">
+
+        </div>
+    </ng-template>
+
+
+    <ng-template #form>
+        <form [formGroup]="formulario">
+            <div class="group">
+                <div class="doc-group">
+                    <!-- Sigla -->
+                    <app-number [nombreCampo]="nombreForms[0]" [placeHolder]="placeholders[0]" [form]="formulario">
+                    </app-number>
+
+                    <!-- Descripcion -->
+                    <app-number [nombreCampo]="nombreForms[1]" [placeHolder]="placeholders[1]" [form]="formulario">
+                    </app-number>
+                </div>
+
+                <app-select [placeholder]="'Tipo.'" [data]="tipo" [argument]="'DESCRIPCION'"
+                    [nombreCampo]="nombreForms[2]" [form]="formulario"></app-select>
+            </div>
+        </form>
+    </ng-template>
+
+    <div class="buttons">
+        <button mat-flat-button>Cancelar</button>
+        <button mat-raised-button color="primary">Crear</button>
+    </div>
+</div>
