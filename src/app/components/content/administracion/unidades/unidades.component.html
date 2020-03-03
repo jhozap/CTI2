@@ -32,8 +32,7 @@
                     [nombreCampo]="nombreForms[2]" [form]="formulario"></app-select>                
             </div>
             <div class="buttons">
-                <button mat-flat-button>Cancelar</button>
-                <button mat-raised-button color="primary">Crear</button>
+                <button mat-raised-button color="primary" [disabled]="formulario.invalid">Crear</button>
             </div>
         </form>
     </ng-template>
