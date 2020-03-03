@@ -34,7 +34,7 @@ export class DataService {
   }
 
   public newUser(params: any) {
-    return this.http.post(environment.pathApi + '/Unidad/ConsultaUnidades', params, {
+    return this.http.post(environment.pathApi + '/Usuario/CrearModificarUsuario', params, {
       headers: this.generateBasicHeaders()
     });
   }
