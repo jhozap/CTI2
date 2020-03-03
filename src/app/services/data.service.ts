@@ -21,6 +21,12 @@ export class DataService {
     });
   }
 
+  public getInvestigadores() {    
+    return this.http.get(environment.pathApi + '/Investigadores/ConsultaInvestigadores', {
+      headers: this.generateBasicHeaders()
+    });
+  }
+
   public getGrados() {
     return this.http.get(environment.pathApi + '/Grado/ConsultaGrados', {
       headers: this.generateBasicHeaders()

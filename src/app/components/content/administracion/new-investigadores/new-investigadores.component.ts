@@ -33,11 +33,10 @@ export class NewInvestigadoresComponent implements OnInit {
     "NOMBRES",
     "APELLIDOS",
     "DESC_GRADO",
-    "USUARIO",
     "EMAIL",
-    "PERFIL",
     "ACCIONES"
   ];
+  dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
@@ -107,6 +106,27 @@ export class NewInvestigadoresComponent implements OnInit {
     this.formulario.get('Tipo').disable();
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  getInvestigadores() {
+    this._dataService
+      .getInvestigadores()
+      .toPromise()
+      .then((data: any[]) => {
+        console.log(data);
+        this.dataSource = new MatTableDataSource(data);
+        setTimeout(() => {
+          this.dataSource.paginator = this.paginator;
+        }, 0);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
   closeTheForm() {
     if (this.new) {
       swalWithBootstrapButtons
@@ -161,6 +181,13 @@ export class NewInvestigadoresComponent implements OnInit {
     }else {
       return false;
     }
-   
+  }
+
+  updateInvestigador(e) {
+
+  }
+
+  deleteInvestigador(e) {
+    
   }
 }
