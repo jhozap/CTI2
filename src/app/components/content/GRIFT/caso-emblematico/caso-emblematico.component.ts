@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from "sweetalert2";
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { DataService } from 'src/app/services/data.service';
+import { FormControlService } from 'src/app/services/form-control.service';
 
 const swalWithBootstrapButtons = Swal.mixin({
   customClass: {
@@ -18,7 +21,24 @@ export class CasoEmblematicoComponent implements OnInit {
   titleForm = "Caso emblematico";
   public new = false;
 
-  constructor() { }
+  investigadores = ["a","b","c","d"];
+  integrantesForm: any;
+  formulario: FormGroup;
+    placeholders = ["Nombre del Caso", "Integrantes", "Lugar de Afectación", "Actividades"];
+    nombreForms = ["nombreCasoForm", "integrantesForm", "lugarForm", "actividadForm"];
+
+
+  constructor( private _dataService: DataService,
+    private formBuilder: FormBuilder,
+    private formGroup: FormControlService) {
+      this.formulario = new FormGroup({
+        nombreCasoForm: new FormControl('', Validators.required),
+      //  integrantesForm: new FormControl('', Validators.required),
+        lugarForm: new FormControl('', Validators.required),
+        actividadForm: new FormControl('', Validators.required),
+      });
+      this.integrantesForm = new FormControl();
+  }
 
   ngOnInit(): void {
   }
