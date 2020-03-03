@@ -93,7 +93,7 @@ export const REAL_MENU_ITEMS: MenuItem[] = [
         ]
     },
     {
-        title: 'Adminstración',
+        title: 'Administración',
         heigth: 24,
         icon: 'settings_applications',
         width: 24,
