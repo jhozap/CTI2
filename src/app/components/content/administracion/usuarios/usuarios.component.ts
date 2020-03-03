@@ -221,10 +221,7 @@ export class UsuariosComponent implements OnInit {
       this.formulario.get("tipoDocForm").setValue(this.consultarTipo(user.ID_TIPO_DOCUMENTO));
       this.formulario.get("gradoForm").setValue(this.consultarGrado(user.ID_GRADO));
       this.formulario.get("unidadForm").setValue(this.consultarUnidad(user.ID_UNIDAD));
-
       this.formulario.get("perfilForm").setValue(this.consultarPerfil(user.PERFIL));
-      
-      
     } 
   }
 
