@@ -20,5 +20,11 @@ export class DataService {
       headers: this.generateBasicHeaders()
     });
   }
+
+  public getGrados() {
+    return this.http.get(environment.pathApi + '/Grado/ConsultaGrados', {
+      headers: this.generateBasicHeaders()
+    });
+  }
   
 }
