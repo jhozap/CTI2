@@ -74,11 +74,12 @@ export class UsuariosComponent implements OnInit {
     private formBuilder: FormBuilder,
     private formGroup: FormControlService) {
       this.formulario = new FormGroup({
-        numeroDocumento: new FormControl('', Validators.required),
+        numeroDocumento: new FormControl('', Validators.compose([Validators.required, Validators.pattern("^[0-9]*$")])),
         NombreForm: new FormControl('', Validators.required),
         Apellidos: new FormControl('', Validators.required),
         tipoDocForm: new FormControl('', Validators.required),
-        telefonoForm: new FormControl('', Validators.required),
+        telefonoForm: new FormControl('',   Validators.compose([Validators.required, 
+          Validators.pattern("^[0-9]*$"), Validators.maxLength(10)])),
         emailForm: new FormControl(
           "",
           Validators.compose([
