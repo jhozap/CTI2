@@ -35,6 +35,7 @@ export class UnidadesComponent implements OnInit {
     "ID_TIPO",
     "ACCIONES"
   ];
+  dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
@@ -73,6 +74,11 @@ export class UnidadesComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   closeTheForm() {
     if (this.new) {
       swalWithBootstrapButtons
@@ -104,6 +110,14 @@ export class UnidadesComponent implements OnInit {
       this.titleForm = "Nueva Unidad";
       this.new = !this.new;
     }
+  }
+
+  updateUnidad(e) {
+
+  }
+
+  deleteUnidad(e) {
+
   }
 
 }
