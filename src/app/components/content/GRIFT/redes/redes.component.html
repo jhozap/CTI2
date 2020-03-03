@@ -14,7 +14,84 @@
 
   <!-- Table -->
   <ng-template #table>
-    <div class="table-container"></div>
+    <div class="table-container">
+      <mat-form-field>
+        <mat-label>Filtro</mat-label>
+        <input
+          matInput
+          (keyup)="applyFilter($event)"
+          placeholder="Red de Investigacion"
+        />
+      </mat-form-field>
+
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+          <!-- ID_RED Column -->
+          <ng-container matColumnDef="ID_RED">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.ID_RED }}
+            </td>
+          </ng-container>
+
+          <!-- NOMBRE_RED Column -->
+          <ng-container matColumnDef="NOMBRE_RED">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Nombre Red
+            </th>
+            <td mat-cell *matCellDef="let row">{{ row.NOMBRE_RED }}</td>
+          </ng-container>
+
+          <!-- ENTIDAD Column -->
+          <ng-container matColumnDef="ENTIDAD">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Entidad</th>
+            <td mat-cell *matCellDef="let row">{{ row.ENTIDAD }}</td>
+          </ng-container>
+
+          <!-- ANO_CREACION Column -->
+          <ng-container matColumnDef="ANO_CREACION">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Actividades
+            </th>
+            <td mat-cell *matCellDef="let row">{{ row.ANO_CREACION }}</td>
+          </ng-container>
+
+          <!-- SEDE_DEPTO Column -->
+          <ng-container matColumnDef="SEDE_DEPTO">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Departamento
+            </th>
+            <td mat-cell *matCellDef="let row">{{ row.SEDE_DEPTO }}</td>
+          </ng-container>
+
+          <!-- SEDE_CIUDAD Column -->
+          <ng-container matColumnDef="SEDE_CIUDAD">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Ciudad
+            </th>
+            <td mat-cell *matCellDef="let row">{{ row.SEDE_CIUDAD }}</td>
+          </ng-container>
+
+          <!-- Acciones Column -->
+          <ng-container matColumnDef="ACCIONES">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-icon-button color="accent" (click)="updateCaso(row)">
+                <mat-icon>create</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="deleteCaso(row)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+      </div>
+    </div>
   </ng-template>
   <!-- Fin Table -->
   <!-- Form Red de Investigacion -->

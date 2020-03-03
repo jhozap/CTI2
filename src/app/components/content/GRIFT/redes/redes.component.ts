@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import Swal from "sweetalert2";
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { DataService } from 'src/app/services/data.service';
 
 const swalWithBootstrapButtons = Swal.mixin({
   customClass: {
@@ -19,10 +22,28 @@ export class RedesComponent implements OnInit {
   titleForm = "Redes de Investigacion";
   public new = false;
 
+  displayedColumns: string[] = [
+    "ID_RED",
+    "NOMBRE_RED",
+    "ENTIDAD",
+    "ANO_CREACION",
+    "SEDE_DEPTO",
+    "SEDE_CIUDAD",
+    "ACCIONES"
+  ];
+  dataSource: MatTableDataSource<any>;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
-  constructor() { }
+
+  constructor(private _dataService: DataService) { }
 
   ngOnInit(): void {
+    this.getRedes();
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   closeTheForm() {
@@ -56,5 +77,19 @@ export class RedesComponent implements OnInit {
       this.new = !this.new;
     }
   }
+
+  getRedes() {
+    this._dataService.getRedes()
+      .subscribe((data: any[]) => {
+        console.log(data);
+        this.dataSource = new MatTableDataSource(data);
+        setTimeout(() => {
+          this.dataSource.paginator = this.paginator;
+        }, 0);
+      });
+  }
+
+  updateRed(e) {}
+  deleteRed(e) {}
 
 }
