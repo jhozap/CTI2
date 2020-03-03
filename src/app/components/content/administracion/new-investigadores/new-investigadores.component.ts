@@ -45,13 +45,20 @@ export class NewInvestigadoresComponent implements OnInit {
   {ID_ESTUDIO_ACADEMICO: '5', DESCRIPCION: 'Posgrados'},
   {ID_ESTUDIO_ACADEMICO: '6', DESCRIPCION: 'Otros'}];
   
+  tipoDoc = [
+    { ID_TIPO_DOCUMENTO: "1", DESCRIPCION: "TARJETA DE IDENTIDAD" },
+    { ID_TIPO_DOCUMENTO: "2", DESCRIPCION: "CEDULA CIUDADANIA" },
+    { ID_TIPO_DOCUMENTO: "3", DESCRIPCION: "PASAPORTE" },
+    { ID_TIPO_DOCUMENTO: "4", DESCRIPCION: "CEDULA EXTRANJERIA" }
+  ];
   
   tipoCategorizacion = ["Junior", "Asociado", "Senior", "Emerito"];
 
   formulario: FormGroup;
-  placeholders = ["Cédula de Ciudadanía", "Nombres", "Apellidos", "Teléfono", "Dirección","Email", "Grado", "Estudios Acádemicos"];
+  placeholders = ["Cédula de Ciudadanía", "Nombres", "Apellidos", "Teléfono", "Dirección","Email", "Grado", "Estudios Acádemicos",
+"Tipo Documento"];
   nombreForms = ["cedulaForm", "NombreForm", "Apellidos", "telefonoForm", "direccionForm", "emailForm", "gradoForm", 
-  "estudiosAcademicosForm"];
+  "estudiosAcademicosForm", "tipoDocForm"];
 
   constructor(
     private _dataService: DataService,
@@ -64,7 +71,8 @@ export class NewInvestigadoresComponent implements OnInit {
         telefonoForm: new FormControl('',   Validators.compose([Validators.required, 
           Validators.pattern("^[0-9]*$"), Validators.maxLength(10)])),
           direccionForm: new FormControl('', Validators.required),
-        emailForm: new FormControl(
+          tipoDocForm: new FormControl('', Validators.required),
+          emailForm: new FormControl(
           "",
           Validators.compose([
             Validators.required,
@@ -104,7 +112,7 @@ export class NewInvestigadoresComponent implements OnInit {
             console.log("cancel aceptado");
             this.new = !this.new;
             this.titleForm = "Investigadores";
-           
+            
             this.formulario.reset();
           } else if (
             /* Read more about handling dismissals below */
@@ -127,10 +135,16 @@ export class NewInvestigadoresComponent implements OnInit {
   
 
   checkOthers(){
-    if(this.formulario.get('estudiosAcademicosForm').value.DESCRIPCION === 'Otros'){
+    if(this.formulario.get('estudiosAcademicosForm').value != null &&
+    this.formulario.get('estudiosAcademicosForm').value != undefined){
+      if(this.formulario.get('estudiosAcademicosForm').value.DESCRIPCION === 'Otros'){
         return true;
     } else {
       return false;
     }
+    }else {
+      return false;
+    }
+   
   }
 }
