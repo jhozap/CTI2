@@ -18,56 +18,136 @@
     <ng-template #form>
         <form [formGroup]="formulario">
             <div class="group">
-               
-
-                    <!-- Cédula Ciudadania -->
-                    <app-number [nombreCampo]="nombreForms[0]" [placeHolder]="placeholders[0]" [form]="formulario">
-                    </app-number>
-
-                    <!-- Nombres -->
-                    <app-number [nombreCampo]="nombreForms[1]" [placeHolder]="placeholders[1]" [form]="formulario">
-                    </app-number>
-
-                    <!-- Apellidos -->
-                    <app-number [nombreCampo]="nombreForms[2]" [placeHolder]="placeholders[2]" [form]="formulario">
-                    </app-number>
-               
+                <!-- Número documento -->
+                <app-simple-input [data]="{
+                        placeholder: 'Cédula de Ciudadanía',
+                        data: null,
+                        icon: null
+                    }" [type]="'number'" (formReady)="formInitialized('Documento', $event)">
+                </app-simple-input>
+                <!-- Nombres -->
+                <app-simple-input [data]="{
+                        placeholder: 'Nombres',
+                        data: null,
+                        icon: null
+                    }" (formReady)="formInitialized('Nombres', $event)">
+                </app-simple-input>
+        
+                <!-- Apellidos -->
+                <app-simple-input [data]="{
+                        placeholder: 'Apellidos',
+                        data: null,
+                        icon: null
+                    }" (formReady)="formInitialized('Apellidos', $event)">
+                </app-simple-input>
+            </div>
+        
+            <div class="group">
+                <!-- Teléfono -->
+                <app-simple-input [data]="{
+                        placeholder: 'Teléono',
+                        data: null,
+                        icon: 'local_phone'
+                    }" (formReady)="formInitialized('Tlf', $event)">
+                </app-simple-input>
+        
+                <!-- Dirección -->
+                <mat-form-field class="full-width">
+                    <textarea matInput placeholder="Dirección" formControlName="Dir"></textarea>
+                </mat-form-field>
+        
+                <!-- Email -->
+                <app-simple-input [data]="{
+                        placeholder: 'Email',
+                        data: null,
+                        icon: 'local_post_office'
+                    }" (formReady)="formInitialized('Email', $event)" [type]="'email'">
+                </app-simple-input>
+            </div>
+        
+            <div class="group">
+                <!-- Grado -->
+                <app-select [placeholder]="'Grado'" [data]="grado" (formReady)="formInitialized('Grado', $event)">
+                </app-select>
+        
+                <!-- Estudios -->
+                <mat-form-field>
+                    <mat-label>Estudios Academicos</mat-label>
+                    <mat-select formControlName="Estudios" multiple>
+                        <mat-option *ngFor="let estudio of estudios" [value]="estudio">{{estudio}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+        
+                <!-- Otros estudios -->
+                <mat-form-field *ngIf="!checkOthers()">
+                    <input matInput placeholder="Otros estudios" formControlName="Otros">
+                </mat-form-field>
+            </div>
+        
+            <div class="group">
+                <!-- Categorización Colciencias -->
+                <div class="sub-group">
+                    <div>
+                        <mat-label>Categorización Colciencias?</mat-label>
+                        <mat-radio-group (change)="enableTipo($event.value)" formControlName="Categ"
+                            class="sub-group__radio-group" aria-labelledby="example-radio-group-label">
+                            <mat-radio-button [value]="true">
+                                Si
+                            </mat-radio-button>
+                            <mat-radio-button [value]="false">
+                                No
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <span class="separator"></span>
+                    <div>
+                        <mat-label>Tipo</mat-label>
+                        <mat-radio-group formControlName="Tipo" class="sub-group__radio-group"
+                            aria-labelledby="example-radio-group-label">
+                            <mat-radio-button *ngFor="let tipo of tipoCategorizacion" [value]="tipo">
+                                {{tipo}}
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+        
             </div>
             <div class="group">
-                <div class="doc-group">
-
-                    <!-- Teléfono -->
-                    <app-number [nombreCampo]="nombreForms[3]" [placeHolder]="placeholders[3]" [form]="formulario">
-                    </app-number>
-
-                    <!-- Dirección -->
-                    <app-number [nombreCampo]="nombreForms[4]" [placeHolder]="placeholders[4]" [form]="formulario">
-                    </app-number>
-
-                    <!-- Email -->
-                    <app-number [nombreCampo]="nombreForms[5]" [placeHolder]="placeholders[5]" [form]="formulario">
-                    </app-number>
+                <div class="sub-group">
+                    <div>
+                        <!-- Profesor Investigador -->
+                        <mat-label>Profesor Investigador?</mat-label>
+                        <mat-radio-group formControlName="Investigador" class="sub-group__radio-group"
+                            aria-labelledby="example-radio-group-label">
+                            <mat-radio-button [value]="true">
+                                Si
+                            </mat-radio-button>
+                            <mat-radio-button [value]="false">
+                                No
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <span class="separator"></span>
+                    <div>
+                        <!-- Estudiante -->
+                        <mat-label>Estudiante?</mat-label>
+                        <mat-radio-group formControlName="Estudiante" class="sub-group__radio-group"
+                            aria-labelledby="example-radio-group-label">
+                            <mat-radio-button [value]="true">
+                                Si
+                            </mat-radio-button>
+                            <mat-radio-button [value]="false">
+                                No
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
                 </div>
+        
             </div>
-            <div class="group">
-                <div class="doc-group">
-
-                    <!-- Grado -->
-
-                    <app-select [placeholder]="'Grado'" [data]="grado" [argument]="'DESCRIPCION'"
-                        [nombreCampo]="nombreForms[6]" [form]="formulario"></app-select>
-
-                    <!-- Estudios Academicos -->
-
-                    <app-select [placeholder]="'Unidad'" [data]="estudiosAcademicos" [argument]="'DESCRIPCION'"
-                        [nombreCampo]="nombreForms[7]" [form]="formulario"></app-select>
-                </div>
-            </div>
-
+        
             <div class="buttons">
-                <!-- <button mat-flat-button (click)="closeTheForm()">Cancelar</button> -->
-                <button mat-raised-button color="primary"
-                    [disabled]="formulario.invalid">Guardar</button>
+                <button mat-flat-button (click)="closeTheForm()">Cancelar</button>
+                <button (click)="sendData()" mat-raised-button color="primary" [disabled]="newInvestigator.invalid">Guardar</button>
             </div>
         </form>
         <!-- <div>{{ formulario | json }}</div> -->
