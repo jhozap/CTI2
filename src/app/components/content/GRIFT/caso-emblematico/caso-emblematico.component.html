@@ -21,24 +21,20 @@
   <ng-template #form>
     <form [formGroup]="formulario">
       <div class="group">
-        <div class="doc-group">
-         
-          <app-number
+        <app-number
           [nombreCampo]="nombreForms[0]"
           [placeHolder]="placeholders[0]"
           [form]="formulario"
         ></app-number>
 
-        </div>
-        
-      </div>
-
-      <div class="group">
-
         <mat-form-field>
           <mat-label>Integrantes</mat-label>
           <mat-select [formControl]="integrantesForm" multiple>
-            <mat-option *ngFor="let investigador of investigadores" [value]="investigador">{{investigador}}</mat-option>
+            <mat-option
+              *ngFor="let investigador of investigadores"
+              [value]="investigador"
+              >{{ investigador }}</mat-option
+            >
           </mat-select>
         </mat-form-field>
         <!-- Lugar de Afectación -->
@@ -56,15 +52,18 @@
         ></app-number>
       </div>
 
-      
-
       <div class="buttons">
         <!-- <button mat-flat-button (click)="closeTheForm()">Cancelar</button> -->
-        <button mat-raised-button color="primary"  [disabled]="formulario.invalid">Guardar</button>
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="formulario.invalid"
+        >
+          Guardar
+        </button>
       </div>
     </form>
     <!-- <div>{{ formulario | json }}</div> -->
- 
   </ng-template>
   <!-- Fin Form Usuarios -->
 </div>
