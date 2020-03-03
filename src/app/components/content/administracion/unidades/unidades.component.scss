@@ -99,3 +99,19 @@ form {
     }
   }
 }
+
+.full-width {
+  width: 100%;
+}
+.separator {
+  border-left: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+mat-form-field,
+table {
+  width: 100%;
+}
+
+.table-container {
+  padding: 1rem;
+}

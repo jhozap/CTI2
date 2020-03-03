@@ -1,223 +1,259 @@
 <div class="content">
-    <div class="title-wrapper">
-        <h1>{{ titleForm }}</h1>
-        <button mat-raised-button [color]="new ? 'warn' : 'primary'" (click)="closeTheForm()">
-            <mat-icon>{{ new ? "close" : "add" }}</mat-icon>{{ new ? "Cancelar" : "Nuevo Investigador" }}
-        </button>
-    </div>
-    <ng-container *ngIf="new; then form; else table"></ng-container>
+  <div class="title-wrapper">
+    <h1>{{ titleForm }}</h1>
+    <button
+      mat-raised-button
+      [color]="new ? 'warn' : 'primary'"
+      (click)="closeTheForm()"
+    >
+      <mat-icon>{{ new ? "close" : "add" }}</mat-icon
+      >{{ new ? "Cancelar" : "Nuevo Investigador" }}
+    </button>
+  </div>
+  <ng-container *ngIf="new; then form; else table"></ng-container>
 
-    <!-- Table -->
-    <ng-template #table>
-        <div class="table-container">
-            <mat-form-field>
-                <mat-label>Filtro</mat-label>
-                <input matInput (keyup)="applyFilter($event)" placeholder="Usuario" />
-              </mat-form-field>
-        
-              <div class="mat-elevation-z8">
-                <table mat-table [dataSource]="dataSource">
-                  
-                  <!-- Documento Column -->
-                  <ng-container matColumnDef="DOCUMENTO">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Documento</th>
-                    <td mat-cell *matCellDef="let row">{{ row.DOCUMENTO }}</td>
-                  </ng-container>
-        
-                  <!-- Nombre Column -->
-                  <ng-container matColumnDef="NOMBRES">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
-                    <td mat-cell *matCellDef="let row">{{ row.NOMBRES }}</td>
-                  </ng-container>
-        
-                  <!-- Apellido Column -->
-                  <ng-container matColumnDef="APELLIDOS">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Apellido</th>
-                    <td mat-cell *matCellDef="let row">{{ row.APELLIDOS }}</td>
-                  </ng-container>
-        
-                  <!-- Grado Column -->
-                  <ng-container matColumnDef="DESC_GRADO">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Grado</th>
-                    <td mat-cell *matCellDef="let row">{{ row.DESC_GRADO }}</td>
-                  </ng-container>                 
-        
-                  <!-- Email Column -->
-                  <ng-container matColumnDef="EMAIL">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>EMAIL</th>
-                    <td mat-cell *matCellDef="let row">{{ row.EMAIL }}</td>
-                  </ng-container>        
-        
-                  <!-- Acciones Column -->
-                  <ng-container matColumnDef="ACCIONES">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
-                    <td mat-cell *matCellDef="let row">
-                      <button mat-icon-button color="accent" (click)="updateInvestigador(row)">
-                        <mat-icon>create</mat-icon>
-                      </button>
-                      <button mat-icon-button color="warn" (click)="deleteInvestigador(row)">
-                        <mat-icon>delete</mat-icon>
-                      </button>
-                    </td>
-                  </ng-container>
-        
-                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-                </table>
-        
-                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-              </div>
-        </div>
-    </ng-template>
-    <!-- Fin Table -->
-    <!-- Form Investigadores -->
-    <ng-template #form>
-        <form [formGroup]="formulario">
-            <div class="group">
-                <div class="doc-group">
-                 <!-- Tipo documento -->
+  <!-- Table -->
+  <ng-template #table>
+    <div class="table-container">
+      <mat-form-field>
+        <mat-label>Filtro</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Usuario" />
+      </mat-form-field>
+
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+          <!-- Documento Column -->
+          <ng-container matColumnDef="DOCUMENTO">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Documento</th>
+            <td mat-cell *matCellDef="let row">{{ row.DOCUMENTO }}</td>
+          </ng-container>
+
+          <!-- Nombre Column -->
+          <ng-container matColumnDef="NOMBRES">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+            <td mat-cell *matCellDef="let row">{{ row.NOMBRES }}</td>
+          </ng-container>
+
+          <!-- Apellido Column -->
+          <ng-container matColumnDef="APELLIDOS">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Apellido</th>
+            <td mat-cell *matCellDef="let row">{{ row.APELLIDOS }}</td>
+          </ng-container>
+
+          <!-- Grado Column -->
+          <ng-container matColumnDef="DESC_GRADO">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Grado</th>
+            <td mat-cell *matCellDef="let row">{{ row.DESC_GRADO }}</td>
+          </ng-container>
+
+          <!-- Email Column -->
+          <ng-container matColumnDef="EMAIL">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>EMAIL</th>
+            <td mat-cell *matCellDef="let row">{{ row.EMAIL }}</td>
+          </ng-container>
+
+          <!-- Acciones Column -->
+          <ng-container matColumnDef="ACCIONES">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+            <td mat-cell *matCellDef="let row">
+              <button
+                mat-icon-button
+                color="accent"
+                (click)="updateInvestigador(row)"
+              >
+                <mat-icon>create</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                color="warn"
+                (click)="deleteInvestigador(row)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+      </div>
+    </div>
+  </ng-template>
+  <!-- Fin Table -->
+  <!-- Form Investigadores -->
+  <ng-template #form>
+    <form [formGroup]="formulario">
+      <div class="group">
+        <div class="doc-group">
+          <!-- Tipo documento -->
           <app-select
-          [placeholder]="'Tipo Doc.'"
-          [data]="tipoDoc"
-          [argument]="'DESCRIPCION'"
-          [nombreCampo]="nombreForms[8]"
-          [form]="formulario"
-        ></app-select>
-                <!-- Número documento -->
-                <app-number
+            [placeholder]="'Tipo Doc.'"
+            [data]="tipoDoc"
+            [argument]="'DESCRIPCION'"
+            [nombreCampo]="nombreForms[8]"
+            [form]="formulario"
+          ></app-select>
+          <!-- Número documento -->
+          <app-number
             [nombreCampo]="nombreForms[0]"
             [placeHolder]="placeholders[0]"
             [form]="formulario"
           ></app-number>
-          </div>
-                <!-- Nombres -->
-                <app-number
-                [nombreCampo]="nombreForms[1]"
-                [placeHolder]="placeholders[1]"
-                [form]="formulario"
-              ></app-number>
-        
-                <!-- Apellidos -->
-                <app-number
-                [nombreCampo]="nombreForms[2]"
-                [placeHolder]="placeholders[2]"
-                [form]="formulario"
-              ></app-number>
-            </div>
-        
-            <div class="group">
-                <!-- Teléfono -->
-                <app-number
-            [nombreCampo]="nombreForms[3]"
-            [placeHolder]="placeholders[3]"
-            [form]="formulario"
-          ></app-number>
-        
-                <!-- Dirección -->
-                <app-number
-                [nombreCampo]="nombreForms[4]"
-                [placeHolder]="placeholders[4]"
-                [form]="formulario"
-              ></app-number>
-        
-                <!-- Email -->
-                <app-number
-                [nombreCampo]="nombreForms[5]"
-                [placeHolder]="placeholders[5]"
-                [form]="formulario"
-              ></app-number>
-            </div>
-        
-            <div class="group">
-                <!-- Grado -->
-                <app-select
-                [placeholder]="'Grado'"
-                [data]="grado"
-                [argument]="'DESCRIPCION'"
-                [nombreCampo]="nombreForms[6]"
-                [form]="formulario"
-              ></app-select>
-                <!-- Estudios -->
-                <app-select
+        </div>
+        <!-- Nombres -->
+        <app-number
+          [nombreCampo]="nombreForms[1]"
+          [placeHolder]="placeholders[1]"
+          [form]="formulario"
+        ></app-number>
+
+        <!-- Apellidos -->
+        <app-number
+          [nombreCampo]="nombreForms[2]"
+          [placeHolder]="placeholders[2]"
+          [form]="formulario"
+        ></app-number>
+      </div>
+
+      <div class="group">
+        <!-- Teléfono -->
+        <app-number
+          [nombreCampo]="nombreForms[3]"
+          [placeHolder]="placeholders[3]"
+          [form]="formulario"
+        ></app-number>
+
+        <!-- Dirección -->
+        <app-number
+          [nombreCampo]="nombreForms[4]"
+          [placeHolder]="placeholders[4]"
+          [form]="formulario"
+        ></app-number>
+
+        <!-- Email -->
+        <app-number
+          [nombreCampo]="nombreForms[5]"
+          [placeHolder]="placeholders[5]"
+          [form]="formulario"
+        ></app-number>
+      </div>
+
+      <div class="group">
+        <!-- Grado -->
+        <app-select
+          [placeholder]="'Grado'"
+          [data]="grado"
+          [argument]="'DESCRIPCION'"
+          [nombreCampo]="nombreForms[6]"
+          [form]="formulario"
+        ></app-select>
+        <!-- Estudios -->
+        <app-select
           [placeholder]="'Estudios Acádemicos'"
           [data]="estudiosAcademicos"
           [argument]="'DESCRIPCION'"
           [nombreCampo]="nombreForms[7]"
           [form]="formulario"
         ></app-select>
-        
-                <!-- Otros estudios -->
-                <mat-form-field *ngIf="checkOthers()">
-                    <input matInput placeholder="Otros estudios" formControlName="OtrosForm">
-                </mat-form-field>
-            </div>
-        
-            <div class="group">
-                <!-- Categorización Colciencias -->
-                <div class="sub-group">
-                    <div>
-                        <mat-label>Categorización Colciencias?</mat-label>
-                        <mat-radio-group (change)="enableTipo($event.value)" formControlName="CategForm"
-                            class="sub-group__radio-group" aria-labelledby="example-radio-group-label">
-                            <mat-radio-button [value]="true">
-                                Si
-                            </mat-radio-button>
-                            <mat-radio-button [value]="false">
-                                No
-                            </mat-radio-button>
-                        </mat-radio-group>
-                    </div>
-                    <span class="separator"></span>
-                    <div>
-                        <mat-label>Tipo</mat-label>
-                        <mat-radio-group formControlName="Tipo" class="sub-group__radio-group"
-                            aria-labelledby="example-radio-group-label">
-                            <mat-radio-button *ngFor="let tipo of tipoCategorizacion" [value]="tipo">
-                                {{tipo}}
-                            </mat-radio-button>
-                        </mat-radio-group>
-                    </div>
-                </div>
-        
-            </div>
-            <div class="group">
-                <div class="sub-group">
-                    <div>
-                        <!-- Profesor Investigador -->
-                        <mat-label>Profesor Investigador?</mat-label>
-                        <mat-radio-group formControlName="Investigador" class="sub-group__radio-group"
-                            aria-labelledby="example-radio-group-label">
-                            <mat-radio-button [value]="true">
-                                Si
-                            </mat-radio-button>
-                            <mat-radio-button [value]="false">
-                                No
-                            </mat-radio-button>
-                        </mat-radio-group>
-                    </div>
-                    <span class="separator"></span>
-                    <div>
-                        <!-- Estudiante -->
-                        <mat-label>Estudiante?</mat-label>
-                        <mat-radio-group formControlName="Estudiante" class="sub-group__radio-group"
-                            aria-labelledby="example-radio-group-label">
-                            <mat-radio-button [value]="true">
-                                Si
-                            </mat-radio-button>
-                            <mat-radio-button [value]="false">
-                                No
-                            </mat-radio-button>
-                        </mat-radio-group>
-                    </div>
-                </div>
-        
-            </div>
-        
-            <div class="buttons">
-                <button  mat-raised-button color="primary" [disabled]="formulario.invalid">Guardar</button>
-            </div>
-        </form>
-        <!-- <div>{{ formulario | json }}</div> -->
-    </ng-template>
-    <!-- Fin Form Investigadores -->
+
+        <!-- Otros estudios -->
+        <mat-form-field *ngIf="checkOthers()">
+          <input
+            matInput
+            placeholder="Otros estudios"
+            formControlName="OtrosForm"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="group">
+        <!-- Categorización Colciencias -->
+        <div class="sub-group">
+          <div>
+            <mat-label>Categorización Colciencias?</mat-label>
+            <mat-radio-group
+              (change)="enableTipo($event.value)"
+              formControlName="CategForm"
+              class="sub-group__radio-group"
+              aria-labelledby="example-radio-group-label"
+            >
+              <mat-radio-button [value]="true">
+                Si
+              </mat-radio-button>
+              <mat-radio-button [value]="false">
+                No
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <span class="separator"></span>
+          <div>
+            <mat-label>Tipo</mat-label>
+            <mat-radio-group
+              formControlName="Tipo"
+              class="sub-group__radio-group"
+              aria-labelledby="example-radio-group-label"
+            >
+              <mat-radio-button
+                *ngFor="let tipo of tipoCategorizacion"
+                [value]="tipo"
+              >
+                {{ tipo }}
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+      </div>
+      <div class="group">
+        <div class="sub-group">
+          <div>
+            <!-- Profesor Investigador -->
+            <mat-label>Profesor Investigador?</mat-label>
+            <mat-radio-group
+              formControlName="Investigador"
+              class="sub-group__radio-group"
+              aria-labelledby="example-radio-group-label"
+            >
+              <mat-radio-button [value]="true">
+                Si
+              </mat-radio-button>
+              <mat-radio-button [value]="false">
+                No
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <span class="separator"></span>
+          <div>
+            <!-- Estudiante -->
+            <mat-label>Estudiante?</mat-label>
+            <mat-radio-group
+              formControlName="Estudiante"
+              class="sub-group__radio-group"
+              aria-labelledby="example-radio-group-label"
+            >
+              <mat-radio-button [value]="true">
+                Si
+              </mat-radio-button>
+              <mat-radio-button [value]="false">
+                No
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="formulario.invalid"
+        >
+          Guardar
+        </button>
+      </div>
+    </form>
+    <!-- <div>{{ formulario | json }}</div> -->
+  </ng-template>
+  <!-- Fin Form Investigadores -->
 </div>
