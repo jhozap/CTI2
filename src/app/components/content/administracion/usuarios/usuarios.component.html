@@ -1,13 +1,8 @@
 <div class="content">
   <div class="title-wrapper">
     <h1>{{ titleForm }}</h1>
-    <button
-      mat-raised-button
-      [color]="new ? 'warn' : 'primary'"
-      (click)="closeTheForm()"
-    >
-      <mat-icon>{{ new ? "close" : "add" }}</mat-icon
-      >{{ new ? "Cancelar" : "Nuevo usuario" }}
+    <button mat-raised-button [color]="new ? 'warn' : 'primary'" (click)="closeTheForm()">
+      <mat-icon>{{ new ? "close" : "add" }}</mat-icon>{{ new ? "Cancelar" : "Nuevo usuario" }}
     </button>
   </div>
   <ng-container *ngIf="new; then form; else table"></ng-container>
@@ -108,12 +103,8 @@
       <div class="group">
         <div class="doc-group">
           <!-- Tipo documento -->
-    <!--      <app-select
-            [placeholder]="'Tipo Doc.'"
-            [data]="tipoDoc"
-            [argument]="'DESCRIPCION'"
-            [formControlName] = "tipoDocForm"
-          ></app-select>-->
+          <app-select [placeholder]="'Tipo Doc.'" [data]="tipoDoc" [argument]="'DESCRIPCION'"
+            [nombreCampo]="nombreForms[3]" [form]="formulario"></app-select>
 
           <!-- Número documento -->
           <app-number [nombreCampo]="nombreForms[0]" [placeHolder]="placeholders[0]" [form]="formulario"></app-number>
@@ -127,43 +118,51 @@
       </div>
 
       <div class="group">
-        <!-- Teléfono -->
-        <app-number></app-number>
+        <div class="doc-group">
+          <!-- Teléfono -->
+          <app-number [nombreCampo]="nombreForms[4]" [placeHolder]="placeholders[3]" [form]="formulario"></app-number>
 
-        <!-- Email -->
-        <app-email></app-email>
+          <!-- Email -->
+          <app-number [nombreCampo]="nombreForms[5]" [placeHolder]="placeholders[4]" [form]="formulario"></app-number>
+
+        </div>
       </div>
 
       <div class="group">
         <!-- Grado -->
-        <app-select></app-select>
+        <div class="doc-group">
+          <app-select [placeholder]="'Grupo'" [data]="grado" [argument]="'DESCRIPCION'" [nombreCampo]="nombreForms[6]"
+            [form]="formulario"></app-select>
 
-        <!-- Unidad -->
-        <app-select></app-select>
-      </div>
+          <!-- Unidad -->
+          
+            <app-select [placeholder]="'Unidad'" [data]="unidad" [argument]="'DESCRIPCION'"
+              [nombreCampo]="nombreForms[7]" [form]="formulario"></app-select>
+          </div>
+        </div>
 
-      <div class="group">
-        <!-- Usuario PSI -->
-        <app-text></app-text>
+        <div class="group">
+          <!-- Usuario PSI -->
+          <app-text></app-text>
 
-        <!-- Perfil -->
-        <app-select></app-select>
+          <!-- Perfil -->
+          <app-select></app-select>
 
-        <!-- Contraseña -->
-        <app-password></app-password>
-
-        <!-- Confirmar Contraseña -->
-        <div>
+          <!-- Contraseña -->
           <app-password></app-password>
-          <!-- <mat-error *ngIf="passwd.errors && passwd.errors.confirmPasswd">Las contraseñas no coinciden</mat-error> -->
+
+          <!-- Confirmar Contraseña -->
+          <div>
+            <app-password></app-password>
+            <!-- <mat-error *ngIf="passwd.errors && passwd.errors.confirmPasswd">Las contraseñas no coinciden</mat-error> -->
+          </div>
+        </div>
+
+        <div class="buttons">
+          <!-- <button mat-flat-button (click)="closeTheForm()">Cancelar</button> -->
+          <button mat-raised-button color="primary">Guardar</button>
         </div>
       </div>
-
-      <div class="buttons">
-        <!-- <button mat-flat-button (click)="closeTheForm()">Cancelar</button> -->
-        <button mat-raised-button color="primary">Guardar</button>
-      </div>
-    </div>
   </ng-template>
   <!-- Fin Form Usuarios -->
 </div>

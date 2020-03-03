@@ -34,9 +34,12 @@ export class UsuariosComponent implements OnInit {
     {ID_TIPO_DOCUMENTO: '4', DESCRIPCION: 'CEDULA EXTRANJERIA'}
     ];
 
+    grado = [];
+    unidad = [];
+
     formulario: FormGroup;
-    placeholders = ["Número de Documento", "Nombres", "Apellidos"];
-    nombreForms = ["numeroDocumento", "NombreForm", "Apellidos"];
+    placeholders = ["Número de Documento", "Nombres", "Apellidos", "Teléfono", "Email", "Grado", "Unidad"];
+    nombreForms = ["numeroDocumento", "NombreForm", "Apellidos", "tipoDocForm", "telefonoForm", "emailForm", "gradoForm", "unidadForm"];
 
 
   constructor(private _dataService: DataService,
@@ -46,7 +49,17 @@ export class UsuariosComponent implements OnInit {
         numeroDocumento: new FormControl('', Validators.required),
         NombreForm: new FormControl('', Validators.required),
         Apellidos: new FormControl('', Validators.required),
-        tipoDocForm: new FormControl('', Validators.required)
+        tipoDocForm: new FormControl('', Validators.required),
+        telefonoForm: new FormControl('', Validators.required),
+        emailForm: new FormControl(
+          "",
+          Validators.compose([
+            Validators.required,
+            Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$")
+          ])
+        ),
+        gradoForm: new FormControl('', Validators.required),
+        unidadForm: new FormControl('', Validators.required)
       });
    
   }

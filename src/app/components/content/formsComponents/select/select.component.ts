@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AutoCompleteData } from 'src/app/models/interfaces.class';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-select',
@@ -15,10 +15,14 @@ export class SelectComponent implements OnInit {
   @Input() data: any[];
   @Input() icon: string;
   @Input() argument: string;
+  @Input()
+  form: FormGroup;
+  @Input()
+  nombreCampo: any;
+
 
   filteredData: Observable<any>;
-  dataControl = new FormControl('', Validators.required);
-
+  
   constructor() {}
 
   ngOnInit() {
