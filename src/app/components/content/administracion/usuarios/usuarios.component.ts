@@ -111,7 +111,7 @@ export class UsuariosComponent implements OnInit {
     if (this.new) {
       swalWithBootstrapButtons
         .fire({
-          title: "¿Esta seguro que desea cancelar la creación del usuario?",
+          title: "¿Esta seguro que desea cancelar?",
           text: "si acepta se perderan todos los datos ya diligenciados",
           icon: "warning",
           showCancelButton: true,

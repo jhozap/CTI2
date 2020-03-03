@@ -35,7 +35,7 @@ export class NewInvestigadoresComponent implements OnInit {
   public tableData = [];
   resultsLength = 0;
 
-  titleForm: string = "Usuarios";
+  titleForm: string = "Investigadores";
 
   grado = [];
   estudiosAcademicos = [{ID_ESTUDIO_ACADEMICO: '1', DESCRIPCION: 'Bachiller'},
@@ -89,7 +89,7 @@ export class NewInvestigadoresComponent implements OnInit {
     if (this.new) {
       swalWithBootstrapButtons
         .fire({
-          title: "¿Esta seguro que desea cancelar la creación del usuario?",
+          title: "¿Esta seguro que desea cancelar",
           text: "si acepta se perderan todos los datos ya diligenciados",
           icon: "warning",
           showCancelButton: true,
@@ -113,7 +113,7 @@ export class NewInvestigadoresComponent implements OnInit {
           }
         });
     } else {
-      this.titleForm = "Nuevo Usuario";
+      this.titleForm = "Nuevo Investigador";
       this.new = !this.new;
     }
   }
