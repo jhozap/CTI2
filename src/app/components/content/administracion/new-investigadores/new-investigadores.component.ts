@@ -91,6 +91,9 @@ export class NewInvestigadoresComponent implements OnInit {
     }
 
   ngOnInit(): void {
+
+    this.formulario.get('CategForm').setValue(false);
+    this.formulario.get('Tipo').disable();
   }
 
   closeTheForm() {
