@@ -59,14 +59,14 @@
 
                     <!-- Estudios Academicos -->
 
-                    <app-select [placeholder]="'Unidad'" [data]="unidad" [argument]="'DESCRIPCION'"
+                    <app-select [placeholder]="'Unidad'" [data]="estudiosAcademicos" [argument]="'DESCRIPCION'"
                         [nombreCampo]="nombreForms[7]" [form]="formulario"></app-select>
                 </div>
             </div>
 
             <div class="buttons">
                 <!-- <button mat-flat-button (click)="closeTheForm()">Cancelar</button> -->
-                <button mat-raised-button color="primary" (click)="guardar()"
+                <button mat-raised-button color="primary"
                     [disabled]="formulario.invalid">Guardar</button>
             </div>
         </form>

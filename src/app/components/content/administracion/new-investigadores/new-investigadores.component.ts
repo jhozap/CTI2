@@ -38,7 +38,7 @@ export class NewInvestigadoresComponent implements OnInit {
   titleForm: string = "Usuarios";
 
   grado = [];
- 
+  estudiosAcademicos = [];
 
   formulario: FormGroup;
   placeholders = ["Cédula de Ciudadanía", "Nombres", "Apellidos", "Teléfono", "Dirección","Email", "Grado", "Estudios Acádemicos"];
