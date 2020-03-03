@@ -26,6 +26,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+
 import { ReactiveFormsModule } from "@angular/forms";
 import { ToastrModule } from "ngx-toastr";
 
@@ -105,6 +107,7 @@ import { PasswordComponent } from './formsComponents/password/password.component
     MatTableModule,
 
     ReactiveFormsModule,
+    SweetAlert2Module.forRoot(),
 
     ToastrModule.forRoot()
   ]
