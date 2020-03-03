@@ -127,9 +127,11 @@ export class NewInvestigadoresComponent implements OnInit {
   }
 
   enableTipo(event){
-
-
-    
+    if (event) {
+      this.formulario.get('Tipo').enable();
+    } else {
+      this.formulario.get('Tipo').disable();
+    }
   }
 
   
