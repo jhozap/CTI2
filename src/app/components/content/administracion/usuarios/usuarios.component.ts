@@ -44,14 +44,15 @@ export class UsuariosComponent implements OnInit {
     ];
 
     perfil = [{ID_TIPO_PERFIL: '1', DESCRIPCION: 'Administrador'},
-    {ID_TIPO_PERFIL: '2', DESCRIPCION: 'Usuario'}]
+    {ID_TIPO_PERFIL: '2', DESCRIPCION: 'Usuario'}];
 
     grado = [];
     unidad = [];
 
     formulario: FormGroup;
-    placeholders = ["Número de Documento", "Nombres", "Apellidos", "Teléfono", "Email", "Grado", "Unidad", "PSI"];
-    nombreForms = ["numeroDocumento", "NombreForm", "Apellidos", "tipoDocForm", "telefonoForm", "emailForm", "gradoForm", "unidadForm", "PSIForm"];
+    placeholders = ["Número de Documento", "Nombres", "Apellidos", "Teléfono", "Email", "Grado", "Unidad", "PSI", "Perfil", "Password"];
+    nombreForms = ["numeroDocumento", "NombreForm", "Apellidos", "tipoDocForm", "telefonoForm", "emailForm", "gradoForm", 
+    "unidadForm", "PSIForm", "perfilForm", "passwordForm"];
 
 
   constructor(private _dataService: DataService,
@@ -73,7 +74,8 @@ export class UsuariosComponent implements OnInit {
         gradoForm: new FormControl('', Validators.required),
         unidadForm: new FormControl('', Validators.required),
         PSIForm: new FormControl('', Validators.required),
-
+        perfilForm: new FormControl('', Validators.required),
+        passwordForm: new FormControl('', Validators.required)
       });
    
   }
