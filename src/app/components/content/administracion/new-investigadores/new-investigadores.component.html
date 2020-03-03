@@ -1,1 +1,76 @@
-<p>new-investigadores works!</p>
+<div class="content">
+    <div class="title-wrapper">
+        <h1>{{ titleForm }}</h1>
+        <button mat-raised-button [color]="new ? 'warn' : 'primary'" (click)="closeTheForm()">
+            <mat-icon>{{ new ? "close" : "add" }}</mat-icon>{{ new ? "Cancelar" : "Nuevo Investigador" }}
+        </button>
+    </div>
+    <ng-container *ngIf="new; then form; else table"></ng-container>
+
+    <!-- Table -->
+    <ng-template #table>
+        <div class="table-container">
+
+        </div>
+    </ng-template>
+    <!-- Fin Table -->
+    <!-- Form Usuarios -->
+    <ng-template #form>
+        <form [formGroup]="formulario">
+            <div class="group">
+               
+
+                    <!-- Cédula Ciudadania -->
+                    <app-number [nombreCampo]="nombreForms[0]" [placeHolder]="placeholders[0]" [form]="formulario">
+                    </app-number>
+
+                    <!-- Nombres -->
+                    <app-number [nombreCampo]="nombreForms[1]" [placeHolder]="placeholders[1]" [form]="formulario">
+                    </app-number>
+
+                    <!-- Apellidos -->
+                    <app-number [nombreCampo]="nombreForms[2]" [placeHolder]="placeholders[2]" [form]="formulario">
+                    </app-number>
+               
+            </div>
+            <div class="group">
+                <div class="doc-group">
+
+                    <!-- Teléfono -->
+                    <app-number [nombreCampo]="nombreForms[3]" [placeHolder]="placeholders[3]" [form]="formulario">
+                    </app-number>
+
+                    <!-- Dirección -->
+                    <app-number [nombreCampo]="nombreForms[4]" [placeHolder]="placeholders[4]" [form]="formulario">
+                    </app-number>
+
+                    <!-- Email -->
+                    <app-number [nombreCampo]="nombreForms[5]" [placeHolder]="placeholders[5]" [form]="formulario">
+                    </app-number>
+                </div>
+            </div>
+            <div class="group">
+                <div class="doc-group">
+
+                    <!-- Grado -->
+
+                    <app-select [placeholder]="'Grado'" [data]="grado" [argument]="'DESCRIPCION'"
+                        [nombreCampo]="nombreForms[6]" [form]="formulario"></app-select>
+
+                    <!-- Estudios Academicos -->
+
+                    <app-select [placeholder]="'Unidad'" [data]="unidad" [argument]="'DESCRIPCION'"
+                        [nombreCampo]="nombreForms[7]" [form]="formulario"></app-select>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <!-- <button mat-flat-button (click)="closeTheForm()">Cancelar</button> -->
+                <button mat-raised-button color="primary" (click)="guardar()"
+                    [disabled]="formulario.invalid">Guardar</button>
+            </div>
+        </form>
+        <!-- <div>{{ formulario | json }}</div> -->
+    </ng-template>
+    <!-- Fin Form Usuarios -->
+</div>
