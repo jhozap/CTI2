@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
 //#region Material
-
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -53,6 +53,7 @@ import { NumberComponent } from './formsComponents/number/number.component';
 import { EmailComponent } from './formsComponents/email/email.component';
 import { MultiSelectComponent } from './formsComponents/multi-select/multi-select.component';
 import { PasswordComponent } from './formsComponents/password/password.component';
+import { DateAdapter, MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -110,6 +111,12 @@ import { PasswordComponent } from './formsComponents/password/password.component
     SweetAlert2Module.forRoot(),
 
     ToastrModule.forRoot()
-  ]
+  ],
+  providers: [    
+    MatDatepickerModule,
+    MatMomentDateModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+  ],
 })
 export class ContentModule {}
