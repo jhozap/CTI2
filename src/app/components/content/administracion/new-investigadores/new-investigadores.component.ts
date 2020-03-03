@@ -55,7 +55,7 @@ export class NewInvestigadoresComponent implements OnInit {
   tipoCategorizacion = ["Junior", "Asociado", "Senior", "Emerito"];
 
   formulario: FormGroup;
-  placeholders = ["Cédula de Ciudadanía", "Nombres", "Apellidos", "Teléfono", "Dirección","Email", "Grado", "Estudios Acádemicos",
+  placeholders = ["Documento", "Nombres", "Apellidos", "Teléfono", "Dirección","Email", "Grado", "Estudios Acádemicos",
 "Tipo Documento"];
   nombreForms = ["cedulaForm", "NombreForm", "Apellidos", "telefonoForm", "direccionForm", "emailForm", "gradoForm", 
   "estudiosAcademicosForm", "tipoDocForm"];
