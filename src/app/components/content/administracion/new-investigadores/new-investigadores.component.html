@@ -81,7 +81,7 @@
         ></app-select>
         
                 <!-- Otros estudios -->
-                <mat-form-field *ngIf="!checkOthers()">
+                <mat-form-field *ngIf="checkOthers()">
                     <input matInput placeholder="Otros estudios" formControlName="OtrosForm">
                 </mat-form-field>
             </div>

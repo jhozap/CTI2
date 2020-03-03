@@ -38,9 +38,15 @@ export class NewInvestigadoresComponent implements OnInit {
   titleForm: string = "Usuarios";
 
   grado = [];
-  estudiosAcademicos = [];
+  estudiosAcademicos = [{ID_ESTUDIO_ACADEMICO: '1', DESCRIPCION: 'Bachiller'},
+  {ID_ESTUDIO_ACADEMICO: '2', DESCRIPCION: 'Técnico'},
+  {ID_ESTUDIO_ACADEMICO: '3', DESCRIPCION: 'Técnologo'},
+  {ID_ESTUDIO_ACADEMICO: '4', DESCRIPCION: 'Pregrado'},
+  {ID_ESTUDIO_ACADEMICO: '5', DESCRIPCION: 'Posgrados'},
+  {ID_ESTUDIO_ACADEMICO: '6', DESCRIPCION: 'Otros'}];
   
-  tipoCategorizacion = [];
+  
+  tipoCategorizacion = ["Junior", "Asociado", "Senior", "Emerito"];
 
   formulario: FormGroup;
   placeholders = ["Cédula de Ciudadanía", "Nombres", "Apellidos", "Teléfono", "Dirección","Email", "Grado", "Estudios Acádemicos"];
@@ -72,7 +78,7 @@ export class NewInvestigadoresComponent implements OnInit {
         Tipo: new FormControl('', Validators.required),
         Investigador: new FormControl('', Validators.required),
         Estudiante: new FormControl('', Validators.required),
-        
+
         });
     }
 
@@ -121,6 +127,10 @@ export class NewInvestigadoresComponent implements OnInit {
   
 
   checkOthers(){
-    return false;
+    if(this.formulario.get('estudiosAcademicosForm').value.DESCRIPCION === 'Otros'){
+        return true;
+    } else {
+      return false;
+    }
   }
 }
