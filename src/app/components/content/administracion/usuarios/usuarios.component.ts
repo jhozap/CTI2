@@ -182,10 +182,43 @@ export class UsuariosComponent implements OnInit {
 
   guardar() {
     console.log(this.formulario.value);
+    const newUser = this.formulario.value;
+    const query = {
+      ID_USUARIO: 0,
+      ID_TIPO_DOCUMENTO: newUser.tipoDocForm.ID_TIPO_DOCUMENTO,
+      DOCUMENTO: newUser.numeroDocumento,
+      NOMBRES: newUser.NombreForm,
+      APELLIDOS: newUser.Apellidos,
+      ID_GRADO: newUser.gradoForm.ID_GRADO,
+      ID_UNIDAD: newUser.unidadForm.ID_UNIDAD,
+      EMAIL: newUser.emailForm,
+      CONTRASENA: newUser.passwordForm,
+      TELEFONO: newUser.telefonoForm, 
+      USUARIO: newUser.PSIForm,
+      PERFIL: newUser.perfilForm.ID_TIPO_PERFIL
+    };
+    debugger;
+    this._dataService.newUser(query)
+      .subscribe((data) => {
+        debugger;
+        console.log(data);
+      });
+
   }
 
-  updateUser(user) {
+  updateUser(user: User) {
     console.log("Update", user);
+    if (!this.new) {
+      this.titleForm = "Actualizar Usuario";
+      this.new = !this.new;
+      this.formulario.get("numeroDocumento").setValue(user.DOCUMENTO);
+      this.formulario.get("NombreForm").setValue(user.NOMBRES);
+      this.formulario.get("Apellidos").setValue(user.APELLIDOS);
+      this.formulario.get("telefonoForm").setValue(user.TELEFONO);
+      this.formulario.get("emailForm").setValue(user.EMAIL);
+      this.formulario.get("PSIForm").setValue(user.USUARIO);
+      this.formulario.get("passwordForm").setValue(user.CONTRASENA);
+    } 
   }
 
   deleteUser(user: User) {
