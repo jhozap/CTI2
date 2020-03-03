@@ -72,11 +72,24 @@ export class UnidadesComponent implements OnInit {
       }
   
   ngOnInit(): void {
+    this.getUnidades();
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  getUnidades() {
+    this._dataService.getUnidades()
+      .subscribe((data: any[]) => {
+        debugger;
+        console.log(data);
+        this.dataSource = new MatTableDataSource(data);
+        setTimeout(() => {
+          this.dataSource.paginator = this.paginator;
+        }, 0);
+      });
   }
 
   closeTheForm() {
@@ -98,7 +111,7 @@ export class UnidadesComponent implements OnInit {
             console.log("cancel aceptado");
             this.new = !this.new;
             this.titleForm = "Unidades";
-            
+            this.getUnidades();
             this.formulario.reset();
           } else if (
             /* Read more about handling dismissals below */
