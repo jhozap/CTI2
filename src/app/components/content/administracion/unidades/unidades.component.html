@@ -29,13 +29,12 @@
                 </div>
 
                 <app-select [placeholder]="'Tipo.'" [data]="tipo" [argument]="'DESCRIPCION'"
-                    [nombreCampo]="nombreForms[2]" [form]="formulario"></app-select>
+                    [nombreCampo]="nombreForms[2]" [form]="formulario"></app-select>                
+            </div>
+            <div class="buttons">
+                <button mat-flat-button>Cancelar</button>
+                <button mat-raised-button color="primary">Crear</button>
             </div>
         </form>
     </ng-template>
-
-    <div class="buttons">
-        <button mat-flat-button>Cancelar</button>
-        <button mat-raised-button color="primary">Crear</button>
-    </div>
 </div>
