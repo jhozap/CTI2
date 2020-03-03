@@ -53,7 +53,14 @@ export class CasoEmblematicoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getCasoEmblematico();
   }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
 
   closeTheForm() {
     if (this.new) {
@@ -97,5 +104,9 @@ export class CasoEmblematicoComponent implements OnInit {
         }, 0);
       });
   }
+
+  updateCaso(e) {}
+
+  deleteCaso(e) {}
 
 }
