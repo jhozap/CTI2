@@ -1,22 +1,41 @@
+<div class="content">
+    <div class="title-wrapper">
+        <h1>{{ titleForm }}</h1>
+        <button mat-raised-button [color]="new ? 'warn' : 'primary'" (click)="closeTheForm()">
+            <mat-icon>{{ new ? "close" : "add" }}</mat-icon>{{ new ? "Cancelar" : "Nuevo Investigador" }}
+        </button>
+    </div>
+    <ng-container *ngIf="new; then form; else table"></ng-container>
 
-<mat-form-field class="unidad-field__sigla">
-    <input matInput formControlName="Sigla" placeholder="Sigla" type="text">
-</mat-form-field>
-<mat-form-field class="unidad-field__descripcion">
-    <textarea matInput formControlName="Descripcion" placeholder="Descripción" cdkTextareaAutosize
-    cdkAutosizeMinRows="0"
-    cdkAutosizeMaxRows="5">
-    </textarea>
-</mat-form-field>
-<mat-form-field class="unidad-field__tipo">
-    <mat-label>Tipo</mat-label>
-    <mat-select formControlName="Tipo">
-        <mat-option *ngFor="let tipo of tipos" [value]="tipo">
-            {{tipo.DESCRIPCION}}
-        </mat-option>
-    </mat-select>
-</mat-form-field>
-<div class="buttons">
-    <button mat-flat-button (click)="reset()">Cancelar</button>
-    <button mat-raised-button color="primary" (click)="enviarSigla()" [disabled]="newUnidad.invalid">Crear</button>
+    <!-- Table -->
+    <ng-template #table>
+        <div class="table-container">
+
+        </div>
+    </ng-template>
+
+
+    <ng-template #form>
+        <form [formGroup]="formulario">
+            <div class="group">
+                <div class="doc-group">
+                    <!-- Sigla -->
+                    <app-number [nombreCampo]="nombreForms[0]" [placeHolder]="placeholders[0]" [form]="formulario">
+                    </app-number>
+
+                    <!-- Descripcion -->
+                    <app-number [nombreCampo]="nombreForms[1]" [placeHolder]="placeholders[1]" [form]="formulario">
+                    </app-number>
+                </div>
+
+                <app-select [placeholder]="'Tipo.'" [data]="tipo" [argument]="'DESCRIPCION'"
+                    [nombreCampo]="nombreForms[2]" [form]="formulario"></app-select>
+            </div>
+        </form>
+    </ng-template>
+
+    <div class="buttons">
+        <button mat-flat-button>Cancelar</button>
+        <button mat-raised-button color="primary">Crear</button>
+    </div>
 </div>
