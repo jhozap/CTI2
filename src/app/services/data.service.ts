@@ -56,5 +56,11 @@ export class DataService {
       headers: this.generateBasicHeaders()
     });
   }
+
+  public deleteUser(id: number) {
+    return this.http.delete(environment.pathApi + `/Usuario/EliminarUsuario?id=${id}`, {
+      headers: this.generateBasicHeaders()
+    });
+  }
   
 }
