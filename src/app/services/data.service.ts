@@ -56,5 +56,23 @@ export class DataService {
       headers: this.generateBasicHeaders()
     });
   }
+
+  public newInvestigador(params: any) {
+    return this.http.post(environment.pathApi + '/Investigadores/CrearModificarInvestigador', params, {
+      headers: this.generateBasicHeaders()
+    });
+  }
+
+  public deleteUser(id: number) {
+    return this.http.delete(environment.pathApi + `/Usuario/EliminarUsuario?id=${id}`, {
+      headers: this.generateBasicHeaders()
+    });
+  }
+
+  public deleteInvestigador(id: number) {
+    return this.http.delete(environment.pathApi + `/Investigadores/EliminarInvestigador?id=${id}`, {
+      headers: this.generateBasicHeaders()
+    });
+  }
   
 }

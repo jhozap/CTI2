@@ -44,6 +44,7 @@ export class NewInvestigadoresComponent implements OnInit {
   public new = false;
   public tableData = [];
   resultsLength = 0;
+  idInvestigador = 0;
 
   titleForm: string = "Investigadores";
 
@@ -81,7 +82,7 @@ export class NewInvestigadoresComponent implements OnInit {
         telefonoForm: new FormControl('',   Validators.compose([Validators.required, 
           Validators.pattern("^[0-9]*$"), Validators.maxLength(10)])),
           direccionForm: new FormControl('', Validators.required),
-          tipoDocForm: new FormControl('', Validators.required),
+          // tipoDocForm: new FormControl('', Validators.required),
           emailForm: new FormControl(
           "",
           Validators.compose([
@@ -96,12 +97,12 @@ export class NewInvestigadoresComponent implements OnInit {
         Tipo: new FormControl('', Validators.required),
         Investigador: new FormControl('', Validators.required),
         Estudiante: new FormControl('', Validators.required),
-
         });
     }
 
   ngOnInit(): void {
-
+    this.getGrados();
+    this.getInvestigadores();
     this.formulario.get('CategForm').setValue(false);
     this.formulario.get('Tipo').disable();
   }
@@ -161,14 +162,13 @@ export class NewInvestigadoresComponent implements OnInit {
   }
 
   enableTipo(event){
+    console.log(event);
     if (event) {
       this.formulario.get('Tipo').enable();
     } else {
       this.formulario.get('Tipo').disable();
     }
   }
-
-  
 
   checkOthers(){
     if(this.formulario.get('estudiosAcademicosForm').value != null &&
@@ -183,11 +183,157 @@ export class NewInvestigadoresComponent implements OnInit {
     }
   }
 
-  updateInvestigador(e) {
-
+  getGrados() {
+    this._dataService
+      .getGrados()
+      .toPromise()
+      .then((data: any[]) => {
+        debugger;
+        this.grado = data;
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
-  deleteInvestigador(e) {
-    
+  guardar() {
+    debugger;
+    console.log(JSON.stringify(this.formulario.value));
+    const newInvestigador = this.formulario.value;
+    const query = {
+      ID_INVESTIGADOR: this.idInvestigador,
+      ID_GRADO: newInvestigador.gradoForm.ID_GRADO,
+      DESC_GRADO: newInvestigador.gradoForm.DESCRIPCION,
+      DOCUMENTO: newInvestigador.cedulaForm,
+      NOMBRES: newInvestigador.NombreForm,
+      APELLIDOS: newInvestigador.Apellidos,
+      EMAIL: newInvestigador.emailForm,
+      TELEFONO: newInvestigador.telefonoForm,
+      DIRECCION: newInvestigador.direccionForm,
+      ESTUDIOS: this.checkOthers() ? newInvestigador.OtrosForm : newInvestigador.estudiosAcademicosForm.DESCRIPCION,
+      CATEGORIZADO: newInvestigador.CategForm ? 1 : 0,
+      CATEGORIZADO_VALOR: newInvestigador.Tipo,
+      PROFESOR: newInvestigador.Investigador ? 1 : 0,
+      ESTUDIANTE: newInvestigador.Estudiante ? 1 : 0
+    };
+    debugger;
+    console.log(JSON.stringify(query));
+    this._dataService.newInvestigador(query).subscribe(data => {
+      if (data[0].codigo > 0) {
+        Swal.fire({
+          icon: "success",
+          title: this.idInvestigador > 0 ? "Datos Actualizados Exitosamente" : "Investigador registrado Exitosamente",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        this.new = !this.new;
+        this.titleForm = "Investigadores";
+        this.getInvestigadores();
+        this.formulario.reset();
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: this.idInvestigador > 0 ? "error al actualizar los datos" : "error al registrar el investigador",
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    });
+  }
+
+  updateInvestigador(i) {
+    if (!this.new) {
+      this.titleForm = "Actualizar Investigador";
+      this.new = !this.new;
+      this.idInvestigador = i.ID_INVESTIGADOR;
+      this.formulario.get("cedulaForm").setValue(i.DOCUMENTO);
+      this.formulario.get("NombreForm").setValue(i.NOMBRES);
+      this.formulario.get("Apellidos").setValue(i.APELLIDOS);
+      this.formulario.get("telefonoForm").setValue(i.TELEFONO);
+      this.formulario.get("direccionForm").setValue(i.DIRECCION);
+      this.formulario.get("emailForm").setValue(i.EMAIL);      
+      this.formulario.get("CategForm").setValue(i.CATEGORIZADO == "1" ? true: false);
+      if(i.CATEGORIZADO == "1") {
+        this.enableTipo(true);
+        this.formulario.get("Tipo").setValue(i.CATEGORIZADO_VALOR);  
+      } else {
+        this.enableTipo(false);
+      }
+      this.formulario.get("Investigador").setValue(i.PROFESOR == "1" ? true: false);
+      this.formulario.get("Estudiante").setValue(i.ESTUDIANTE  == "1" ? true: false);
+      this.formulario
+        .get("gradoForm")
+        .setValue(this.consultarGrado(i.ID_GRADO));
+      this.formulario
+        .get("estudiosAcademicosForm")
+        .setValue(this.consultarEstudios(i.ESTUDIOS));
+    }
+  }
+
+  consultarGrado(idGrado) {
+    let grado = this.grado.find(x => x.ID_GRADO == idGrado);
+    return grado;
+  }
+
+  consultarEstudios(desc) {
+    let grado = this.estudiosAcademicos.find(x => x.DESCRIPCION == desc);
+    return grado;
+  }
+
+  deleteInvestigador(i) {
+    swalWithBootstrapButtons
+      .fire({
+        title: "Eliminar Usuario",
+        text:
+          "¿Esta seguro que desea eliminar el usuario " +
+          i.NOMBRES +
+          " " +
+          i.APELLIDOS +
+          "?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Aceptar",
+        cancelButtonText: "Cancelar",
+        reverseButtons: true,
+        allowOutsideClick: false,
+        allowEscapeKey: false
+      })
+      .then(result => {
+        if (result.value) {
+
+          this._dataService.deleteInvestigador(i.ID_INVESTIGADOR)
+            .subscribe((data)=> {
+              if (data[0].codigo > 0) {
+                Swal.fire({
+                  icon: "success",
+                  title: "Investigador Eliminado Exitosamente" ,
+                  showConfirmButton: false,
+                  timer: 1500
+                });                
+              } else {
+                Swal.fire({
+                  icon: "error",
+                  title: "error al eliminar el investigador",
+                  showConfirmButton: false,
+                  timer: 1500
+                });
+              }
+            });
+
+          Swal.fire({
+            icon: "success",
+            title: "Investigador eliminado correctamente",
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            timer: 1500
+          });
+          this.getInvestigadores();
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+        }
+      });
   }
 }

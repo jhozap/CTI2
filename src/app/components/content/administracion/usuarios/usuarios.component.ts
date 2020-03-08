@@ -59,42 +59,78 @@ export class UsuariosComponent implements OnInit {
     { ID_TIPO_DOCUMENTO: "4", DESCRIPCION: "CEDULA EXTRANJERIA" }
   ];
 
-    perfil = [{ID_TIPO_PERFIL: '1', DESCRIPCION: 'Administrador'},
-    {ID_TIPO_PERFIL: '2', DESCRIPCION: 'Usuario'}];
+  perfil = [
+    { ID_TIPO_PERFIL: "1", DESCRIPCION: "Administrador" },
+    { ID_TIPO_PERFIL: "2", DESCRIPCION: "Usuario" }
+  ];
 
-    grado = [];
-    unidad = [];
+  grado = [];
+  unidad = [];
 
-    formulario: FormGroup;
-    placeholders = ["Número de Documento", "Nombres", "Apellidos", "Teléfono", "Email", "Grado", "Unidad", "PSI", "Perfil", "Password"];
-    nombreForms = ["numeroDocumento", "NombreForm", "Apellidos", "tipoDocForm", "telefonoForm", "emailForm", "gradoForm", 
-    "unidadForm", "PSIForm", "perfilForm", "passwordForm"];
+  formulario: FormGroup;
+  placeholders = [
+    "Número de Documento",
+    "Nombres",
+    "Apellidos",
+    "Teléfono",
+    "Email",
+    "Grado",
+    "Unidad",
+    "PSI",
+    "Perfil",
+    "Password"
+  ];
+  nombreForms = [
+    "numeroDocumento",
+    "NombreForm",
+    "Apellidos",
+    "tipoDocForm",
+    "telefonoForm",
+    "emailForm",
+    "gradoForm",
+    "unidadForm",
+    "PSIForm",
+    "perfilForm",
+    "passwordForm"
+  ];
 
   constructor(
     private _dataService: DataService,
     private formBuilder: FormBuilder,
-    private formGroup: FormControlService) {
-      this.formulario = new FormGroup({
-        numeroDocumento: new FormControl('', Validators.compose([Validators.required, Validators.pattern("^[0-9]*$")])),
-        NombreForm: new FormControl('', Validators.required),
-        Apellidos: new FormControl('', Validators.required),
-        tipoDocForm: new FormControl('', Validators.required),
-        telefonoForm: new FormControl('',   Validators.compose([Validators.required, 
-          Validators.pattern("^[0-9]*$"), Validators.maxLength(10)])),
-        emailForm: new FormControl(
-          "",
-          Validators.compose([
-            Validators.required,
-            Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$")
-          ])
-        ),
-        gradoForm: new FormControl('', Validators.required),
-        unidadForm: new FormControl('', Validators.required),
-        PSIForm: new FormControl('', Validators.required),
-        perfilForm: new FormControl('', Validators.required),
-        passwordForm: new FormControl('', Validators.required)
-      });
-   
+    private formGroup: FormControlService
+  ) {
+    this.formulario = new FormGroup({
+      numeroDocumento: new FormControl(
+        "",
+        Validators.compose([
+          Validators.required,
+          Validators.pattern("^[0-9]*$")
+        ])
+      ),
+      NombreForm: new FormControl("", Validators.required),
+      Apellidos: new FormControl("", Validators.required),
+      tipoDocForm: new FormControl("", Validators.required),
+      telefonoForm: new FormControl(
+        "",
+        Validators.compose([
+          Validators.required,
+          Validators.pattern("^[0-9]*$"),
+          Validators.maxLength(10)
+        ])
+      ),
+      emailForm: new FormControl(
+        "",
+        Validators.compose([
+          Validators.required,
+          Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$")
+        ])
+      ),
+      gradoForm: new FormControl("", Validators.required),
+      unidadForm: new FormControl("", Validators.required),
+      PSIForm: new FormControl("", Validators.required),
+      perfilForm: new FormControl("", Validators.required),
+      passwordForm: new FormControl("", Validators.required)
+    });
   }
 
   ngOnInit(): void {
@@ -195,17 +231,32 @@ export class UsuariosComponent implements OnInit {
       ID_UNIDAD: newUser.unidadForm.ID_UNIDAD,
       EMAIL: newUser.emailForm,
       CONTRASENA: newUser.passwordForm,
-      TELEFONO: newUser.telefonoForm, 
+      TELEFONO: newUser.telefonoForm,
       USUARIO: newUser.PSIForm,
       PERFIL: newUser.perfilForm.ID_TIPO_PERFIL
     };
-    debugger;
-    this._dataService.newUser(query)
-      .subscribe((data) => {
-        debugger;
-        console.log(data);
-      });
 
+    this._dataService.newUser(query).subscribe(data => {
+      if (data[0].codigo > 0) {
+        Swal.fire({
+          icon: "success",
+          title: this.idUsuario > 0 ? "Datos Actualizados Exitosamente" : "Usuario registrado Exitosamente",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        this.new = !this.new;
+        this.titleForm = "Usuarios";
+        this.getUsers();
+        this.formulario.reset();
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: this.idUsuario > 0 ? "error al actualizar los datos" : "error al registrar el usuario",
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    });
   }
 
   updateUser(user: User) {
@@ -221,33 +272,38 @@ export class UsuariosComponent implements OnInit {
       this.formulario.get("emailForm").setValue(user.EMAIL);
       this.formulario.get("PSIForm").setValue(user.USUARIO);
       this.formulario.get("passwordForm").setValue(user.CONTRASENA);
-      this.formulario.get("tipoDocForm").setValue(this.consultarTipo(user.ID_TIPO_DOCUMENTO));
-      this.formulario.get("gradoForm").setValue(this.consultarGrado(user.ID_GRADO));
-      this.formulario.get("unidadForm").setValue(this.consultarUnidad(user.ID_UNIDAD));
-      this.formulario.get("perfilForm").setValue(this.consultarPerfil(user.PERFIL));
-    } 
+      this.formulario
+        .get("tipoDocForm")
+        .setValue(this.consultarTipo(user.ID_TIPO_DOCUMENTO));
+      this.formulario
+        .get("gradoForm")
+        .setValue(this.consultarGrado(user.ID_GRADO));
+      this.formulario
+        .get("unidadForm")
+        .setValue(this.consultarUnidad(user.ID_UNIDAD));
+      this.formulario
+        .get("perfilForm")
+        .setValue(this.consultarPerfil(user.PERFIL));
+    }
   }
 
-  
-
   consultarUnidad(idUnidad) {
-    let unidad = this.unidad.find(x=> x.ID_UNIDAD == idUnidad);
+    let unidad = this.unidad.find(x => x.ID_UNIDAD == idUnidad);
     return unidad;
   }
 
-
-  consultarPerfil(idPerfil){
-    let perfil = this.perfil.find(x=> x.ID_TIPO_PERFIL == idPerfil);
+  consultarPerfil(idPerfil) {
+    let perfil = this.perfil.find(x => x.ID_TIPO_PERFIL == idPerfil);
     return perfil;
   }
 
-  consultarGrado(idGrado){
-    let grado = this.grado.find(x=> x.ID_GRADO == idGrado);
+  consultarGrado(idGrado) {
+    let grado = this.grado.find(x => x.ID_GRADO == idGrado);
     return grado;
   }
 
   consultarTipo(idTipoDocumento) {
-    let tipo = this.tipoDoc.find(x=> x.ID_TIPO_DOCUMENTO == idTipoDocumento);
+    let tipo = this.tipoDoc.find(x => x.ID_TIPO_DOCUMENTO == idTipoDocumento);
     return tipo;
   }
 
@@ -272,6 +328,26 @@ export class UsuariosComponent implements OnInit {
       })
       .then(result => {
         if (result.value) {
+
+          this._dataService.deleteUser(user.ID_USUARIO)
+            .subscribe((data)=> {
+              if (data[0].codigo > 0) {
+                Swal.fire({
+                  icon: "success",
+                  title: "Usuario Eliminado Exitosamente" ,
+                  showConfirmButton: false,
+                  timer: 1500
+                });                
+              } else {
+                Swal.fire({
+                  icon: "error",
+                  title: "error al eliminar el usuario",
+                  showConfirmButton: false,
+                  timer: 1500
+                });
+              }
+            });
+
           Swal.fire({
             icon: "success",
             title: "Usuario eliminado correctamente",
