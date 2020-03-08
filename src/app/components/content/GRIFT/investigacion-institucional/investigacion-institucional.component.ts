@@ -33,6 +33,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
 
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  fourFormGroup: FormGroup;
   isOptional = false;
   direccionesDuena = [];
   encuestas = [];
@@ -48,6 +49,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     "EMAIL",
     "ACCIONES"
   ];
+  detallesVisualizacion = [false,false,false,false,false,false,false,false];
   dataSource: MatTableDataSource<any>;
   
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
@@ -68,16 +70,29 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       aplicaForm: ['', Validators.required],
       areasForm: ['', Validators.required],
       lineasForm: ['', Validators.required],
+     
     });
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ''
     });
 
+    this.fourFormGroup = this._formBuilder.group({
+      autorForm: ['',],
+      cartillaForm: ['',],
+      prototipoForm: ['',],
+      manualesForm: ['',],
+      procedimientosForm: ['',],
+      instructivosForm: ['',],
+      articuloForm: ['',],
+      libroForm: ['',],
+    });
+
 
   }
 
-  enableTipo(valor) {
-
+  productoInvestigacionChange(valor, posicion) {
+    console.log(valor.checked);
+    this.detallesVisualizacion[posicion] = valor.checked; 
   }
 
   aplicaChange(valor) {
