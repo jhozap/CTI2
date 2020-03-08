@@ -1,1 +1,85 @@
-<p>investigacion-institucional works!</p>
+<mat-horizontal-stepper linear #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Información Base</ng-template>
+            <mat-form-field>
+                <mat-label>Titulo Investigación</mat-label>
+                <input matInput placeholder="" formControlName="tituloInvestigacionForm" required>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Dirección Dueña</mat-label>
+                <mat-select formControlName="direccionDuenaForm" multiple>
+                    <mat-option *ngFor="let direccion of direccionesDuena" [value]="direccion">{{ direccion }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Encuestas</mat-label>
+                <mat-select formControlName="encuestasForm" multiple>
+                    <mat-option *ngFor="let encuesta of encuestas" [value]="encuesta">{{ encuesta }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field style="margin-right: 20px;" id="3">
+                <input readonly matInput [matDatepicker]="picker" placeholder="Año" />
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Aplica</mat-label>
+                <mat-select formControlName="aplicasForm" (selectionChange)="aplicaChange($event)">
+                    <mat-option *ngFor="let aplica of aplicas" [value]="aplica">{{aplica}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field *ngIf="aplica">
+                <mat-label>Cuales</mat-label>
+                <input matInput placeholder="" formControlName="aplicaForm" required>
+            </mat-form-field>
+
+
+            <mat-form-field>
+                <mat-label>Areas</mat-label>
+                <mat-select formControlName="areasForm" multiple>
+                    <mat-option *ngFor="let area of areas" [value]="area">{{ area }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Lineas</mat-label>
+                <mat-select formControlName="lineasForm" multiple>
+                    <mat-option *ngFor="let linea of lineas" [value]="linea">{{ linea }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <div>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
+        <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Fill out your address</ng-template>
+            <mat-form-field>
+                <mat-label>Address</mat-label>
+                <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
+            </mat-form-field>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p>You are now done.</p>
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+    </mat-step>
+</mat-horizontal-stepper>

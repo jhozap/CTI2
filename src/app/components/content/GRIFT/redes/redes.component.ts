@@ -140,4 +140,7 @@ export class RedesComponent implements OnInit {
 
   updateRed(e) {}
   deleteRed(e) {}
+  deleteCaso(){
+    
+  }
 }
