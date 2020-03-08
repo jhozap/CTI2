@@ -32,8 +32,7 @@ export class UnidadesComponent implements OnInit {
     "ID_UNIDAD",
     "SIGLA",
     "DESCRIPCION",
-    "ID_TIPO",
-    "ACCIONES"
+    "ID_TIPO"
   ];
   dataSource: MatTableDataSource<any>;
 
