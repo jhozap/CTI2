@@ -86,22 +86,22 @@
   <ng-template #form>
     <form [formGroup]="formulario">
       <div class="group">
-        <div class="doc-group">
+        <!-- <div class="doc-group"> -->
           <!-- Tipo documento -->
-          <app-select
+          <!-- <app-select
             [placeholder]="'Tipo Doc.'"
             [data]="tipoDoc"
             [argument]="'DESCRIPCION'"
             [nombreCampo]="nombreForms[8]"
             [form]="formulario"
-          ></app-select>
+          ></app-select> -->
           <!-- Número documento -->
           <app-number
             [nombreCampo]="nombreForms[0]"
             [placeHolder]="placeholders[0]"
             [form]="formulario"
           ></app-number>
-        </div>
+        <!-- </div> -->
         <!-- Nombres -->
         <app-number
           [nombreCampo]="nombreForms[1]"
@@ -247,6 +247,7 @@
         <button
           mat-raised-button
           color="primary"
+          (click)="guardar()"
           [disabled]="formulario.invalid"
         >
           Guardar
