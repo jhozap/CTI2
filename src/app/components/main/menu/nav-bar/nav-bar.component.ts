@@ -19,7 +19,7 @@ export class NavBarComponent implements OnInit {
               private router: Router,) { }
 
   ngOnInit(): void {
-    debugger;
+   
     let datosUser = atob(sessionStorage.getItem("user"));
     let values: User = JSON.parse(datosUser);
     this.user = values.NOMBRES + " " + values.APELLIDOS;

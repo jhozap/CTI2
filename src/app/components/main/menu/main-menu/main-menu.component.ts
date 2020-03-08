@@ -21,7 +21,7 @@ export class MainMenuComponent implements OnInit {
   ngOnInit(): void {
     this.usr = JSON.parse(atob(sessionStorage.getItem("user")));
     this.perfilDenied = this.usr.PERFIL;
-    debugger;
+   
     this.items = this.componentService.menuItems.value;
   }
 
