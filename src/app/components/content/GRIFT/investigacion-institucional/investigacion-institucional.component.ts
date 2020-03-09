@@ -1,11 +1,20 @@
-import { Component, OnInit, ViewChild, Inject } from '@angular/core';
-import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import Swal from 'sweetalert2';
+import { Component, OnInit, ViewChild, Inject } from "@angular/core";
+import {
+  FormBuilder,
+  Validators,
+  FormGroup,
+  FormControl
+} from "@angular/forms";
+import { MatTableDataSource } from "@angular/material/table";
+import { MatPaginator } from "@angular/material/paginator";
+import Swal from "sweetalert2";
 import { DataService } from "src/app/services/data.service";
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { Investigador } from 'src/app/models/interfaces.class';
+import {
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+  MatDialog
+} from "@angular/material/dialog";
+import { Investigador } from "src/app/models/interfaces.class";
 
 export interface DialogData {
   animal: string;
@@ -21,15 +30,15 @@ const swalWithBootstrapButtons = Swal.mixin({
 });
 
 @Component({
-  selector: 'app-investigacion-institucional',
-  templateUrl: './investigacion-institucional.component.html',
-  styleUrls: ['./investigacion-institucional.component.scss']
+  selector: "app-investigacion-institucional",
+  templateUrl: "./investigacion-institucional.component.html",
+  styleUrls: ["./investigacion-institucional.component.scss"]
 })
 export class InvestigacionInstitucionalComponent implements OnInit {
-
+  displayedColumns: string[] = ["position", "escuela", "nombre", "ticket", "Acciones"];
 
   public new = false;
-  titleForm: string = "Investigadores";
+  titleForm: string = "Investigación Institucional";
 
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -37,73 +46,70 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   isOptional = false;
   direccionesDuena = [];
   encuestas = [];
-  aplicas = ['Si', 'No']
+  aplicas = ["Si", "No"];
   aplica = false;
   areas = [];
   lineas = [];
-  displayedColumns: string[] = [
-    "DOCUMENTO",
-    "NOMBRES",
-    "APELLIDOS",
-    "DESC_GRADO",
-    "EMAIL",
-    "ACCIONES"
-  ];
-  detallesVisualizacion = [false,false,false,false,false,false,false,false];
-  dataSource: MatTableDataSource<any>;
   
+  detallesVisualizacion = [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ];
+  dataSource: MatTableDataSource<any>;
+
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
-
-  constructor(private _formBuilder: FormBuilder,
+  constructor(
+    private _formBuilder: FormBuilder,
     private _dataService: DataService,
-    public dialog: MatDialog) { }
-
-  
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
-      tituloInvestigacionForm: ['', Validators.required],
-      direccionDuenaForm: ['', Validators.required],
-      encuestasForm: ['', Validators.required],
-      aplicasForm: ['', Validators.required],
-      aplicaForm: ['', Validators.required],
-      areasForm: ['', Validators.required],
-      lineasForm: ['', Validators.required],
-     
+      tituloInvestigacionForm: ["", Validators.required],
+      direccionDuenaForm: ["", Validators.required],
+      encuestasForm: ["", Validators.required],
+      aplicasForm: ["", Validators.required],
+      aplicaForm: ["", Validators.required],
+      areasForm: ["", Validators.required],
+      lineasForm: ["", Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ''
+      secondCtrl: ""
     });
 
     this.fourFormGroup = this._formBuilder.group({
-      autorForm: ['',],
-      cartillaForm: ['',],
-      prototipoForm: ['',],
-      manualesForm: ['',],
-      procedimientosForm: ['',],
-      instructivosForm: ['',],
-      articuloForm: ['',],
-      libroForm: ['',],
+      autorForm: [""],
+      cartillaForm: [""],
+      prototipoForm: [""],
+      manualesForm: [""],
+      procedimientosForm: [""],
+      instructivosForm: [""],
+      articuloForm: [""],
+      libroForm: [""]
     });
-
-
   }
 
   productoInvestigacionChange(valor, posicion) {
     console.log(valor.checked);
-    this.detallesVisualizacion[posicion] = valor.checked; 
+    this.detallesVisualizacion[posicion] = valor.checked;
   }
 
   aplicaChange(valor) {
-    if (valor.value === 'Si') {
+    if (valor.value === "Si") {
       this.aplica = true;
     } else {
       this.aplica = false;
     }
   }
 
-  
   deleteInvestigador(i) {
     swalWithBootstrapButtons
       .fire({
@@ -124,16 +130,16 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       })
       .then(result => {
         if (result.value) {
-
-          this._dataService.deleteInvestigador(i.ID_INVESTIGADOR)
-            .subscribe((data)=> {
+          this._dataService
+            .deleteInvestigador(i.ID_INVESTIGADOR)
+            .subscribe(data => {
               if (data[0].codigo > 0) {
                 Swal.fire({
                   icon: "success",
-                  title: "Investigador Eliminado Exitosamente" ,
+                  title: "Investigador Eliminado Exitosamente",
                   showConfirmButton: false,
                   timer: 1500
-                });                
+                });
               } else {
                 Swal.fire({
                   icon: "error",
@@ -161,7 +167,6 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       });
   }
 
-  
   getInvestigadores() {
     this._dataService
       .getInvestigadores()
@@ -196,8 +201,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
           if (result.value) {
             console.log("cancel aceptado");
             this.new = !this.new;
-            this.titleForm = "Investigadores";
-         
+            this.titleForm = "Investigación Institucional";
           } else if (
             /* Read more about handling dismissals below */
             result.dismiss === Swal.DismissReason.cancel
@@ -205,9 +209,13 @@ export class InvestigacionInstitucionalComponent implements OnInit {
           }
         });
     } else {
-      this.titleForm = "Nuevo Investigador";
+      this.titleForm = "Nueva Investigación Institucional";
       this.new = !this.new;
     }
+  }
+
+  view(e) {
+
   }
 
   applyFilter(event: Event) {
@@ -218,19 +226,16 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   openDialog() {
     this.dialog.open(DialogDataExampleDialog, {
       data: {
-        animal: 'panda'
+        animal: "panda"
       }
     });
   }
-
-
 }
 
 @Component({
-  selector: 'dialog-data-example-dialog',
-  templateUrl: 'dialog-data-example-dialog.html',
+  selector: "dialog-data-example-dialog",
+  templateUrl: "dialog-data-example-dialog.html"
 })
 export class DialogDataExampleDialog {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-  ) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
 }
