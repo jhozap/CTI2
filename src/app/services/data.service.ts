@@ -33,7 +33,7 @@ export class DataService {
     });
   }
 
-  getRedes() {
+  public getRedes() {
     return this.http.get(environment.pathApi + '/Redes/ConsultaRedes', {
       headers: this.generateBasicHeaders()
     });
@@ -59,6 +59,18 @@ export class DataService {
 
   public getDirecciones() {
     return this.http.get(environment.pathApi + '/Unidad/ConsultaDirecciones', {
+      headers: this.generateBasicHeaders()
+    });
+  }
+
+  public getAreas() {
+    return this.http.get(environment.pathApi + '/Area/ConsultaAreas', {
+      headers: this.generateBasicHeaders()
+    });
+  }
+
+  public getAreasXLinea() {
+    return this.http.get(environment.pathApi + '/AreaLinea/ConsultaAreaLinea', {
       headers: this.generateBasicHeaders()
     });
   }
