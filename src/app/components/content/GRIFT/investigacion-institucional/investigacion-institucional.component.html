@@ -1,72 +1,91 @@
 <div class="content">
-    <div class="title-wrapper">
-        <h1>{{ titleForm }}</h1>
-        <button mat-raised-button [color]="new ? 'warn' : 'primary'" (click)="closeTheForm()">
-            <mat-icon>{{ new ? "close" : "add" }}</mat-icon>{{ new ? "Cancelar" : "Nueva investigación" }}
-        </button>
+  <div class="title-wrapper">
+    <h1>{{ titleForm }}</h1>
+    <button
+      mat-raised-button
+      [color]="new ? 'warn' : 'primary'"
+      (click)="closeTheForm()"
+    >
+      <mat-icon>{{ new ? "close" : "add" }}</mat-icon
+      >{{ new ? "Cancelar" : "Nueva investigación" }}
+    </button>
+  </div>
+  <ng-container *ngIf="new; then form; else table"></ng-container>
+  <!-- Table -->
+  <ng-template #table>
+    <div class="table-container">
+      <mat-form-field style="width: 100%;">
+        <mat-label>Filtro</mat-label>
+        <input
+          matInput
+          (keyup)="applyFilter($event)"
+          placeholder="Investigacion"
+        />
+      </mat-form-field>
+      <table
+        mat-table
+        [dataSource]="dataSource"
+        class="mat-elevation-z8"
+        style="width: 100%;"
+      >
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef>No.</th>
+          <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef>Nombre Investigacion</th>
+          <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="escuela">
+          <th mat-header-cell *matHeaderCellDef>Escuela</th>
+          <td mat-cell *matCellDef="let element">{{ element.escuela }}</td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="ticket">
+          <th mat-header-cell *matHeaderCellDef>Ticket</th>
+          <td mat-cell *matCellDef="let element">{{ element.ticket }}</td>
+        </ng-container>
+
+        <!-- Acciones Column -->
+        <ng-container matColumnDef="Acciones">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-icon-button color="accent" (click)="view(row)">
+              <mat-icon>search</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
     </div>
-    <ng-container *ngIf="new; then form; else table"></ng-container>
-    <!-- Table -->
-    <ng-template #table>
-        <div class="table-container">
-            <mat-form-field style="width: 100%;">
-                <mat-label>Filtro</mat-label>
-                <input matInput (keyup)="applyFilter($event)" placeholder="Investigacion" />
+  </ng-template>
+  <!-- Fin Table -->
+  <!-- Form Investigacion -->
+  <ng-template #form>
+    <mat-horizontal-stepper linear #stepper>
+      <mat-step [stepControl]="firstFormGroup" optional="true">
+        <form [formGroup]="firstFormGroup">
+          <div>
+            <ng-template matStepLabel>Información Base</ng-template>
+            <mat-form-field>
+              <mat-label>Titulo Investigación</mat-label>
+              <input
+                matInput
+                placeholder=""
+                formControlName="tituloInvestigacionForm"
+                required
+              />
             </mat-form-field>
-            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;">
-                <!-- Position Column -->
-                <ng-container matColumnDef="position">
-                    <th mat-header-cell *matHeaderCellDef>No.</th>
-                    <td mat-cell *matCellDef="let element">{{ element.position }}</td>
-                </ng-container>
-
-                <!-- Name Column -->
-                <ng-container matColumnDef="nombre">
-                    <th mat-header-cell *matHeaderCellDef>Nombre Investigacion</th>
-                    <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
-                </ng-container>
-
-                <!-- Weight Column -->
-                <ng-container matColumnDef="escuela">
-                    <th mat-header-cell *matHeaderCellDef>Escuela</th>
-                    <td mat-cell *matCellDef="let element">{{ element.escuela }}</td>
-                </ng-container>
-
-                <!-- Symbol Column -->
-                <ng-container matColumnDef="ticket">
-                    <th mat-header-cell *matHeaderCellDef>Ticket</th>
-                    <td mat-cell *matCellDef="let element">{{ element.ticket }}</td>
-                </ng-container>
-
-                <!-- Acciones Column -->
-                <ng-container matColumnDef="Acciones">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
-                    <td mat-cell *matCellDef="let row">
-                        <button mat-icon-button color="accent" (click)="view(row)">
-                            <mat-icon>search</mat-icon>
-                        </button>
-                    </td>
-                </ng-container>
-
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-            </table>
-
-            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-        </div>
-    </ng-template>
-    <!-- Fin Table -->
-    <!-- Form Investigacion -->
-    <ng-template #form>
-        <mat-horizontal-stepper linear #stepper>
-            <mat-step [stepControl]="firstFormGroup" optional="true">
-                <form [formGroup]="firstFormGroup">
-                    <div>
-                        <ng-template matStepLabel>Información Base</ng-template>
-                        <mat-form-field>
-                            <mat-label>Titulo Investigación</mat-label>
-                            <input matInput placeholder="" formControlName="tituloInvestigacionForm" required />
-                        </mat-form-field>
 
             <mat-form-field>
               <mat-label>Dirección Dueña</mat-label>
@@ -90,11 +109,19 @@
               </mat-select>
             </mat-form-field>
 
-                        <mat-form-field style="margin-right: 20px;" id="3">
-                            <input readonly matInput [matDatepicker]="picker" placeholder="Año" />
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
-                        </mat-form-field>
+            <mat-form-field style="margin-right: 20px;" id="3">
+              <input
+                readonly
+                matInput
+                [matDatepicker]="picker"
+                placeholder="Año"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
 
             <mat-form-field>
               <mat-label>Particpación de entidades externas</mat-label>
@@ -108,31 +135,36 @@
               </mat-select>
             </mat-form-field>
 
-                        <mat-form-field *ngIf="aplica">
-                            <mat-label>Cuales</mat-label>
-                            <input matInput placeholder="" formControlName="aplicaForm" required />
-                        </mat-form-field>
-                    </div>
+            <mat-form-field *ngIf="aplica">
+              <mat-label>Cuales</mat-label>
+              <input
+                matInput
+                placeholder=""
+                formControlName="aplicaForm"
+                required
+              />
+            </mat-form-field>
+          </div>
 
-                    <div>
-                        <mat-form-field>
-                            <mat-label>Areas</mat-label>
-                            <mat-select formControlName="areasForm" multiple>
-                                <mat-option *ngFor="let area of areas" [value]="area">{{
-                  area
+          <div>
+            <mat-form-field>
+              <mat-label>Areas</mat-label>
+              <mat-select formControlName="areasForm" multiple>
+                <mat-option *ngFor="let area of areas" [value]="area.ID_AREA">{{
+                  area.NOMBRE
                 }}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
+              </mat-select>
+            </mat-form-field>
 
-                        <mat-form-field>
-                            <mat-label>Lineas</mat-label>
-                            <mat-select formControlName="lineasForm" multiple>
-                                <mat-option *ngFor="let linea of lineas" [value]="linea">{{
-                  linea
+            <mat-form-field>
+              <mat-label>Lineas</mat-label>
+              <mat-select formControlName="lineasForm" multiple>
+                <mat-option *ngFor="let linea of lineas" [value]="linea.LINEA">{{
+                  linea.LINEA_NOMBRE
                 }}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
+              </mat-select>
+            </mat-form-field>
+          </div>
 
 
                   
@@ -148,95 +180,108 @@
                   </div>
             </mat-step>
 
-            <!--  2  -->
+      <!--  2  -->
 
-            <mat-step [stepControl]="secondFormGroup" optional="true">
-                <div class="buttonsBegin">
-                    <button
-                      mat-raised-button
-                      color="primary"
-                      mat-button 
-                      (click)="openDialog()"
-                    >
-                    Agregar Investigador
-                    </button>
+      <mat-step [stepControl]="secondFormGroup" optional="true">
+        <div class="buttonsBegin">
+            <button
+              mat-raised-button
+              color="primary"
+              mat-button 
+              (click)="openDialog()"
+            >
+            Agregar Investigador
+            </button>
+    </div>
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Investigadores</ng-template>
+          <div>
+            <button mat-button (click)="openDialog()">
+              Agregar Investigador
+            </button>
+          </div>
+          <ng-template>
+            <div class="table-container">
+              <mat-form-field>
+                <mat-label>Filtro</mat-label>
+                <input
+                  matInput
+                  (keyup)="applyFilter($event)"
+                  placeholder="Investigador"
+                />
+              </mat-form-field>
+
+              <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource">
+                  <!-- Documento Column -->
+                  <ng-container matColumnDef="DOCUMENTO">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      Documento
+                    </th>
+                    <td mat-cell *matCellDef="let row">{{ row.DOCUMENTO }}</td>
+                  </ng-container>
+
+                  <!-- Nombre Column -->
+                  <ng-container matColumnDef="NOMBRES">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      Nombre
+                    </th>
+                    <td mat-cell *matCellDef="let row">{{ row.NOMBRES }}</td>
+                  </ng-container>
+
+                  <!-- Apellido Column -->
+                  <ng-container matColumnDef="APELLIDOS">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      Apellido
+                    </th>
+                    <td mat-cell *matCellDef="let row">{{ row.APELLIDOS }}</td>
+                  </ng-container>
+
+                  <!-- Grado Column -->
+                  <ng-container matColumnDef="DESC_GRADO">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      Grado
+                    </th>
+                    <td mat-cell *matCellDef="let row">{{ row.DESC_GRADO }}</td>
+                  </ng-container>
+
+                  <!-- Email Column -->
+                  <ng-container matColumnDef="EMAIL">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      EMAIL
+                    </th>
+                    <td mat-cell *matCellDef="let row">{{ row.EMAIL }}</td>
+                  </ng-container>
+
+                  <!-- Acciones Column -->
+                  <ng-container matColumnDef="ACCIONES">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      Acciones
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                      <button mat-icon-button color="accent">
+                        <mat-icon>create</mat-icon>
+                      </button>
+                      <button mat-icon-button color="warn">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr
+                    mat-row
+                    *matRowDef="let row; columns: displayedColumns"
+                  ></tr>
+                </table>
+
+                <mat-paginator
+                  [pageSizeOptions]="[5, 10, 25, 100]"
+                ></mat-paginator>
+              </div>
             </div>
-                <form [formGroup]="secondFormGroup">
-                    <ng-template matStepLabel>Investigadores</ng-template>
-                    
-                    <ng-template>
-                        <div class="table-container">
-                            <mat-form-field>
-                                <mat-label>Filtro</mat-label>
-                                <input matInput (keyup)="applyFilter($event)" placeholder="Investigador" />
-                            </mat-form-field>
-
-                            <div class="mat-elevation-z8">
-                                <table mat-table [dataSource]="dataSource">
-                                    <!-- Documento Column -->
-                                    <ng-container matColumnDef="DOCUMENTO">
-                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                                            Documento
-                                        </th>
-                                        <td mat-cell *matCellDef="let row">{{ row.DOCUMENTO }}</td>
-                                    </ng-container>
-
-                                    <!-- Nombre Column -->
-                                    <ng-container matColumnDef="NOMBRES">
-                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                                            Nombre
-                                        </th>
-                                        <td mat-cell *matCellDef="let row">{{ row.NOMBRES }}</td>
-                                    </ng-container>
-
-                                    <!-- Apellido Column -->
-                                    <ng-container matColumnDef="APELLIDOS">
-                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                                            Apellido
-                                        </th>
-                                        <td mat-cell *matCellDef="let row">{{ row.APELLIDOS }}</td>
-                                    </ng-container>
-
-                                    <!-- Grado Column -->
-                                    <ng-container matColumnDef="DESC_GRADO">
-                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                                            Grado
-                                        </th>
-                                        <td mat-cell *matCellDef="let row">{{ row.DESC_GRADO }}</td>
-                                    </ng-container>
-
-                                    <!-- Email Column -->
-                                    <ng-container matColumnDef="EMAIL">
-                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                                            EMAIL
-                                        </th>
-                                        <td mat-cell *matCellDef="let row">{{ row.EMAIL }}</td>
-                                    </ng-container>
-
-                                    <!-- Acciones Column -->
-                                    <ng-container matColumnDef="ACCIONES">
-                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                                            Acciones
-                                        </th>
-                                        <td mat-cell *matCellDef="let row">
-                                            <button mat-icon-button color="accent">
-                                                <mat-icon>create</mat-icon>
-                                            </button>
-                                            <button mat-icon-button color="warn">
-                                                <mat-icon>delete</mat-icon>
-                                            </button>
-                                        </td>
-                                    </ng-container>
-
-                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                                    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-                                </table>
-
-                                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-                            </div>
-                        </div>
-                    </ng-template>
-                    <!-- Fin Table -->
+          </ng-template>
+          <!-- Fin Table -->
 
                    
                 </form>
@@ -270,160 +315,244 @@
                 <mat-checkbox (change)="productoInvestigacionChange($event, 6)">Procedimientos</mat-checkbox>
                 <mat-checkbox (change)="productoInvestigacionChange($event, 7)">Instructivos</mat-checkbox>
 
-                <div>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button matStepperNext>Next</button>
-                </div>
-            </mat-step>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </mat-step>
 
-            <!-- Detalles  -->
-            <mat-step [stepControl]="fourFormGroup" optional="true">
-                <ng-template matStepLabel>Detalles</ng-template>
+      <!-- Detalles  -->
+      <mat-step [stepControl]="fourFormGroup" optional="true">
+        <ng-template matStepLabel>Detalles</ng-template>
 
-                <form [formGroup]="fourFormGroup">
-                    <div class="group">
-                        <div class="doc-group" *ngIf="detallesVisualizacion[0]">
-                            <app-number [nombreCampo]="'autorForm'" [placeHolder]="'Autor'" [form]="fourFormGroup">
-                            </app-number>
-                        </div>
+        <form [formGroup]="fourFormGroup">
+          <div class="group">
+            <div class="doc-group" *ngIf="detallesVisualizacion[0]">
+              <app-number
+                [nombreCampo]="'autorForm'"
+                [placeHolder]="'Autor'"
+                [form]="fourFormGroup"
+              >
+              </app-number>
+            </div>
 
-                        <div class="doc-group" *ngIf="detallesVisualizacion[1]">
-                            <app-number [nombreCampo]="'cartillaForm'" [placeHolder]="'Autor'" [form]="fourFormGroup">
-                            </app-number>
-                        </div>
+            <div class="doc-group" *ngIf="detallesVisualizacion[1]">
+              <app-number
+                [nombreCampo]="'cartillaForm'"
+                [placeHolder]="'Autor'"
+                [form]="fourFormGroup"
+              >
+              </app-number>
+            </div>
 
-                        <div class="doc-group" *ngIf="detallesVisualizacion[2]">
-                            <app-number [nombreCampo]="'prototipoForm'" [placeHolder]="'Autor'" [form]="fourFormGroup">
-                            </app-number>
-                        </div>
+            <div class="doc-group" *ngIf="detallesVisualizacion[2]">
+              <app-number
+                [nombreCampo]="'prototipoForm'"
+                [placeHolder]="'Autor'"
+                [form]="fourFormGroup"
+              >
+              </app-number>
+            </div>
 
-                        <div class="doc-group" *ngIf="detallesVisualizacion[5]">
-                            <app-number [nombreCampo]="'manualesForm'" [placeHolder]="'Autor'" [form]="fourFormGroup">
-                            </app-number>
-                        </div>
+            <div class="doc-group" *ngIf="detallesVisualizacion[5]">
+              <app-number
+                [nombreCampo]="'manualesForm'"
+                [placeHolder]="'Autor'"
+                [form]="fourFormGroup"
+              >
+              </app-number>
+            </div>
 
-                        <div class="doc-group" *ngIf="detallesVisualizacion[6]">
-                            <app-number [nombreCampo]="'procedimientosForm'" [placeHolder]="'Autor'"
-                                [form]="fourFormGroup"></app-number>
-                        </div>
+            <div class="doc-group" *ngIf="detallesVisualizacion[6]">
+              <app-number
+                [nombreCampo]="'procedimientosForm'"
+                [placeHolder]="'Autor'"
+                [form]="fourFormGroup"
+              ></app-number>
+            </div>
 
-                        <div class="doc-group" *ngIf="detallesVisualizacion[7]">
-                            <app-number [nombreCampo]="'instructivosForm'" [placeHolder]="'Autor'"
-                                [form]="fourFormGroup"></app-number>
-                        </div>
+            <div class="doc-group" *ngIf="detallesVisualizacion[7]">
+              <app-number
+                [nombreCampo]="'instructivosForm'"
+                [placeHolder]="'Autor'"
+                [form]="fourFormGroup"
+              ></app-number>
+            </div>
 
-                        <div class="doc-group" *ngIf="detallesVisualizacion[3]">
-                            <app-number [nombreCampo]="'nombreRevista'" [placeHolder]="'Nombre de Revista'"
-                                [form]="fourFormGroup"></app-number>
+            <div class="doc-group" *ngIf="detallesVisualizacion[3]">
+              <app-number
+                [nombreCampo]="'nombreRevista'"
+                [placeHolder]="'Nombre de Revista'"
+                [form]="fourFormGroup"
+              ></app-number>
 
-                            <app-number [nombreCampo]="'nombreArticulo'" [placeHolder]="'Nombre del Artículo'"
-                                [form]="fourFormGroup"></app-number>
+              <app-number
+                [nombreCampo]="'nombreArticulo'"
+                [placeHolder]="'Nombre del Artículo'"
+                [form]="fourFormGroup"
+              ></app-number>
 
+              <mat-form-field style="margin-right: 20px;" id="3">
+                <input
+                  readonly
+                  matInput
+                  [matDatepicker]="picker"
+                  placeholder="Año"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
 
-                            <mat-form-field style="margin-right: 20px;" id="3">
-                                <input readonly matInput [matDatepicker]="picker" placeholder="Año" />
-                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                <mat-datepicker #picker></mat-datepicker>
-                            </mat-form-field>
+              <app-number
+                [nombreCampo]="'codigoISSN'"
+                [placeHolder]="'Código ISSN'"
+                [form]="fourFormGroup"
+              ></app-number>
 
-                            <app-number [nombreCampo]="'codigoISSN'" [placeHolder]="'Código ISSN'"
-                                [form]="fourFormGroup"></app-number>
+              <app-number
+                [nombreCampo]="'autorArticulo'"
+                [placeHolder]="'Autor'"
+                [form]="fourFormGroup"
+              >
+              </app-number>
+            </div>
 
+            <div class="doc-group" *ngIf="detallesVisualizacion[4]">
+              <app-number
+                [nombreCampo]="'nombreLibro'"
+                [placeHolder]="'Nombre Libro'"
+                [form]="fourFormGroup"
+              ></app-number>
 
-                            <app-number [nombreCampo]="'autorArticulo'" [placeHolder]="'Autor'" [form]="fourFormGroup">
-                            </app-number>
+              <app-number
+                [nombreCampo]="'pagInicio'"
+                [placeHolder]="'Pagina de Inicio'"
+                [form]="fourFormGroup"
+              ></app-number>
 
-                        </div>
+              <app-number
+                [nombreCampo]="'pagFinal'"
+                [placeHolder]="'Pagina Final'"
+                [form]="fourFormGroup"
+              ></app-number>
 
-                        <div class="doc-group" *ngIf="detallesVisualizacion[4]">
+              <app-number
+                [nombreCampo]="'editorial'"
+                [placeHolder]="'Editorial'"
+                [form]="fourFormGroup"
+              >
+              </app-number>
 
+              <mat-form-field style="margin-right: 20px;" id="3">
+                <input
+                  readonly
+                  matInput
+                  [matDatepicker]="picker"
+                  placeholder="Fecha de Publicación"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+        </form>
 
-                            <app-number [nombreCampo]="'nombreLibro'" [placeHolder]="'Nombre Libro'"
-                                [form]="fourFormGroup"></app-number>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+      </mat-step>
 
-                            <app-number [nombreCampo]="'pagInicio'" [placeHolder]="'Pagina de Inicio'"
-                                [form]="fourFormGroup"></app-number>
+      <!-- 5 -->
+      <mat-step>
+        <ng-template matStepLabel>Estímulos</ng-template>
 
-                            <app-number [nombreCampo]="'pagFinal'" [placeHolder]="'Pagina Final'"
-                                [form]="fourFormGroup"></app-number>
+        <mat-checkbox (change)="estimulosChange($event, 0)"
+          >Condecoraciones</mat-checkbox
+        >
+        <mat-checkbox (change)="estimulosChange($event, 1)"
+          >Felicitaciones</mat-checkbox
+        >
+        <mat-checkbox (change)="estimulosChange($event, 2)"
+          >Personaje del Mes</mat-checkbox
+        >
+        <mat-checkbox (change)="estimulosChange($event, 3)"
+          >Permiso</mat-checkbox
+        >
+        <mat-checkbox (change)="estimulosChange($event, 4)"
+          >Estatuillas</mat-checkbox
+        >
+        <mat-checkbox (change)="estimulosChange($event, 5)"
+          >Monedas</mat-checkbox
+        >
+        <mat-checkbox (change)="estimulosChange($event, 6)"
+          >Capacitaciones</mat-checkbox
+        >
 
-                            <app-number [nombreCampo]="'editorial'" [placeHolder]="'Editorial'" [form]="fourFormGroup">
-                            </app-number>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+      </mat-step>
 
-                            <mat-form-field style="margin-right: 20px;" id="3">
-                                <input readonly matInput [matDatepicker]="picker" placeholder="Fecha de Publicación" />
-                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                <mat-datepicker #picker></mat-datepicker>
-                            </mat-form-field>
+      <!-- 6-->
+      <mat-step>
+        <ng-template matStepLabel>Eventos</ng-template>
 
-                        </div>
-                    </div>
-                </form>
+        <form [formGroup]="sixFormGroup">
+          <div class="group">
+            <app-select
+              [placeholder]="'Tipo.'"
+              [data]="tipoEvento"
+              [argument]="'DESCRIPCION'"
+              [nombreCampo]="'tipoForm'"
+              [form]="sixFormGroup"
+            ></app-select>
 
-                <div>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button (click)="stepper.reset()">Reset</button>
-                </div>
-            </mat-step>
+            <app-select
+              [placeholder]="'Participación.'"
+              [data]="participaciones"
+              [argument]="'DESCRIPCION'"
+              [nombreCampo]="'participacion'"
+              [form]="sixFormGroup"
+            ></app-select>
 
-            <!-- 5 -->
-            <mat-step>
-                <ng-template matStepLabel>Estímulos</ng-template>
+            <mat-form-field style="margin-right: 20px;" id="3">
+              <input
+                readonly
+                matInput
+                [matDatepicker]="picker2"
+                placeholder="Fecha"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker2"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </form>
 
-
-                <mat-checkbox (change)="estimulosChange($event, 0)">Condecoraciones</mat-checkbox>
-                <mat-checkbox (change)="estimulosChange($event, 1)">Felicitaciones</mat-checkbox>
-                <mat-checkbox (change)="estimulosChange($event, 2)">Personaje del Mes</mat-checkbox>
-                <mat-checkbox (change)="estimulosChange($event, 3)">Permiso</mat-checkbox>
-                <mat-checkbox (change)="estimulosChange($event, 4)">Estatuillas</mat-checkbox>
-                <mat-checkbox (change)="estimulosChange($event, 5)">Monedas</mat-checkbox>
-                <mat-checkbox (change)="estimulosChange($event, 6)">Capacitaciones</mat-checkbox>
-
-                <div>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button (click)="stepper.reset()">Reset</button>
-                </div>
-            </mat-step>
-
-
-            <!-- 6-->
-            <mat-step>
-                <ng-template matStepLabel>Eventos</ng-template>
-
-
-                <form [formGroup]="sixFormGroup">
-                    <div class="group">
-
-                        <app-select [placeholder]="'Tipo.'" [data]="tipoEvento" [argument]="'DESCRIPCION'"
-                            [nombreCampo]="'tipoForm'" [form]="sixFormGroup"></app-select>
-
-                        <app-select [placeholder]="'Participación.'" [data]="participaciones" [argument]="'DESCRIPCION'"
-                            [nombreCampo]="'participacion'" [form]="sixFormGroup"></app-select>
-
-                        <mat-form-field style="margin-right: 20px;" id="3">
-                            <input readonly matInput [matDatepicker]="picker2" placeholder="Fecha" />
-                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                            <mat-datepicker #picker2></mat-datepicker>
-                        </mat-form-field>
-
-                    </div>
-                </form>
-
-
-                <div>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button (click)="stepper.reset()">Reset</button>
-                </div>
-            </mat-step>
-            <mat-step>
-                <ng-template matStepLabel>Done</ng-template>
-                <p>You are now done.</p>
-                <div>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button (click)="stepper.reset()">Reset</button>
-                </div>
-            </mat-step>
-        </mat-horizontal-stepper>
-    </ng-template>
-    <!-- Fin Form Investigacion -->
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p>You are now done.</p>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </ng-template>
+  <!-- Fin Form Investigacion -->
 </div>

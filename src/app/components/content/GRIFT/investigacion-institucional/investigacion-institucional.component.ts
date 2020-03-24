@@ -123,6 +123,8 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     this.getDirecciones();
     this.getEscuelas();
     this.getInvestigadores();
+    this.getAreas();
+    this.getAreasXLinea();
   }
 
   productoInvestigacionChange(valor, posicion) {
@@ -257,6 +259,20 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     this._dataService.getEscuelas()
       .subscribe((data: [])=> {
         this.escuelas = data;
+      });
+  }
+
+  getAreas() {
+    this._dataService.getAreas()
+      .subscribe((data: [])=> {
+        this.areas = data;
+      });
+  }
+
+  getAreasXLinea() {
+    this._dataService.getAreasXLinea()
+      .subscribe((data: [])=> {
+        this.lineas = data;
       });
   }
 
