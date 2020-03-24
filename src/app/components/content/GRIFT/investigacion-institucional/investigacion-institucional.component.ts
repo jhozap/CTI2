@@ -15,6 +15,7 @@ import {
   MatDialog
 } from "@angular/material/dialog";
 import { DialogService } from 'src/app/services/dialog.service';
+import { investigadores } from 'src/app/constants/mockData.class';
 
 export interface DialogData {
   animal: string;
@@ -328,5 +329,13 @@ export class InvestigacionInstitucionalComponent implements OnInit {
         },
       error => {}
     );
+  }
+
+  eliminarInvestigador(investigador){
+    this.investigadoresSeleccionados = this.investigadoresSeleccionados.filter(x=>x.ID_INVESTIGADOR != investigador.ID_INVESTIGADOR);
+    this.dataSourceInvestigadores = new MatTableDataSource(this.investigadoresSeleccionados);
+    setTimeout(() => {
+      this.dataSourceInvestigadores.paginator = this.paginator;
+    }, 0);
   }
 }
