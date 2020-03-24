@@ -38,7 +38,7 @@ export class ModalInvestigador implements OnInit {
     }
 
     agregarInvestigador(investigador){
-        this.investigador = investigador;
+        this.investigador = investigador.source.value;
     }
 
 

@@ -310,8 +310,12 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     this.dialogService.openInvestigador(this.investigadores, this.investigadoresSeleccionados).subscribe(
       response => {
           console.log(response);
-          this.investigadoresSeleccionados.push(response);
-      },
+          if(response != null && response != undefined){
+            this.investigadoresSeleccionados.push(response);
+     
+          }
+     
+        },
       error => {}
     );
   }
