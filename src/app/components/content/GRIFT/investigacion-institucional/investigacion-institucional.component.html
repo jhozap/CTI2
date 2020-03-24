@@ -74,103 +74,106 @@
   <ng-template #form>
     <mat-horizontal-stepper linear #stepper>
       <mat-step [stepControl]="firstFormGroup" optional="true">
-        <form [formGroup]="firstFormGroup">
-          <div>
-            <ng-template matStepLabel>Información Base</ng-template>
-            <mat-form-field>
-              <mat-label>Titulo Investigación</mat-label>
-              <input
-                matInput
-                placeholder=""
-                formControlName="tituloInvestigacionForm"
-                required
-              />
-            </mat-form-field>
+        <div class="first">
+          <form [formGroup]="firstFormGroup">
+            <div>
+              <ng-template matStepLabel>Información Base</ng-template>
+              <mat-form-field>
+                <mat-label>Titulo Investigación</mat-label>
+                <input
+                  matInput
+                  placeholder=""
+                  formControlName="tituloInvestigacionForm"
+                  required
+                />
+              </mat-form-field>
 
-            <mat-form-field>
-              <mat-label>Dirección Dueña</mat-label>
-              <mat-select formControlName="direccionDuenaForm">
-                <mat-option
-                  *ngFor="let direccion of direccionesDuena"
-                  [value]="direccion.ID_UNIDAD"
-                  >{{ direccion.DESCRIPCION }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
+              <mat-form-field>
+                <mat-label>Dirección Dueña</mat-label>
+                <mat-select formControlName="direccionDuenaForm">
+                  <mat-option
+                    *ngFor="let direccion of direccionesDuena"
+                    [value]="direccion.ID_UNIDAD"
+                    >{{ direccion.DESCRIPCION }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
 
-            <mat-form-field>
-              <mat-label>Escuelas</mat-label>
-              <mat-select formControlName="escuelasForm">
-                <mat-option
-                  *ngFor="let escuela of escuelas"
-                  [value]="escuela.ID_UNIDAD"
-                  >{{ escuela.DESCRIPCION }}</mat-option
+              <mat-form-field>
+                <mat-label>Escuelas</mat-label>
+                <mat-select formControlName="escuelasForm">
+                  <mat-option
+                    *ngFor="let escuela of escuelas"
+                    [value]="escuela.ID_UNIDAD"
+                    >{{ escuela.DESCRIPCION }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field style="margin-right: 20px;" id="3">
+                <input
+                  readonly
+                  matInput
+                  [matDatepicker]="picker"
+                  placeholder="Año"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Particpación de entidades externas</mat-label>
+                <mat-select
+                  formControlName="aplicasForm"
+                  (selectionChange)="aplicaChange($event)"
                 >
-              </mat-select>
-            </mat-form-field>
+                  <mat-option *ngFor="let aplica of aplicas" [value]="aplica"
+                    >{{ aplica }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
 
-            <mat-form-field style="margin-right: 20px;" id="3">
-              <input
-                readonly
-                matInput
-                [matDatepicker]="picker"
-                placeholder="Año"
-              />
-              <mat-datepicker-toggle
-                matSuffix
-                [for]="picker"
-              ></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
+              <mat-form-field *ngIf="aplica">
+                <mat-label>Cuales</mat-label>
+                <input
+                  matInput
+                  placeholder=""
+                  formControlName="aplicaForm"
+                  required
+                />
+              </mat-form-field>
+            </div>
 
-            <mat-form-field>
-              <mat-label>Particpación de entidades externas</mat-label>
-              <mat-select
-                formControlName="aplicasForm"
-                (selectionChange)="aplicaChange($event)"
-              >
-                <mat-option *ngFor="let aplica of aplicas" [value]="aplica"
-                  >{{ aplica }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
+            <div>
+              <mat-form-field>
+                <mat-label>Areas</mat-label>
+                <mat-select formControlName="areasForm" multiple>
+                  <mat-option
+                    (onSelectionChange)="mostrarLineas($event)"
+                    *ngFor="let area of areas"
+                    [value]="area.ID_AREA"
+                    >{{ area.NOMBRE }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
 
-            <mat-form-field *ngIf="aplica">
-              <mat-label>Cuales</mat-label>
-              <input
-                matInput
-                placeholder=""
-                formControlName="aplicaForm"
-                required
-              />
-            </mat-form-field>
-          </div>
+              <mat-form-field>
+                <mat-label>Lineas</mat-label>
+                <mat-select formControlName="lineasForm" multiple>
+                  <mat-option
+                    *ngFor="let linea of lineas"
+                    [value]="linea.LINEA"
+                    >{{ linea.LINEA_NOMBRE }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </form>
+        </div>
 
-          <div>
-            <mat-form-field>
-              <mat-label>Areas</mat-label>
-              <mat-select formControlName="areasForm" multiple>
-                <mat-option
-                  (onSelectionChange)="mostrarLineas($event)"
-                  *ngFor="let area of areas"
-                  [value]="area.ID_AREA"
-                  >{{ area.NOMBRE }}</mat-option
-                >
-              </mat-select>
-            </mat-form-field>
-
-            <mat-form-field>
-              <mat-label>Lineas</mat-label>
-              <mat-select formControlName="lineasForm" multiple>
-                <mat-option
-                  *ngFor="let linea of lineas"
-                  [value]="linea.LINEA"
-                  >{{ linea.LINEA_NOMBRE }}</mat-option
-                >
-              </mat-select>
-            </mat-form-field>
-          </div>
-        </form>
         <div class="buttons">
           <button mat-raised-button color="primary" mat-button matStepperNext>
             Siguiente
@@ -288,33 +291,35 @@
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>Producto Investigación</ng-template>
-        <mat-checkbox (change)="productoInvestigacionChange($event, 0)"
-          >Guía</mat-checkbox
-        >
-        <mat-checkbox (change)="productoInvestigacionChange($event, 1)"
-          >Cartilla</mat-checkbox
-        >
-        <mat-checkbox (change)="productoInvestigacionChange($event, 2)"
-          >Prototipo</mat-checkbox
-        >
-        <mat-checkbox (change)="productoInvestigacionChange($event, 3)"
-          >Artículo</mat-checkbox
-        >
-        <mat-checkbox (change)="productoInvestigacionChange($event, 4)"
-          >Libro</mat-checkbox
-        >
-        <mat-checkbox (change)="productoInvestigacionChange($event, 4)"
-          >Cap. Libro</mat-checkbox
-        >
-        <mat-checkbox (change)="productoInvestigacionChange($event, 5)"
-          >Manuales</mat-checkbox
-        >
-        <mat-checkbox (change)="productoInvestigacionChange($event, 6)"
-          >Procedimientos</mat-checkbox
-        >
-        <mat-checkbox (change)="productoInvestigacionChange($event, 7)"
-          >Instructivos</mat-checkbox
-        >
+        <div class="productos">
+          <mat-checkbox (change)="productoInvestigacionChange($event, 0)"
+            >Guía</mat-checkbox
+          >
+          <mat-checkbox (change)="productoInvestigacionChange($event, 1)"
+            >Cartilla</mat-checkbox
+          >
+          <mat-checkbox (change)="productoInvestigacionChange($event, 2)"
+            >Prototipo</mat-checkbox
+          >
+          <mat-checkbox (change)="productoInvestigacionChange($event, 3)"
+            >Artículo</mat-checkbox
+          >
+          <mat-checkbox (change)="productoInvestigacionChange($event, 4)"
+            >Libro</mat-checkbox
+          >
+          <mat-checkbox (change)="productoInvestigacionChange($event, 4)"
+            >Cap. Libro</mat-checkbox
+          >
+          <mat-checkbox (change)="productoInvestigacionChange($event, 5)"
+            >Manuales</mat-checkbox
+          >
+          <mat-checkbox (change)="productoInvestigacionChange($event, 6)"
+            >Procedimientos</mat-checkbox
+          >
+          <mat-checkbox (change)="productoInvestigacionChange($event, 7)"
+            >Instructivos</mat-checkbox
+          >
+        </div>
 
         <div class="buttons">
           <button mat-raised-button color="warn" mat-button matStepperPrevious>
@@ -332,138 +337,162 @@
 
         <form [formGroup]="fourFormGroup">
           <div class="group">
-            <div class="doc-group" *ngIf="detallesVisualizacion[0]">
-              <app-number
-                [nombreCampo]="'autorForm'"
-                [placeHolder]="'Autor'"
-                [form]="fourFormGroup"
-              >
-              </app-number>
+            <div class="element" *ngIf="detallesVisualizacion[0]">
+              <h3>Guía</h3>
+              <div class="doc-group">
+                <app-number
+                  [nombreCampo]="'autorForm'"
+                  [placeHolder]="'Autor'"
+                  [form]="fourFormGroup"
+                >
+                </app-number>
+              </div>
             </div>
 
-            <div class="doc-group" *ngIf="detallesVisualizacion[1]">
-              <app-number
-                [nombreCampo]="'cartillaForm'"
-                [placeHolder]="'Autor'"
-                [form]="fourFormGroup"
-              >
-              </app-number>
+            <div class="element" *ngIf="detallesVisualizacion[1]">
+              <h3>Cartilla</h3>
+              <div class="doc-group">
+                <app-number
+                  [nombreCampo]="'cartillaForm'"
+                  [placeHolder]="'Autor'"
+                  [form]="fourFormGroup"
+                >
+                </app-number>
+              </div>
             </div>
 
-            <div class="doc-group" *ngIf="detallesVisualizacion[2]">
-              <app-number
-                [nombreCampo]="'prototipoForm'"
-                [placeHolder]="'Autor'"
-                [form]="fourFormGroup"
-              >
-              </app-number>
+            <div class="element" *ngIf="detallesVisualizacion[2]">
+              <h3>Prototipo</h3>
+              <div class="doc-group">
+                <app-number
+                  [nombreCampo]="'prototipoForm'"
+                  [placeHolder]="'Autor'"
+                  [form]="fourFormGroup"
+                >
+                </app-number>
+              </div>
             </div>
 
-            <div class="doc-group" *ngIf="detallesVisualizacion[5]">
-              <app-number
-                [nombreCampo]="'manualesForm'"
-                [placeHolder]="'Autor'"
-                [form]="fourFormGroup"
-              >
-              </app-number>
+            <div class="element" *ngIf="detallesVisualizacion[5]">
+              <h3>Manuales</h3>
+              <div class="doc-group">
+                <app-number
+                  [nombreCampo]="'manualesForm'"
+                  [placeHolder]="'Autor'"
+                  [form]="fourFormGroup"
+                >
+                </app-number>
+              </div>
             </div>
 
-            <div class="doc-group" *ngIf="detallesVisualizacion[6]">
-              <app-number
-                [nombreCampo]="'procedimientosForm'"
-                [placeHolder]="'Autor'"
-                [form]="fourFormGroup"
-              ></app-number>
+            <div class="element" *ngIf="detallesVisualizacion[6]">
+              <h3>Procedimientos</h3>
+              <div class="doc-group">
+                <app-number
+                  [nombreCampo]="'procedimientosForm'"
+                  [placeHolder]="'Autor'"
+                  [form]="fourFormGroup"
+                ></app-number>
+              </div>
             </div>
 
-            <div class="doc-group" *ngIf="detallesVisualizacion[7]">
-              <app-number
-                [nombreCampo]="'instructivosForm'"
-                [placeHolder]="'Autor'"
-                [form]="fourFormGroup"
-              ></app-number>
+            <div class="element" *ngIf="detallesVisualizacion[7]">
+              <h3>Instructivos</h3>
+              <div class="doc-group">
+                <app-number
+                  [nombreCampo]="'instructivosForm'"
+                  [placeHolder]="'Autor'"
+                  [form]="fourFormGroup"
+                ></app-number>
+              </div>
             </div>
 
-            <div class="doc-group" *ngIf="detallesVisualizacion[3]">
-              <app-number
-                [nombreCampo]="'nombreRevista'"
-                [placeHolder]="'Nombre de Revista'"
-                [form]="fourFormGroup"
-              ></app-number>
+            <div class="element" *ngIf="detallesVisualizacion[3]">
+              <h3>Artículo</h3>
+              <div class="doc-group">
+                <app-number
+                  [nombreCampo]="'nombreRevista'"
+                  [placeHolder]="'Nombre de Revista'"
+                  [form]="fourFormGroup"
+                ></app-number>
 
-              <app-number
-                [nombreCampo]="'nombreArticulo'"
-                [placeHolder]="'Nombre del Artículo'"
-                [form]="fourFormGroup"
-              ></app-number>
+                <app-number
+                  [nombreCampo]="'nombreArticulo'"
+                  [placeHolder]="'Nombre del Artículo'"
+                  [form]="fourFormGroup"
+                ></app-number>
 
-              <mat-form-field style="margin-right: 20px;" id="3">
-                <input
-                  readonly
-                  matInput
-                  [matDatepicker]="picker"
-                  placeholder="Año"
-                />
-                <mat-datepicker-toggle
-                  matSuffix
-                  [for]="picker"
-                ></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-              </mat-form-field>
+                <mat-form-field style="margin-right: 20px;" id="3">
+                  <input
+                    readonly
+                    matInput
+                    [matDatepicker]="picker"
+                    placeholder="Año"
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="picker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
 
-              <app-number
-                [nombreCampo]="'codigoISSN'"
-                [placeHolder]="'Código ISSN'"
-                [form]="fourFormGroup"
-              ></app-number>
+                <app-number
+                  [nombreCampo]="'codigoISSN'"
+                  [placeHolder]="'Código ISSN'"
+                  [form]="fourFormGroup"
+                ></app-number>
 
-              <app-number
-                [nombreCampo]="'autorArticulo'"
-                [placeHolder]="'Autor'"
-                [form]="fourFormGroup"
-              >
-              </app-number>
+                <app-number
+                  [nombreCampo]="'autorArticulo'"
+                  [placeHolder]="'Autor'"
+                  [form]="fourFormGroup"
+                >
+                </app-number>
+              </div>
             </div>
 
-            <div class="doc-group" *ngIf="detallesVisualizacion[4]">
-              <app-number
-                [nombreCampo]="'nombreLibro'"
-                [placeHolder]="'Nombre Libro'"
-                [form]="fourFormGroup"
-              ></app-number>
+            <div class="element" *ngIf="detallesVisualizacion[4]">
+              <h3>Libro</h3>
+              <div class="doc-group">
+                <app-number
+                  [nombreCampo]="'nombreLibro'"
+                  [placeHolder]="'Nombre Libro'"
+                  [form]="fourFormGroup"
+                ></app-number>
 
-              <app-number
-                [nombreCampo]="'pagInicio'"
-                [placeHolder]="'Pagina de Inicio'"
-                [form]="fourFormGroup"
-              ></app-number>
+                <app-number
+                  [nombreCampo]="'pagInicio'"
+                  [placeHolder]="'Pagina de Inicio'"
+                  [form]="fourFormGroup"
+                ></app-number>
 
-              <app-number
-                [nombreCampo]="'pagFinal'"
-                [placeHolder]="'Pagina Final'"
-                [form]="fourFormGroup"
-              ></app-number>
+                <app-number
+                  [nombreCampo]="'pagFinal'"
+                  [placeHolder]="'Pagina Final'"
+                  [form]="fourFormGroup"
+                ></app-number>
 
-              <app-number
-                [nombreCampo]="'editorial'"
-                [placeHolder]="'Editorial'"
-                [form]="fourFormGroup"
-              >
-              </app-number>
+                <app-number
+                  [nombreCampo]="'editorial'"
+                  [placeHolder]="'Editorial'"
+                  [form]="fourFormGroup"
+                >
+                </app-number>
 
-              <mat-form-field style="margin-right: 20px;" id="3">
-                <input
-                  readonly
-                  matInput
-                  [matDatepicker]="picker"
-                  placeholder="Fecha de Publicación"
-                />
-                <mat-datepicker-toggle
-                  matSuffix
-                  [for]="picker"
-                ></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-              </mat-form-field>
+                <mat-form-field style="margin-right: 20px;" id="3">
+                  <input
+                    readonly
+                    matInput
+                    [matDatepicker]="picker"
+                    placeholder="Fecha de Publicación"
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="picker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </div>
             </div>
           </div>
         </form>
