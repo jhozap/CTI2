@@ -6,9 +6,9 @@
     <div mat-dialog-content>
       <mat-form-field>
         <mat-label>Investigadores</mat-label>
-        <mat-select formControlName="investigadorForm" multiple>
-          <mat-option (onSelectionChange)="agregarInvestigador($event)" *ngFor="let investigador of data.investigadores"
-            [value]="investigador.ID">{{ investigador.NOMBRE }}</mat-option>
+        <mat-select formControlName="investigadorForm">
+          <mat-option (onSelectionChange)="agregarInvestigador($event)" *ngFor="let investigador of data"
+            [value]="investigador.ID">{{ investigador.NOMBRES }} {{ investigador.APELLIDOS }}</mat-option>
         </mat-select>
       </mat-form-field>
 

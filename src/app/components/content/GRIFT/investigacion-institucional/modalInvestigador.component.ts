@@ -28,14 +28,11 @@ export class ModalInvestigador implements OnInit {
         });
     }
     ngOnInit() {
-
         console.log(this.data);
-
     }
 
     agregarInvestigador(investigador){
         console.log(investigador);
-        
     }
 
 

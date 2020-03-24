@@ -208,7 +208,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       .getInvestigadores()
       .toPromise()
       .then((data: any[]) => {
-        console.log(data);
+        this.investigadores = data;
         this.dataSource = new MatTableDataSource(data);
         setTimeout(() => {
           this.dataSource.paginator = this.paginator;
