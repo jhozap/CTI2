@@ -89,22 +89,22 @@
 
             <mat-form-field>
               <mat-label>Dirección Dueña</mat-label>
-              <mat-select formControlName="direccionDuenaForm" multiple>
+              <mat-select formControlName="direccionDuenaForm">
                 <mat-option
                   *ngFor="let direccion of direccionesDuena"
-                  [value]="direccion"
-                  >{{ direccion }}
+                  [value]="direccion.ID_UNIDAD"
+                  >{{ direccion.DESCRIPCION }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
 
             <mat-form-field>
-              <mat-label>Encuestas</mat-label>
-              <mat-select formControlName="encuestasForm" multiple>
+              <mat-label>Escuelas</mat-label>
+              <mat-select formControlName="escuelasForm">
                 <mat-option
-                  *ngFor="let encuesta of encuestas"
-                  [value]="encuesta"
-                  >{{ encuesta }}</mat-option
+                  *ngFor="let escuela of escuelas"
+                  [value]="escuela.ID_UNIDAD"
+                  >{{ escuela.DESCRIPCION }}</mat-option
                 >
               </mat-select>
             </mat-form-field>
@@ -124,7 +124,7 @@
             </mat-form-field>
 
             <mat-form-field>
-              <mat-label>Aplica</mat-label>
+              <mat-label>Particpación de entidades externas</mat-label>
               <mat-select
                 formControlName="aplicasForm"
                 (selectionChange)="aplicaChange($event)"

@@ -45,11 +45,12 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   fourFormGroup: FormGroup;
   isOptional = false;
   direccionesDuena = [];
-  encuestas = [];
+  escuelas = [];
   aplicas = ["Si", "No"];
   aplica = false;
   areas = [];
   lineas = [];
+  investigadores = [];
   
   detallesVisualizacion = [
     false,
@@ -75,7 +76,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     this.firstFormGroup = this._formBuilder.group({
       tituloInvestigacionForm: ["", Validators.required],
       direccionDuenaForm: ["", Validators.required],
-      encuestasForm: ["", Validators.required],
+      escuelasForm: ["", Validators.required],
       aplicasForm: ["", Validators.required],
       aplicaForm: ["", Validators.required],
       areasForm: ["", Validators.required],
@@ -95,6 +96,10 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       articuloForm: [""],
       libroForm: [""]
     });
+
+    this.getDirecciones();
+    this.getEscuelas();
+    this.getInvestigadores();
   }
 
   productoInvestigacionChange(valor, posicion) {
@@ -214,6 +219,20 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     }
   }
 
+  getDirecciones() {
+    this._dataService.getDirecciones()
+      .subscribe((data: [])=> {
+        this.direccionesDuena = data;
+      });
+  }
+
+  getEscuelas() {
+    this._dataService.getEscuelas()
+      .subscribe((data: [])=> {
+        this.escuelas = data;
+      });
+  }
+
   view(e) {
 
   }
@@ -226,7 +245,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   openDialog() {
     this.dialog.open(DialogDataExampleDialog, {
       data: {
-        animal: "panda"
+        investigadores: this.investigadores
       }
     });
   }
@@ -237,5 +256,8 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   templateUrl: "dialog-data-example-dialog.html"
 })
 export class DialogDataExampleDialog {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
+  investigadores = [];
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
+    this.investigadores = data.investigadores;
+  }
 }

@@ -51,6 +51,18 @@ export class DataService {
     });
   }
 
+  public getEscuelas() {
+    return this.http.get(environment.pathApi + '/Unidad/ConsultaEscuelas', {
+      headers: this.generateBasicHeaders()
+    });
+  }
+
+  public getDirecciones() {
+    return this.http.get(environment.pathApi + '/Unidad/ConsultaDirecciones', {
+      headers: this.generateBasicHeaders()
+    });
+  }
+
   public newUser(params: any) {
     return this.http.post(environment.pathApi + '/Usuario/CrearModificarUsuario', params, {
       headers: this.generateBasicHeaders()
