@@ -61,3 +61,10 @@ form {
   grid-template-columns: auto auto;
 }
 
+.buttonsBegin {
+  justify-content: start;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: auto auto;
+}
+
