@@ -166,11 +166,19 @@
             </mat-form-field>
           </div>
 
-          <div>
-            <button mat-button matStepperNext>Next</button>
-          </div>
-        </form>
-      </mat-step>
+
+                  
+                </form>
+                <div class="buttons">
+                    <button
+                      mat-raised-button
+                      color="primary"
+                      mat-button matStepperNext
+                    >
+                      Siguiente
+                    </button>
+                  </div>
+            </mat-step>
 
       <!--  2  -->
 
@@ -265,41 +273,37 @@
           </ng-template>
           <!-- Fin Table -->
 
-          <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
-          </div>
-        </form>
-      </mat-step>
-      <mat-step>
-        <ng-template matStepLabel>Producto Investigación</ng-template>
-        <mat-checkbox (change)="productoInvestigacionChange($event, 0)"
-          >Guía</mat-checkbox
-        >
-        <mat-checkbox (change)="productoInvestigacionChange($event, 1)"
-          >Cartilla</mat-checkbox
-        >
-        <mat-checkbox (change)="productoInvestigacionChange($event, 2)"
-          >Prototipo</mat-checkbox
-        >
-        <mat-checkbox (change)="productoInvestigacionChange($event, 3)"
-          >Artículo</mat-checkbox
-        >
-        <mat-checkbox (change)="productoInvestigacionChange($event, 4)"
-          >Libro</mat-checkbox
-        >
-        <mat-checkbox (change)="productoInvestigacionChange($event, 4)"
-          >Cap. Libro</mat-checkbox
-        >
-        <mat-checkbox (change)="productoInvestigacionChange($event, 5)"
-          >Manuales</mat-checkbox
-        >
-        <mat-checkbox (change)="productoInvestigacionChange($event, 6)"
-          >Procedimientos</mat-checkbox
-        >
-        <mat-checkbox (change)="productoInvestigacionChange($event, 7)"
-          >Instructivos</mat-checkbox
-        >
+                   
+                </form>
+                <div class="buttons">
+                    <button
+                      mat-raised-button
+                      color="primary"
+                      mat-button matStepperPrevious
+                    >
+                      Atras
+                    </button>
+                    <button
+                      mat-raised-button
+                      color="primary"
+                      mat-button matStepperNext
+                    >
+                      Siguiente
+                    </button>
+                  </div>
+               
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>Producto Investigación</ng-template>
+                <mat-checkbox (change)="productoInvestigacionChange($event, 0)">Guía</mat-checkbox>
+                <mat-checkbox (change)="productoInvestigacionChange($event, 1)">Cartilla</mat-checkbox>
+                <mat-checkbox (change)="productoInvestigacionChange($event, 2)">Prototipo</mat-checkbox>
+                <mat-checkbox (change)="productoInvestigacionChange($event, 3)">Artículo</mat-checkbox>
+                <mat-checkbox (change)="productoInvestigacionChange($event, 4)">Libro</mat-checkbox>
+                <mat-checkbox (change)="productoInvestigacionChange($event, 4)">Cap. Libro</mat-checkbox>
+                <mat-checkbox (change)="productoInvestigacionChange($event, 5)">Manuales</mat-checkbox>
+                <mat-checkbox (change)="productoInvestigacionChange($event, 6)">Procedimientos</mat-checkbox>
+                <mat-checkbox (change)="productoInvestigacionChange($event, 7)">Instructivos</mat-checkbox>
 
         <div>
           <button mat-button matStepperPrevious>Back</button>
