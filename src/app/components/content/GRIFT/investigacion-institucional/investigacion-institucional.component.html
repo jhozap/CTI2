@@ -149,7 +149,9 @@
           <div>
             <mat-form-field>
               <mat-label>Areas</mat-label>
-              <mat-select formControlName="areasForm" multiple>
+              <mat-select formControlName="areasForm" 
+              (selectionChange)="mostrarLineas($event)"
+              multiple>
                 <mat-option *ngFor="let area of areas" [value]="area.ID_AREA">{{
                   area.NOMBRE
                 }}</mat-option>

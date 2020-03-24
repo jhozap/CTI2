@@ -51,6 +51,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   aplica = false;
   areas = [];
   lineas = [];
+  lineasOriginal = [];
   investigadores = [];
   
   detallesVisualizacion = [
@@ -272,8 +273,13 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   getAreasXLinea() {
     this._dataService.getAreasXLinea()
       .subscribe((data: [])=> {
-        this.lineas = data;
+        this.lineasOriginal = data;
       });
+  }
+
+  mostrarLineas(event){
+    this.lineas = this.lineasOriginal.filter(x=> x.ID == event);
+    
   }
 
   view(e) {
