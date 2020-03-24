@@ -43,6 +43,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   fourFormGroup: FormGroup;
+  sixFormGroup: FormGroup;
   isOptional = false;
   direccionesDuena = [];
   escuelas = [];
@@ -62,6 +63,11 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     false,
     false
   ];
+
+  tipoEvento = [];
+  participaciones = [];
+
+  estimulosVisualizacion = [false,false,false,false,false,false,false];
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
@@ -93,8 +99,25 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       manualesForm: [""],
       procedimientosForm: [""],
       instructivosForm: [""],
-      articuloForm: [""],
-      libroForm: [""]
+      nombreRevista: [""],
+      nombreArticulo: [""],
+      anio: [""],
+      codigoISSN: [""],
+      autorArticulo: [""],
+
+      nombreLibro: [""],
+      pagInicio: [""],
+      pagFinal: [""],
+      editorial: [""],
+      fechaPublicacion: [""],
+    });
+
+    this.sixFormGroup  = this._formBuilder.group({
+      tipoForm: [''],
+      participacion: [''],
+      fechaForm: [''],
+      nacionalInternacional: [''],
+      
     });
 
     this.getDirecciones();
@@ -105,6 +128,10 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   productoInvestigacionChange(valor, posicion) {
     console.log(valor.checked);
     this.detallesVisualizacion[posicion] = valor.checked;
+  }
+
+  estimulosChange(valor, posicion){
+    this.estimulosVisualizacion[posicion] = valor.checked;
   }
 
   aplicaChange(valor) {
