@@ -65,6 +65,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     false
   ];
 
+  investigadoresSeleccionados = [];
   tipoEvento = [];
   participaciones = [];
 
@@ -306,7 +307,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialogService.openInvestigador(this.investigadores).subscribe(
+    this.dialogService.openInvestigador(this.investigadores, this.investigadoresSeleccionados).subscribe(
       response => {
           console.log(response);
           

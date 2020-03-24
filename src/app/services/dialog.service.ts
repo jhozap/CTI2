@@ -12,10 +12,10 @@ export class DialogService {
     private dialog: MatDialog
   ) { }
 
-  openInvestigador(investigadores: any): Observable<any>{
+  openInvestigador(investigadores: any, seleccionados:any): Observable<any>{
     
     const dialogRef = this.dialog.open(ModalInvestigador, {
-      data: investigadores,
+      data: {investigadores: investigadores, seleccionados: seleccionados},
       panelClass: ["proveedorEdit-modal"]
     });
     return dialogRef.afterClosed();

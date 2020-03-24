@@ -7,7 +7,7 @@
       <mat-form-field>
         <mat-label>Investigadores</mat-label>
         <mat-select formControlName="investigadorForm">
-          <mat-option (onSelectionChange)="agregarInvestigador($event)" *ngFor="let investigador of data"
+          <mat-option (onSelectionChange)="agregarInvestigador($event)" *ngFor="let investigador of data.investigadores"
             [value]="investigador.ID_INVESTIGADOR">{{ investigador.NOMBRES }} {{ investigador.APELLIDOS }}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -15,7 +15,7 @@
     </div>
     </form>
     <mat-dialog-actions>
-      <button mat-button color="primary" [mat-dialog-close]="investigadoresSeleccionados"
+      <button mat-button color="primary" [mat-dialog-close]="guardar()"
         cdkFocusInitial>Guardar</button>
       <button mat-button (click)="onClose()">close</button>
     </mat-dialog-actions>

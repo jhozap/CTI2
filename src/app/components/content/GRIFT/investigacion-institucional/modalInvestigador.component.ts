@@ -5,6 +5,8 @@ import {
     Validators,
     FormBuilder
 } from "@angular/forms";
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { investigadores } from 'src/app/constants/mockData.class';
 
 @Component({
     selector: "app-modal-investigador",
@@ -17,6 +19,7 @@ export class ModalInvestigador implements OnInit {
     public form: FormGroup;
     new = true;
     investigadoresSeleccionados = [];
+    investigador: any;
 
     constructor(
         public dialogRef: MatDialogRef<ModalInvestigador>,
@@ -28,16 +31,24 @@ export class ModalInvestigador implements OnInit {
         });
     }
     ngOnInit() {
-        console.log(this.data);
+        this.investigadoresSeleccionados = this.data.seleccionados;
+        this.investigadoresSeleccionados.forEach(element => {
+            this.data.investigadores = this.data.investigadores.filter(x=> x.ID_INVESTIGADOR != element.ID_INVESTIGADOR);
+        });
     }
 
     agregarInvestigador(investigador){
-        console.log(investigador);
+        this.investigador = investigador;
     }
 
 
     onClose() {
         this.dialogRef.close();
+    }
+
+    guardar(){
+        this.investigadoresSeleccionados.push(this.investigador);
+        return this.investigadoresSeleccionados;
     }
 
 }
