@@ -36,6 +36,7 @@ const swalWithBootstrapButtons = Swal.mixin({
 })
 export class InvestigacionInstitucionalComponent implements OnInit {
   displayedColumns: string[] = ["position", "escuela", "nombre", "ticket", "Acciones"];
+  displayedColumnsIn: string[] = ["DOCUMENTO", "NOMBRES", "APELLIDOS", "DESC_GRADO", "EMAIL", "ACCIONES"];
 
   public new = false;
   titleForm: string = "Investigación Institucional";
@@ -71,6 +72,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
 
   estimulosVisualizacion = [false,false,false,false,false,false,false];
   dataSource: MatTableDataSource<any>;
+  dataSourceInvestigadores: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
@@ -82,6 +84,10 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.dataSourceInvestigadores = new MatTableDataSource();
+    setTimeout(() => {
+      this.dataSourceInvestigadores.paginator = this.paginator;
+    }, 0);
     this.firstFormGroup = this._formBuilder.group({
       tituloInvestigacionForm: ["", Validators.required],
       direccionDuenaForm: ["", Validators.required],
@@ -313,6 +319,10 @@ export class InvestigacionInstitucionalComponent implements OnInit {
           if(response != null && response != undefined){
             this.investigadoresSeleccionados.push(response);
      
+            this.dataSourceInvestigadores = new MatTableDataSource(this.investigadoresSeleccionados);
+            setTimeout(() => {
+              this.dataSourceInvestigadores.paginator = this.paginator;
+            }, 0);
           }
      
         },
