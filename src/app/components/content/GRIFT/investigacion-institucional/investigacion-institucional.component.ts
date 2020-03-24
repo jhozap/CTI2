@@ -278,7 +278,9 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   }
 
   mostrarLineas(event){
-    this.lineas = this.lineasOriginal.filter(x=> x.ID == event);
+    
+    console.log(event);
+    
     
   }
 
