@@ -149,54 +149,51 @@
           <div>
             <mat-form-field>
               <mat-label>Areas</mat-label>
-              <mat-select formControlName="areasForm" 
-              multiple>
-                <mat-option (onSelectionChange)="mostrarLineas($event)" *ngFor="let area of areas" [value]="area.ID_AREA">{{
-                  area.NOMBRE
-                }}</mat-option>
+              <mat-select formControlName="areasForm" multiple>
+                <mat-option
+                  (onSelectionChange)="mostrarLineas($event)"
+                  *ngFor="let area of areas"
+                  [value]="area.ID_AREA"
+                  >{{ area.NOMBRE }}</mat-option
+                >
               </mat-select>
             </mat-form-field>
 
             <mat-form-field>
               <mat-label>Lineas</mat-label>
               <mat-select formControlName="lineasForm" multiple>
-                <mat-option *ngFor="let linea of lineas" [value]="linea.LINEA">{{
-                  linea.LINEA_NOMBRE
-                }}</mat-option>
+                <mat-option
+                  *ngFor="let linea of lineas"
+                  [value]="linea.LINEA"
+                  >{{ linea.LINEA_NOMBRE }}</mat-option
+                >
               </mat-select>
             </mat-form-field>
           </div>
-
-
-                  
-                </form>
-                <div class="buttons">
-                    <button
-                      mat-raised-button
-                      color="primary"
-                      mat-button matStepperNext
-                    >
-                      Siguiente
-                    </button>
-                  </div>
-            </mat-step>
+        </form>
+        <div class="buttons">
+          <button mat-raised-button color="primary" mat-button matStepperNext>
+            Siguiente
+          </button>
+        </div>
+      </mat-step>
 
       <!--  2  -->
 
       <mat-step [stepControl]="secondFormGroup" optional="true">
         <div class="buttonsBegin">
-            <button
-              mat-raised-button
-              color="primary"
-              mat-button 
-              (click)="openDialog()"
-            >
+          <button
+            mat-raised-button
+            color="primary"
+            mat-button
+            (click)="openDialog()"
+          >
             Agregar Investigador
-            </button>
-    </div>
+          </button>
+        </div>
         <form [formGroup]="secondFormGroup">
           <ng-template matStepLabel>Investigadores</ng-template>
-          
+
           <ng-template>
             <div class="table-container">
               <mat-form-field>
@@ -279,42 +276,53 @@
             </div>
           </ng-template>
           <!-- Fin Table -->
+        </form>
+        <div class="buttons">
+          <button mat-raised-button color="warn" mat-button matStepperPrevious>
+            Atras
+          </button>
+          <button mat-raised-button color="primary" mat-button matStepperNext>
+            Siguiente
+          </button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Producto Investigación</ng-template>
+        <mat-checkbox (change)="productoInvestigacionChange($event, 0)"
+          >Guía</mat-checkbox
+        >
+        <mat-checkbox (change)="productoInvestigacionChange($event, 1)"
+          >Cartilla</mat-checkbox
+        >
+        <mat-checkbox (change)="productoInvestigacionChange($event, 2)"
+          >Prototipo</mat-checkbox
+        >
+        <mat-checkbox (change)="productoInvestigacionChange($event, 3)"
+          >Artículo</mat-checkbox
+        >
+        <mat-checkbox (change)="productoInvestigacionChange($event, 4)"
+          >Libro</mat-checkbox
+        >
+        <mat-checkbox (change)="productoInvestigacionChange($event, 4)"
+          >Cap. Libro</mat-checkbox
+        >
+        <mat-checkbox (change)="productoInvestigacionChange($event, 5)"
+          >Manuales</mat-checkbox
+        >
+        <mat-checkbox (change)="productoInvestigacionChange($event, 6)"
+          >Procedimientos</mat-checkbox
+        >
+        <mat-checkbox (change)="productoInvestigacionChange($event, 7)"
+          >Instructivos</mat-checkbox
+        >
 
-                   
-                </form>
-                <div class="buttons">
-                    <button
-                      mat-raised-button
-                      color="warn"
-                      mat-button matStepperPrevious
-                    >
-                      Atras
-                    </button>
-                    <button
-                      mat-raised-button
-                      color="primary"
-                      mat-button matStepperNext
-                    >
-                      Siguiente
-                    </button>
-                  </div>
-               
-            </mat-step>
-            <mat-step>
-                <ng-template matStepLabel>Producto Investigación</ng-template>
-                <mat-checkbox (change)="productoInvestigacionChange($event, 0)">Guía</mat-checkbox>
-                <mat-checkbox (change)="productoInvestigacionChange($event, 1)">Cartilla</mat-checkbox>
-                <mat-checkbox (change)="productoInvestigacionChange($event, 2)">Prototipo</mat-checkbox>
-                <mat-checkbox (change)="productoInvestigacionChange($event, 3)">Artículo</mat-checkbox>
-                <mat-checkbox (change)="productoInvestigacionChange($event, 4)">Libro</mat-checkbox>
-                <mat-checkbox (change)="productoInvestigacionChange($event, 4)">Cap. Libro</mat-checkbox>
-                <mat-checkbox (change)="productoInvestigacionChange($event, 5)">Manuales</mat-checkbox>
-                <mat-checkbox (change)="productoInvestigacionChange($event, 6)">Procedimientos</mat-checkbox>
-                <mat-checkbox (change)="productoInvestigacionChange($event, 7)">Instructivos</mat-checkbox>
-
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+        <div class="buttons">
+          <button mat-raised-button color="warn" mat-button matStepperPrevious>
+            Atras
+          </button>
+          <button mat-raised-button color="primary" mat-button matStepperNext>
+            Siguiente
+          </button>
         </div>
       </mat-step>
 
@@ -460,9 +468,13 @@
           </div>
         </form>
 
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button (click)="stepper.reset()">Reset</button>
+        <div class="buttons">
+          <button mat-raised-button color="warn" mat-button matStepperPrevious>
+            Atras
+          </button>
+          <button mat-raised-button color="primary" mat-button matStepperNext>
+            Siguiente
+          </button>
         </div>
       </mat-step>
 
@@ -492,9 +504,13 @@
           >Capacitaciones</mat-checkbox
         >
 
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button (click)="stepper.reset()">Reset</button>
+        <div class="buttons">
+          <button mat-raised-button color="warn" mat-button matStepperPrevious>
+            Atras
+          </button>
+          <button mat-raised-button color="primary" mat-button matStepperNext>
+            Siguiente
+          </button>
         </div>
       </mat-step>
 
@@ -536,17 +552,30 @@
           </div>
         </form>
 
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button (click)="stepper.reset()">Reset</button>
+        <div class="buttons">
+          <button mat-raised-button color="warn" mat-button matStepperPrevious>
+            Atras
+          </button>
+          <button mat-raised-button color="primary" mat-button matStepperNext>
+            Siguiente
+          </button>
         </div>
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>Done</ng-template>
         <p>You are now done.</p>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button (click)="stepper.reset()">Reset</button>
+        <div class="buttons">
+          <button mat-raised-button color="warn" mat-button matStepperPrevious>
+            Atras
+          </button>
+          <button
+            mat-raised-button
+            color="primary"
+            mat-button
+            (click)="stepper.reset()"
+          >
+            Ir al inicio
+          </button>
         </div>
       </mat-step>
     </mat-horizontal-stepper>
