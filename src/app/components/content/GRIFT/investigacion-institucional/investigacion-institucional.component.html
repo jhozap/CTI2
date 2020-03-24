@@ -134,10 +134,18 @@
                         </mat-form-field>
                     </div>
 
-                    <div>
-                        <button mat-button matStepperNext>Next</button>
-                    </div>
+
+                  
                 </form>
+                <div class="buttons">
+                    <button
+                      mat-raised-button
+                      color="primary"
+                      mat-button matStepperNext
+                    >
+                      Siguiente
+                    </button>
+                  </div>
             </mat-step>
 
             <!--  2  -->
@@ -224,11 +232,25 @@
                     </ng-template>
                     <!-- Fin Table -->
 
-                    <div>
-                        <button mat-button matStepperPrevious>Back</button>
-                        <button mat-button matStepperNext>Next</button>
-                    </div>
+                   
                 </form>
+                <div class="buttons">
+                    <button
+                      mat-raised-button
+                      color="primary"
+                      mat-button matStepperPrevious
+                    >
+                      Atras
+                    </button>
+                    <button
+                      mat-raised-button
+                      color="primary"
+                      mat-button matStepperNext
+                    >
+                      Siguiente
+                    </button>
+                  </div>
+               
             </mat-step>
             <mat-step>
                 <ng-template matStepLabel>Producto Investigación</ng-template>

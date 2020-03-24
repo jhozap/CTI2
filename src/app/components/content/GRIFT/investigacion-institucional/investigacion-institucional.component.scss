@@ -53,3 +53,11 @@ form {
     width: 100%;
   }
 }
+
+.buttons {
+  justify-content: end;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: auto auto;
+}
+
