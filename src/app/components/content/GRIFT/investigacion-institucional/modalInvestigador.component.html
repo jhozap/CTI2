@@ -8,7 +8,7 @@
         <mat-label>Investigadores</mat-label>
         <mat-select formControlName="investigadorForm">
           <mat-option (onSelectionChange)="agregarInvestigador($event)" *ngFor="let investigador of data"
-            [value]="investigador.ID">{{ investigador.NOMBRES }} {{ investigador.APELLIDOS }}</mat-option>
+            [value]="investigador.ID_INVESTIGADOR">{{ investigador.NOMBRES }} {{ investigador.APELLIDOS }}</mat-option>
         </mat-select>
       </mat-form-field>
 

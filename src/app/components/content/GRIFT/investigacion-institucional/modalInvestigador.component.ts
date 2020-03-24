@@ -24,7 +24,7 @@ export class ModalInvestigador implements OnInit {
         private formBuilder: FormBuilder,
     ) {
         this.form = this.formBuilder.group({
-            investigadorForm: [, [Validators.required]]
+            investigadorForm: []
         });
     }
     ngOnInit() {
