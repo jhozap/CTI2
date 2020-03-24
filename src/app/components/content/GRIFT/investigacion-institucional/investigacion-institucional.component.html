@@ -291,7 +291,7 @@
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>Producto Investigación</ng-template>
-        <div class="productos">
+        <div class="checks">
           <mat-checkbox (change)="productoInvestigacionChange($event, 0)"
             >Guía</mat-checkbox
           >
@@ -510,28 +510,29 @@
       <!-- 5 -->
       <mat-step>
         <ng-template matStepLabel>Estímulos</ng-template>
-
-        <mat-checkbox (change)="estimulosChange($event, 0)"
-          >Condecoraciones</mat-checkbox
-        >
-        <mat-checkbox (change)="estimulosChange($event, 1)"
-          >Felicitaciones</mat-checkbox
-        >
-        <mat-checkbox (change)="estimulosChange($event, 2)"
-          >Personaje del Mes</mat-checkbox
-        >
-        <mat-checkbox (change)="estimulosChange($event, 3)"
-          >Permiso</mat-checkbox
-        >
-        <mat-checkbox (change)="estimulosChange($event, 4)"
-          >Estatuillas</mat-checkbox
-        >
-        <mat-checkbox (change)="estimulosChange($event, 5)"
-          >Monedas</mat-checkbox
-        >
-        <mat-checkbox (change)="estimulosChange($event, 6)"
-          >Capacitaciones</mat-checkbox
-        >
+        <div class="checks">
+          <mat-checkbox (change)="estimulosChange($event, 0)"
+            >Condecoraciones</mat-checkbox
+          >
+          <mat-checkbox (change)="estimulosChange($event, 1)"
+            >Felicitaciones</mat-checkbox
+          >
+          <mat-checkbox (change)="estimulosChange($event, 2)"
+            >Personaje del Mes</mat-checkbox
+          >
+          <mat-checkbox (change)="estimulosChange($event, 3)"
+            >Permiso</mat-checkbox
+          >
+          <mat-checkbox (change)="estimulosChange($event, 4)"
+            >Estatuillas</mat-checkbox
+          >
+          <mat-checkbox (change)="estimulosChange($event, 5)"
+            >Monedas</mat-checkbox
+          >
+          <mat-checkbox (change)="estimulosChange($event, 6)"
+            >Capacitaciones</mat-checkbox
+          >
+        </div>
 
         <div class="buttons">
           <button mat-raised-button color="warn" mat-button matStepperPrevious>
