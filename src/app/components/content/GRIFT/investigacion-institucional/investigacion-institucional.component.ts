@@ -279,9 +279,8 @@ export class InvestigacionInstitucionalComponent implements OnInit {
 
   mostrarLineas(event){
     
-    console.log(event._selected);
-    console.log(event.value);
-    
+    console.log(event.source.value, event.source.selected);
+   
     
   }
 
