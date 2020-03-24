@@ -55,6 +55,8 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   lineas = [];
   lineasOriginal = [];
   investigadores = [];
+  capacitacionSeleccionada : any;
+  capacitaciones = ["Becas","Diplomado","Seminario","Curso"];
   
   detallesVisualizacion = [
     false,
@@ -284,6 +286,11 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       .subscribe((data: [])=> {
         this.lineasOriginal = data;
       });
+  }
+
+  seleccionarCapacitacion(event){
+    console.log(event.source.value);
+   
   }
 
   mostrarLineas(event){
