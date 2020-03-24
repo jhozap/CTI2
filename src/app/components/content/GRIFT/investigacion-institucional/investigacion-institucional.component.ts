@@ -281,6 +281,17 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     
     console.log(event.source.value, event.source.selected);
    
+    if(event.source.selected === false){
+      this.lineas = this.lineas.filter(x=> x.AREA != event.source.value);
+    } else {
+      let linea = this.lineasOriginal.filter(x=>x.AREA == event.source.value);
+      linea.forEach(element => {
+        this.lineas.push(element);  
+      });
+      
+      console.log(this.lineas);
+      
+    }
     
   }
 
