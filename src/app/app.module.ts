@@ -34,11 +34,13 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { ReactiveFormsModule } from "@angular/forms";
+import { ModalInvestigador } from './components/content/GRIFT/investigacion-institucional/modalInvestigador.component';
 //#endregion Material
 
 @NgModule({
   declarations: [
-    AppComponent    
+    AppComponent,
+    ModalInvestigador    
   ],
   imports: [
     BrowserModule,
@@ -76,6 +78,7 @@ import { ReactiveFormsModule } from "@angular/forms";
     ReactiveFormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ModalInvestigador]
 })
 export class AppModule {}

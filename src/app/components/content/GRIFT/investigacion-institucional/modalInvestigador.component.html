@@ -1,0 +1,23 @@
+<div class="content">
+  <h1 mat-dialog-title>Agregar Investigador</h1>
+  <ng-container *ngIf="new; then formI;"></ng-container>
+  <ng-template #formI>
+    <form [formGroup]="form">
+    <div mat-dialog-content>
+      <mat-form-field>
+        <mat-label>Investigadores</mat-label>
+        <mat-select formControlName="investigadorForm" multiple>
+          <mat-option (onSelectionChange)="agregarInvestigador($event)" *ngFor="let investigador of data.investigadores"
+            [value]="investigador.ID">{{ investigador.NOMBRE }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+    </form>
+    <mat-dialog-actions>
+      <button mat-button color="primary" [mat-dialog-close]="investigadoresSeleccionados"
+        cdkFocusInitial>Guardar</button>
+      <button mat-button (click)="onClose()">close</button>
+    </mat-dialog-actions>
+  </ng-template>
+</div>

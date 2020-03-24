@@ -14,7 +14,7 @@ import {
   MAT_DIALOG_DATA,
   MatDialog
 } from "@angular/material/dialog";
-import { Investigador } from "src/app/models/interfaces.class";
+import { DialogService } from 'src/app/services/dialog.service';
 
 export interface DialogData {
   animal: string;
@@ -76,7 +76,8 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private _dataService: DataService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private dialogService: DialogService,
   ) {}
 
   ngOnInit() {
@@ -305,21 +306,12 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(DialogDataExampleDialog, {
-      data: {
-        investigadores: this.investigadores
-      }
-    });
-  }
-}
-
-@Component({
-  selector: "dialog-data-example-dialog",
-  templateUrl: "dialog-data-example-dialog.html"
-})
-export class DialogDataExampleDialog {
-  investigadores = [];
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
-    this.investigadores = data.investigadores;
+    this.dialogService.openInvestigador(this.investigadores).subscribe(
+      response => {
+          console.log(response);
+          
+      },
+      error => {}
+    );
   }
 }
