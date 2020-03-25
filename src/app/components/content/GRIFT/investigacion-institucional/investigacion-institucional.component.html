@@ -592,8 +592,8 @@
                 <mat-option
                   (onSelectionChange)="seleccionarPais($event)"
                   *ngFor="let pais of paises"
-                  [value]="pais.ID_PAIS"
-                  >{{ pais.NOMBRE }}</mat-option
+                  [value]="pais.codigo"
+                  >{{ pais.nombre }}</mat-option
                 >
               </mat-select>
             </mat-form-field>

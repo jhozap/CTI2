@@ -16,6 +16,7 @@ import {
 } from "@angular/material/dialog";
 import { DialogService } from 'src/app/services/dialog.service';
 import { investigadores } from 'src/app/constants/mockData.class';
+import { paises } from 'src/app/models/paises';
 
 export interface DialogData {
   animal: string;
@@ -57,7 +58,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   investigadores = [];
   capacitacionSeleccionada : any;
   capacitaciones = ["Becas","Diplomado","Seminario","Curso"];
-  paises = [];
+  paises = paises;
   ciudades = [];
   ciudadFiltro = [];
   
