@@ -526,18 +526,19 @@
           <mat-checkbox (change)="estimulosChange($event, 6)"
             >Capacitaciones</mat-checkbox
           >
+          <mat-form-field *ngIf="estimulosVisualizacion[6]">
+            <mat-label>Capacitaciones</mat-label>
+            <mat-select formControlName="areasForm">
+              <mat-option 
+                (onSelectionChange)="seleccionarCapacitacion($event)"
+                *ngFor="let capacitacion of capacitaciones"
+                [value]="capacitacion"
+                >{{ capacitacion }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
         </div>
-        <mat-form-field *ngIf="estimulosVisualizacion[6]">
-          <mat-label>Capacitaciones</mat-label>
-          <mat-select formControlName="areasForm">
-            <mat-option
-              (onSelectionChange)="seleccionarCapacitacion($event)"
-              *ngFor="let capacitacion of capacitaciones"
-              [value]="capacitacion"
-              >{{ capacitacion }}</mat-option
-            >
-          </mat-select>
-        </mat-form-field>
+        
         </form>
         <div class="buttons">
           <button mat-raised-button color="warn" mat-button matStepperPrevious>
