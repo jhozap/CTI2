@@ -599,6 +599,17 @@
                   >{{ pais.nombre }}</mat-option
                 >
               </mat-select>
+
+            </mat-form-field>
+
+            <mat-form-field *ngIf="nacional">
+              <mat-label>Ciudad</mat-label>
+              <input
+                matInput
+                placeholder=""
+                formControlName="ciudadInternacionalForm"
+                required
+              />
             </mat-form-field>
 
             <mat-form-field *ngIf="!nacional">

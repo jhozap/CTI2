@@ -150,7 +150,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       ciudadForm: [''],
       paisForm: [''],
       departamentoForm:[''],
-
+      ciudadInternacionalForm: ['']
       
     });
 
