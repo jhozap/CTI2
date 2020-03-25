@@ -194,85 +194,86 @@
             Agregar Investigador
           </button>
         </div>
-         
-            <div class="table-container">
-              <mat-form-field>
-                <mat-label>Filtro</mat-label>
-                <input
-                  matInput
-                  (keyup)="applyFilter($event)"
-                  placeholder="Investigador"
-                />
-              </mat-form-field>
 
-              <div class="mat-elevation-z8">
-                <table mat-table [dataSource]="dataSourceInvestigadores">
-                  <!-- Documento Column -->
-                  <ng-container matColumnDef="DOCUMENTO">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                      Documento
-                    </th>
-                    <td mat-cell *matCellDef="let row">{{ row.DOCUMENTO }}</td>
-                  </ng-container>
+        <div class="table-container">
+          <mat-form-field>
+            <mat-label>Filtro</mat-label>
+            <input
+              matInput
+              (keyup)="applyFilter($event)"
+              placeholder="Investigador"
+            />
+          </mat-form-field>
 
-                  <!-- Nombre Column -->
-                  <ng-container matColumnDef="NOMBRES">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                      Nombre
-                    </th>
-                    <td mat-cell *matCellDef="let row">{{ row.NOMBRES }}</td>
-                  </ng-container>
+          <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSourceInvestigadores">
+              <!-- Documento Column -->
+              <ng-container matColumnDef="DOCUMENTO">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  Documento
+                </th>
+                <td mat-cell *matCellDef="let row">{{ row.DOCUMENTO }}</td>
+              </ng-container>
 
-                  <!-- Apellido Column -->
-                  <ng-container matColumnDef="APELLIDOS">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                      Apellido
-                    </th>
-                    <td mat-cell *matCellDef="let row">{{ row.APELLIDOS }}</td>
-                  </ng-container>
+              <!-- Nombre Column -->
+              <ng-container matColumnDef="NOMBRES">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  Nombre
+                </th>
+                <td mat-cell *matCellDef="let row">{{ row.NOMBRES }}</td>
+              </ng-container>
 
-                  <!-- Grado Column -->
-                  <ng-container matColumnDef="DESC_GRADO">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                      Grado
-                    </th>
-                    <td mat-cell *matCellDef="let row">{{ row.DESC_GRADO }}</td>
-                  </ng-container>
+              <!-- Apellido Column -->
+              <ng-container matColumnDef="APELLIDOS">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  Apellido
+                </th>
+                <td mat-cell *matCellDef="let row">{{ row.APELLIDOS }}</td>
+              </ng-container>
 
-                  <!-- Email Column -->
-                  <ng-container matColumnDef="EMAIL">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                      EMAIL
-                    </th>
-                    <td mat-cell *matCellDef="let row">{{ row.EMAIL }}</td>
-                  </ng-container>
+              <!-- Grado Column -->
+              <ng-container matColumnDef="DESC_GRADO">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  Grado
+                </th>
+                <td mat-cell *matCellDef="let row">{{ row.DESC_GRADO }}</td>
+              </ng-container>
 
-                  <!-- Acciones Column -->
-                  <ng-container matColumnDef="ACCIONES">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                      Acciones
-                    </th>
-                    <td mat-cell *matCellDef="let row">
-                     
-                      <button mat-icon-button color="warn" (click)="eliminarInvestigador(row)">
-                        <mat-icon>delete</mat-icon>
-                      </button>
-                    </td>
-                  </ng-container>
+              <!-- Email Column -->
+              <ng-container matColumnDef="EMAIL">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  EMAIL
+                </th>
+                <td mat-cell *matCellDef="let row">{{ row.EMAIL }}</td>
+              </ng-container>
 
-                  <tr mat-header-row *matHeaderRowDef="displayedColumnsIn"></tr>
-                  <tr
-                    mat-row
-                    *matRowDef="let row; columns: displayedColumnsIn"
-                  ></tr>
-                </table>
+              <!-- Acciones Column -->
+              <ng-container matColumnDef="ACCIONES">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  Acciones
+                </th>
+                <td mat-cell *matCellDef="let row">
+                  <button
+                    mat-icon-button
+                    color="warn"
+                    (click)="eliminarInvestigador(row)"
+                  >
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
 
-                <mat-paginator
-                  [pageSizeOptions]="[5, 10, 25, 100]"
-                ></mat-paginator>
-              </div>
-            </div>
-          <!-- Fin Table -->
+              <tr mat-header-row *matHeaderRowDef="displayedColumnsIn"></tr>
+              <tr
+                mat-row
+                *matRowDef="let row; columns: displayedColumnsIn"
+              ></tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+          </div>
+        </div>
+        <!-- Fin Table -->
         <div class="buttons">
           <button mat-raised-button color="warn" mat-button matStepperPrevious>
             Atras
@@ -503,41 +504,41 @@
       <!-- 5 -->
       <mat-step>
         <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Estímulos</ng-template>
-        <div class="checks">
-          <mat-checkbox (change)="estimulosChange($event, 0)"
-            >Condecoraciones</mat-checkbox
-          >
-          <mat-checkbox (change)="estimulosChange($event, 1)"
-            >Felicitaciones</mat-checkbox
-          >
-          <mat-checkbox (change)="estimulosChange($event, 2)"
-            >Personaje del Mes</mat-checkbox
-          >
-          <mat-checkbox (change)="estimulosChange($event, 3)"
-            >Permiso</mat-checkbox
-          >
-          <mat-checkbox (change)="estimulosChange($event, 4)"
-            >Estatuillas</mat-checkbox
-          >
-          <mat-checkbox (change)="estimulosChange($event, 5)"
-            >Monedas</mat-checkbox
-          >
-          <mat-checkbox (change)="estimulosChange($event, 6)"
-            >Capacitaciones</mat-checkbox
-          >
-        </div>
-        <mat-form-field *ngIf="estimulosVisualizacion[6]">
-          <mat-label>Capacitaciones</mat-label>
-          <mat-select formControlName="areasForm">
-            <mat-option
-              (onSelectionChange)="seleccionarCapacitacion($event)"
-              *ngFor="let capacitacion of capacitaciones"
-              [value]="capacitacion"
-              >{{ capacitacion }}</mat-option
+          <ng-template matStepLabel>Estímulos</ng-template>
+          <div class="checks">
+            <mat-checkbox (change)="estimulosChange($event, 0)"
+              >Condecoraciones</mat-checkbox
             >
-          </mat-select>
-        </mat-form-field>
+            <mat-checkbox (change)="estimulosChange($event, 1)"
+              >Felicitaciones</mat-checkbox
+            >
+            <mat-checkbox (change)="estimulosChange($event, 2)"
+              >Personaje del Mes</mat-checkbox
+            >
+            <mat-checkbox (change)="estimulosChange($event, 3)"
+              >Permiso</mat-checkbox
+            >
+            <mat-checkbox (change)="estimulosChange($event, 4)"
+              >Estatuillas</mat-checkbox
+            >
+            <mat-checkbox (change)="estimulosChange($event, 5)"
+              >Monedas</mat-checkbox
+            >
+            <mat-checkbox (change)="estimulosChange($event, 6)"
+              >Capacitaciones</mat-checkbox
+            >
+            <mat-form-field *ngIf="estimulosVisualizacion[6]">
+              <mat-label>Capacitaciones</mat-label>
+              <mat-select formControlName="areasForm">
+                <mat-option
+                  (onSelectionChange)="seleccionarCapacitacion($event)"
+                  *ngFor="let capacitacion of capacitaciones"
+                  [value]="capacitacion"
+                  >{{ capacitacion }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
         </form>
         <div class="buttons">
           <button mat-raised-button color="warn" mat-button matStepperPrevious>
@@ -620,17 +621,26 @@
           </button>
         </div>
       </mat-step>
+
+      <!-- 7-->
       <mat-step>
         <ng-template matStepLabel>Presupuesto Asignado</ng-template>
 
         <form [formGroup]="sixFormGroup">
-          <div class="group">
-            </div>
-            </form>
+          <div class="group"></div>
+        </form>
+        <div class="buttons">
+          <button mat-raised-button color="warn" mat-button matStepperPrevious>
+            Atras
+          </button>
+          <button mat-raised-button color="primary" mat-button matStepperNext>
+            Siguiente
+          </button>
+        </div>
       </mat-step>
       <mat-step>
-        <ng-template matStepLabel>Done</ng-template>
-        <p>You are now done.</p>
+        <ng-template matStepLabel>Confirmar</ng-template>
+        <p>¿Esta seguro que desea guardar la Investigación?</p>
         <div class="buttons">
           <button mat-raised-button color="warn" mat-button matStepperPrevious>
             Atras

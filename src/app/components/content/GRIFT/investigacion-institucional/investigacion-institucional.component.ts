@@ -73,8 +73,19 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   ];
 
   investigadoresSeleccionados = [];
-  tipoEvento = [];
-  participaciones = [];
+  tipoEvento = [  
+    { ID: "1", DESCRIPCION: "Seminario" },
+    { ID: "2", DESCRIPCION: "Simposio" },
+    { ID: "3", DESCRIPCION: "Foro" },
+    { ID: "4", DESCRIPCION: "Panel" },
+    { ID: "4", DESCRIPCION: "Conversatorio" },
+    { ID: "4", DESCRIPCION: "Encuentro" }
+  ];
+  participaciones = [
+    { ID: "1", DESCRIPCION: "Asistente" },
+    { ID: "2", DESCRIPCION: "Ponente" },
+    { ID: "3", DESCRIPCION: "Organizador" }
+  ];
 
   estimulosVisualizacion = [false,false,false,false,false,false,false];
   dataSource: MatTableDataSource<any>;
