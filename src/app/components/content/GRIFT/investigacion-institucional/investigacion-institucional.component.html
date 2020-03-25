@@ -652,8 +652,65 @@
       <mat-step>
         <ng-template matStepLabel>Presupuesto Asignado</ng-template>
 
-        <form [formGroup]="sixFormGroup">
-          <div class="group"></div>
+        <form [formGroup]="sevenFormGroup">
+          <div class="group">
+            <!-- Categorización Colciencias -->
+            <div class="sub-group">
+              <div>
+                <mat-label>Externo</mat-label>
+                <div class="checks">
+                  <mat-checkbox (change)="productoInvestigacionChange($event, 0)"
+                    >Convocatoria Colciencias</mat-checkbox
+                  >
+                  <mat-checkbox (change)="productoInvestigacionChange($event, 1)"
+                    >Ministerios</mat-checkbox
+                  >
+                  <mat-checkbox (change)="productoInvestigacionChange($event, 2)"
+                    >Entes Internacionales</mat-checkbox
+                  >
+                  <mat-checkbox (change)="productoInvestigacionChange($event, 3)"
+                    >Otras Instituciones</mat-checkbox
+                  >
+                
+                </div>
+              </div>
+            </div>
+            <div class="sub-group">
+              <div>
+                <mat-label>Interno</mat-label>
+                <div class="checks">
+                  <mat-checkbox (change)="productoInvestigacionChange($event, 0)"
+                    >Rubro Presupuestal (OFPLA)</mat-checkbox
+                  >
+                  <mat-checkbox (change)="productoInvestigacionChange($event, 1)"
+                    >Convocatoria Interna (DINAE)</mat-checkbox
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="sub-group">
+              <div>
+                <mat-label>Presupuesto Gestionado</mat-label>
+                <div class="checks">
+                  <mat-checkbox (change)="productoInvestigacionChange($event, 0)"
+                    >Convenios Externos</mat-checkbox
+                  >
+                  
+                </div>
+              </div>
+            </div>
+            <div class="sub-group">
+              <div>
+                <mat-label>Especie</mat-label>
+                <div class="checks">
+                  <mat-checkbox (change)="productoInvestigacionChange($event, 0)"
+                    >Presupuesto Personal (Investigadores)</mat-checkbox
+                  >
+                  
+                </div>
+              </div>
+            </div>
+          </div>
         </form>
         <div class="buttons">
           <button mat-raised-button color="warn" mat-button matStepperPrevious>

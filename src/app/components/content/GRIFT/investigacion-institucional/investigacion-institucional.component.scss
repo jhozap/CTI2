@@ -96,3 +96,21 @@ table {
     }
   }
 }
+
+.sub-group {
+    display: grid;
+    grid-template-columns: 1fr min-content 1fr;
+    grid-gap: 1rem;
+    justify-content: center;
+    &__radio-group {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+    & div {
+      display: grid;
+      grid-gap: 10px;
+      grid-template-columns: 1fr;
+    }
+  
+}
+

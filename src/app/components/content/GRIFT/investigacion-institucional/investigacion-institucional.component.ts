@@ -48,6 +48,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   secondFormGroup: FormGroup;
   fourFormGroup: FormGroup;
   sixFormGroup: FormGroup;
+  sevenFormGroup: FormGroup;
   isOptional = false;
   direccionesDuena = [];
   escuelas = [];
@@ -153,6 +154,12 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       ciudadInternacionalForm: ['']
       
     });
+
+    this.sevenFormGroup = this._formBuilder.group({
+     
+      
+    });
+
 
     this.getDirecciones();
     this.getEscuelas();
