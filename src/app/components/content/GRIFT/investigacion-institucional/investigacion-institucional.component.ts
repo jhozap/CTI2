@@ -17,6 +17,7 @@ import {
 import { DialogService } from 'src/app/services/dialog.service';
 import { investigadores } from 'src/app/constants/mockData.class';
 import { paises } from 'src/app/models/paises';
+import { colombia } from 'src/app/models/colombia';
 
 export interface DialogData {
   animal: string;
@@ -59,8 +60,11 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   capacitacionSeleccionada : any;
   capacitaciones = ["Becas","Diplomado","Seminario","Curso"];
   paises = paises;
+  ciudadesDpto = colombia;
+  departamentos = colombia;
   ciudades = [];
   ciudadFiltro = [];
+  nacional = false;
   
   detallesVisualizacion = [
     false,
@@ -145,6 +149,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       fechaForm: [''],
       ciudadForm: [''],
       paisForm: [''],
+      departamentoForm:[''],
 
       
     });
@@ -368,8 +373,28 @@ export class InvestigacionInstitucionalComponent implements OnInit {
    
   }
 
+  seleccionarDepartamento(event){
+    console.log(event.source.value);
+    this.ciudades = [];
+    this.ciudades = this.departamentos.find(x=>x.id === event.source.value).ciudades;
+    console.log(this.ciudades);
+    
+  }
+
   seleccionarCiudad(event){
     console.log(event.source.value);
    
+  }
+
+  cambiarLugar(event){
+    this.nacional = event.checked;
+  }
+
+  internacional(){
+    if(this.nacional){
+      return 'Internacional'
+    } else {
+      return 'Nacional'
+    }
   }
 }

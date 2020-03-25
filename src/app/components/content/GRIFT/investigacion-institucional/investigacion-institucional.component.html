@@ -586,7 +586,10 @@
               <mat-datepicker #picker2></mat-datepicker>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-slide-toggle  [checked]="nacional"
+            (change)="cambiarLugar($event)">Lugar: {{internacional()}}</mat-slide-toggle>
+            
+            <mat-form-field *ngIf="nacional">
               <mat-label>País</mat-label>
               <mat-select formControlName="paisForm">
                 <mat-option
@@ -598,14 +601,26 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field *ngIf="!nacional">
+              <mat-label>Departamento</mat-label>
+              <mat-select formControlName="departamentoForm"  (selectionChange)="seleccionarDepartamento($event)">
+                <mat-option
+                 
+                  *ngFor="let departamento of departamentos"
+                  [value]="departamento.id"
+                  >{{ departamento.departamento }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field *ngIf="!nacional">
               <mat-label>Ciudad</mat-label>
               <mat-select formControlName="ciudadForm">
                 <mat-option
                   (onSelectionChange)="seleccionarCiudad($event)"
                   *ngFor="let ciudad of ciudades"
-                  [value]="ciudad.ID_CIUDAD"
-                  >{{ ciudad.NOMBRE }}</mat-option
+                  [value]="ciudad"
+                  >{{ ciudad }}</mat-option
                 >
               </mat-select>
             </mat-form-field>
