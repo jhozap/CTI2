@@ -584,6 +584,30 @@
               ></mat-datepicker-toggle>
               <mat-datepicker #picker2></mat-datepicker>
             </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>País</mat-label>
+              <mat-select formControlName="paisForm">
+                <mat-option
+                  (onSelectionChange)="seleccionarPais($event)"
+                  *ngFor="let pais of paises"
+                  [value]="pais.ID_PAIS"
+                  >{{ pais.NOMBRE }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Ciudad</mat-label>
+              <mat-select formControlName="ciudadForm">
+                <mat-option
+                  (onSelectionChange)="seleccionarCiudad($event)"
+                  *ngFor="let ciudad of ciudades"
+                  [value]="ciudad.ID_CIUDAD"
+                  >{{ ciudad.NOMBRE }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
           </div>
         </form>
 
@@ -595,6 +619,14 @@
             Siguiente
           </button>
         </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Presupuesto Asignado</ng-template>
+
+        <form [formGroup]="sixFormGroup">
+          <div class="group">
+            </div>
+            </form>
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>Done</ng-template>

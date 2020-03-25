@@ -57,6 +57,9 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   investigadores = [];
   capacitacionSeleccionada : any;
   capacitaciones = ["Becas","Diplomado","Seminario","Curso"];
+  paises = [];
+  ciudades = [];
+  ciudadFiltro = [];
   
   detallesVisualizacion = [
     false,
@@ -128,7 +131,9 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       tipoForm: [''],
       participacion: [''],
       fechaForm: [''],
-      nacionalInternacional: [''],
+      ciudadForm: [''],
+      paisForm: [''],
+
       
     });
 
@@ -344,5 +349,15 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     setTimeout(() => {
       this.dataSourceInvestigadores.paginator = this.paginator;
     }, 0);
+  }
+
+  seleccionarPais(event){
+    console.log(event.source.value);
+   
+  }
+
+  seleccionarCiudad(event){
+    console.log(event.source.value);
+   
   }
 }
