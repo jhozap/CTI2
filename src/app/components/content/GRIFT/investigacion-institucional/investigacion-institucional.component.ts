@@ -133,6 +133,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       cartillaForm: [""],
       prototipoForm: [""],
       manualesForm: [""],
+      dateForm2: [""],
       procedimientosForm: [""],
       instructivosForm: [""],
       nombreRevista: [""],
@@ -140,7 +141,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       anio: [""],
       codigoISSN: [""],
       autorArticulo: [""],
-
+      dateForm3: [""],
       nombreLibro: [""],
       pagInicio: [""],
       pagFinal: [""],
@@ -194,6 +195,72 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   productoInvestigacionChange(valor, posicion) {
     console.log(valor.checked);
     this.detallesVisualizacion[posicion] = valor.checked;
+
+    if(posicion==0 && valor.checked){
+      this.fourFormGroup.controls["autorForm"].setValidators([Validators.required]);
+    }
+    if(posicion==0 && !valor.checked){
+      this.fourFormGroup.controls["autorForm"].setValidators([]);
+    }
+    if(posicion==1 && valor.checked){
+      this.fourFormGroup.controls["cartillaForm"].setValidators([Validators.required]);
+    }
+    if(posicion==1 && !valor.checked){
+      this.fourFormGroup.controls["cartillaForm"].setValidators([]);
+    }
+    if(posicion==2 && valor.checked){
+      this.fourFormGroup.controls["prototipoForm"].setValidators([Validators.required]);
+    }
+    if(posicion==2 && !valor.checked){
+      this.fourFormGroup.controls["prototipoForm"].setValidators([]);
+    }
+    if(posicion==3 && valor.checked){
+      this.fourFormGroup.controls["nombreRevista"].setValidators([Validators.required]);
+      this.fourFormGroup.controls["nombreArticulo"].setValidators([Validators.required]);
+      this.fourFormGroup.controls["dateForm2"].setValidators([Validators.required]);
+      this.fourFormGroup.controls["codigoISSN"].setValidators([Validators.required]);
+      this.fourFormGroup.controls["autorArticulo"].setValidators([Validators.required]);
+    }
+    if(posicion==3 && !valor.checked){
+      this.fourFormGroup.controls["nombreRevista"].setValidators([]);
+      this.fourFormGroup.controls["nombreArticulo"].setValidators([]);
+      this.fourFormGroup.controls["dateForm2"].setValidators([]);
+      this.fourFormGroup.controls["codigoISSN"].setValidators([]);
+      this.fourFormGroup.controls["autorArticulo"].setValidators([]);
+    }
+    if(posicion==4 && valor.checked){
+      this.fourFormGroup.controls["nombreLibro"].setValidators([Validators.required]);
+      this.fourFormGroup.controls["pagInicio"].setValidators([Validators.required]);
+      this.fourFormGroup.controls["pagFinal"].setValidators([Validators.required]);
+      this.fourFormGroup.controls["editorial"].setValidators([Validators.required]);
+      this.fourFormGroup.controls["dateForm3"].setValidators([Validators.required]);
+    }
+    if(posicion==4 && !valor.checked){
+      this.fourFormGroup.controls["nombreLibro"].setValidators([]);
+      this.fourFormGroup.controls["pagInicio"].setValidators([]);
+      this.fourFormGroup.controls["pagFinal"].setValidators([]);
+      this.fourFormGroup.controls["editorial"].setValidators([]);
+      this.fourFormGroup.controls["dateForm3"].setValidators([]);
+    }
+    if(posicion==5 && valor.checked){
+      this.fourFormGroup.controls["manualesForm"].setValidators([Validators.required]);
+    }
+    if(posicion==5 && !valor.checked){
+      this.fourFormGroup.controls["manualesForm"].setValidators([]);
+    }
+    if(posicion==6 && valor.checked){
+      this.fourFormGroup.controls["procedimientosForm"].setValidators([Validators.required]);
+    }
+    if(posicion==6 && !valor.checked){
+      this.fourFormGroup.controls["procedimientosForm"].setValidators([]);
+    }
+    if(posicion==7 && valor.checked){
+      this.fourFormGroup.controls["instructivosForm"].setValidators([Validators.required]);
+    }
+    if(posicion==7 && !valor.checked){
+      this.fourFormGroup.controls["instructivosForm"].setValidators([]);
+    }
+    
   }
 
   estimulosChange(valor, posicion){
@@ -507,4 +574,13 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       return false;
     }
   }
+
+  validarPaso3(){
+    if(this.detallesVisualizacion.filter(x=>x == true).length>0){
+      return true;
+    }else{
+      return false;
+    }
+  }
+  
 }

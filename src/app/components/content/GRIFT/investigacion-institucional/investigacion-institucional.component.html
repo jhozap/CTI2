@@ -73,7 +73,7 @@
   <!-- Form Investigacion -->
   <ng-template #form>
     <mat-horizontal-stepper linear #stepper>
-      <mat-step [stepControl]="firstFormGroup" optional="true">
+      <mat-step [stepControl]="firstFormGroup" optional="false">
         <div class="first">
           <form [formGroup]="firstFormGroup">
             <div>
@@ -321,14 +321,14 @@
           <button mat-raised-button color="warn" mat-button matStepperPrevious>
             Atras
           </button>
-          <button mat-raised-button color="primary" mat-button matStepperNext>
+          <button mat-raised-button color="primary" disabled="validarPaso3()" mat-button matStepperNext>
             Siguiente
           </button>
         </div>
       </mat-step>
 
       <!-- Detalles  -->
-      <mat-step [stepControl]="fourFormGroup" optional="true">
+      <mat-step [stepControl]="fourFormGroup" optional="false">
         <ng-template matStepLabel>Detalles</ng-template>
 
         <form [formGroup]="fourFormGroup">
@@ -340,6 +340,7 @@
                   [nombreCampo]="'autorForm'"
                   [placeHolder]="'Autor'"
                   [form]="fourFormGroup"
+                  
                 >
                 </app-number>
               </div>
@@ -424,6 +425,7 @@
                     matInput
                     [matDatepicker]="picker"
                     placeholder="Año"
+                    formControlName="dateForm2"
                   />
                   <mat-datepicker-toggle
                     matSuffix
@@ -481,6 +483,7 @@
                     matInput
                     [matDatepicker]="picker"
                     placeholder="Fecha de Publicación"
+                    formControlName="dateForm3"
                   />
                   <mat-datepicker-toggle
                     matSuffix
