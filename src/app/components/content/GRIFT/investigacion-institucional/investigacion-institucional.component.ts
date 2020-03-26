@@ -78,7 +78,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     false,
     false
   ];
-
+  ciudadSeleccionada: any;
   paso7= [true,true,true,true,true,true,true,true];
   capacitacionSeleccionadaCombo = false;
   valorCapacitacion = "";
@@ -152,9 +152,9 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     });
 
     this.sixFormGroup  = this._formBuilder.group({
-      tipoForm: [''],
-      participacion: [''],
-      fechaForm: [''],
+      tipoForm: ['', Validators.required],
+      participacion: ['', Validators.required],
+      fechaForm: ['', Validators.required],
       ciudadForm: [''],
       paisForm: [''],
       departamentoForm:[''],
@@ -501,11 +501,23 @@ export class InvestigacionInstitucionalComponent implements OnInit {
 
   seleccionarCiudad(event){
     console.log(event.source.value);
-   
+    this.ciudadSeleccionada = event.source.value;
   }
 
   cambiarLugar(event){
     this.nacional = event.checked;
+    if(this.nacional){
+      
+      this.sixFormGroup.controls["departamentoForm"].setValidators([]);
+      this.sixFormGroup.controls["ciudadForm"].setValidators([]);
+      this.sixFormGroup.controls["paisForm"].setValidators([Validators.required]);
+      this.sixFormGroup.controls["ciudadInternacionalForm"].setValidators([Validators.required]);
+    }else{
+      this.sixFormGroup.controls["ciudadInternacionalForm"].setValidators([]);
+      this.sixFormGroup.controls["paisForm"].setValidators([]);
+      this.sixFormGroup.controls["departamentoForm"].setValidators([Validators.required]);
+      this.sixFormGroup.controls["ciudadForm"].setValidators([Validators.required]);
+    }
   }
 
   internacional(){
