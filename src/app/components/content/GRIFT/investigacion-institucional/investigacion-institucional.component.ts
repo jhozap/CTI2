@@ -121,7 +121,8 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       aplicasForm: ["", Validators.required],
       aplicaForm: ["", Validators.required],
       areasForm: ["", Validators.required],
-      lineasForm: ["", Validators.required]
+      lineasForm: ["", Validators.required],
+      dateForm: ["", Validators.required],
     });
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ""

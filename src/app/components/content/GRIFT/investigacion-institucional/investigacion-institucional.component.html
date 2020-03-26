@@ -73,7 +73,7 @@
   <!-- Form Investigacion -->
   <ng-template #form>
     <mat-horizontal-stepper linear #stepper>
-      <mat-step [stepControl]="firstFormGroup" optional="true">
+      <mat-step [stepControl]="firstFormGroup" optional="false">
         <div class="first">
           <form [formGroup]="firstFormGroup">
             <div>
@@ -116,6 +116,8 @@
                   matInput
                   [matDatepicker]="picker"
                   placeholder="Año"
+                  required
+                  formControlName="dateForm"
                 />
                 <mat-datepicker-toggle
                   matSuffix
