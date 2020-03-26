@@ -903,7 +903,9 @@
           <button mat-raised-button color="warn" mat-button matStepperPrevious>
             Atras
           </button>
-          <button mat-raised-button color="primary" mat-button matStepperNext>
+          <button mat-raised-button color="primary" 
+          [disabled] = " verTotal ? 'disabled': null"
+          mat-button matStepperNext>
             Siguiente
           </button>
         </div>

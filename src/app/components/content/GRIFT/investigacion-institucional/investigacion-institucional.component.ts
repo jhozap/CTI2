@@ -79,6 +79,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     false
   ];
   ciudadSeleccionada: any;
+  verTotal = false;
   paso7= [true,true,true,true,true,true,true,true];
   capacitacionSeleccionadaCombo = false;
   valorCapacitacion = "";
@@ -575,6 +576,11 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     Number(this.sevenFormGroup.get('total1').value)+
     Number(this.sevenFormGroup.get('total2').value));
     
+    if(Number(this.sevenFormGroup.get('total').value)>0){
+      this.verTotal = true;
+    }else{
+      this.verTotal = false;
+    }
   }
 
   desahibilitarTodo(){
@@ -621,4 +627,5 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     }
   }
   
+ 
 }
