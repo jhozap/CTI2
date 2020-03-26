@@ -512,6 +512,9 @@ export class InvestigacionInstitucionalComponent implements OnInit {
 
   cambiarLugar(event){
     this.nacional = event.checked;
+    console.log(event.checked);
+
+    
     if(this.nacional){
       
       this.sixFormGroup.controls["departamentoForm"].setValidators([]);
