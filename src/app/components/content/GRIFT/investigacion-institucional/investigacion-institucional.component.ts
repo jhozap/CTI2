@@ -516,11 +516,15 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       
       this.sixFormGroup.controls["departamentoForm"].setValidators([]);
       this.sixFormGroup.controls["ciudadForm"].setValidators([]);
+      this.sixFormGroup.get("departamentoForm").setValue('');
+      this.sixFormGroup.get("ciudadForm").setValue('');
       this.sixFormGroup.controls["paisForm"].setValidators([Validators.required]);
       this.sixFormGroup.controls["ciudadInternacionalForm"].setValidators([Validators.required]);
     }else{
       this.sixFormGroup.controls["ciudadInternacionalForm"].setValidators([]);
       this.sixFormGroup.controls["paisForm"].setValidators([]);
+      this.sixFormGroup.get("ciudadInternacionalForm").setValue('');
+      this.sixFormGroup.get("paisForm").setValue('');
       this.sixFormGroup.controls["departamentoForm"].setValidators([Validators.required]);
       this.sixFormGroup.controls["ciudadForm"].setValidators([Validators.required]);
     }
