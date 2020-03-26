@@ -80,7 +80,8 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   ];
 
   paso7= [true,true,true,true,true,true,true,true];
-
+  capacitacionSeleccionadaCombo = false;
+  valorCapacitacion = "";
   investigadoresSeleccionados = [];
   tipoEvento = [  
     { ID: "1", DESCRIPCION: "Seminario" },
@@ -268,6 +269,14 @@ export class InvestigacionInstitucionalComponent implements OnInit {
 
   estimulosChange(valor, posicion){
     this.estimulosVisualizacion[posicion] = valor.checked;
+    if(this.estimulosVisualizacion.filter(x=>x == true).length>0){
+      this.capacitacionSeleccionadaCombo = true;
+    } else{
+      this.capacitacionSeleccionadaCombo = false;
+    }
+    if(posicion==6){
+      this.capacitacionSeleccionadaCombo = false;
+    }
   }
 
   aplicaChange(valor) {
@@ -414,6 +423,13 @@ export class InvestigacionInstitucionalComponent implements OnInit {
 
   seleccionarCapacitacion(event){
     console.log(event.source.value);
+    this.valorCapacitacion = event.source.value;
+    if(this.estimulosVisualizacion.filter(x=>x == true).length>0){
+      this.capacitacionSeleccionadaCombo = true;
+    } else{
+      this.capacitacionSeleccionadaCombo = false;
+    }
+   
    
   }
 
