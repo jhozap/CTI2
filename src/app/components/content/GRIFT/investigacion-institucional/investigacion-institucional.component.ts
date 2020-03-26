@@ -119,7 +119,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       direccionDuenaForm: ["", Validators.required],
       escuelasForm: ["", Validators.required],
       aplicasForm: ["", Validators.required],
-      aplicaForm: ["", Validators.required],
+      aplicaForm: ["", ],
       areasForm: ["", Validators.required],
       lineasForm: ["", Validators.required],
       dateForm: ["", Validators.required],
@@ -270,8 +270,10 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   aplicaChange(valor) {
     if (valor.value === "Si") {
       this.aplica = true;
+      this.firstFormGroup.controls["aplicaForm"].setValidators([Validators.required]);
     } else {
       this.aplica = false;
+      this.firstFormGroup.controls["aplicaForm"].setValidators([]);
     }
   }
 
