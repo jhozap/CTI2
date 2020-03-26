@@ -66,7 +66,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   ciudades = [];
   ciudadFiltro = [];
   nacional = false;
-  paso3valido = false; 
+  paso3valido = true; 
   
   detallesVisualizacion = [
     false,
