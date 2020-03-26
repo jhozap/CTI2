@@ -559,7 +559,7 @@
       </mat-step>
 
       <!-- 6-->
-      <mat-step>
+      <mat-step [stepControl]="sixFormGroup" optional="false">
         <ng-template matStepLabel>Eventos</ng-template>
 
         <form [formGroup]="sixFormGroup">
