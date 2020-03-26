@@ -78,6 +78,8 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     false
   ];
 
+  paso7= [true,true,true,true,true,true,true,true];
+
   investigadoresSeleccionados = [];
   tipoEvento = [  
     { ID: "1", DESCRIPCION: "Seminario" },
@@ -107,6 +109,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+
     this.dataSourceInvestigadores = new MatTableDataSource();
     setTimeout(() => {
       this.dataSourceInvestigadores.paginator = this.paginator;
@@ -156,11 +159,30 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     });
 
     this.sevenFormGroup = this._formBuilder.group({
-     
-      
+      desc1: [''],
+      apor1: [''],
+      desc2: [''],
+      apor2: [''],
+      desc3: [''],
+      apor3: [''],
+      desc4: [''],
+      apor4: [''],
+      total1: [''],
+      desc5: [''],
+      apor5: [''],
+      desc6: [''],
+      apor6: [''],
+      total2: [''],
+      desc7: [''],
+      apor7: [''],
+      total3: [''],
+      desc8: [''],
+      apor8: [''],
+      total4: [''],
+      total: [''],
     });
 
-
+    this.desahibilitarTodo();
     this.getDirecciones();
     this.getEscuelas();
     this.getInvestigadores();
@@ -403,5 +425,77 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     } else {
       return 'Nacional'
     }
+  }
+
+  paso7Checked(event, posicion){
+    if(event.source.checked){
+      this.sevenFormGroup.get('desc'+posicion).enable();
+      this.sevenFormGroup.get('apor'+posicion).enable();
+    }
+    else {
+      this.sevenFormGroup.get('desc'+posicion).disable();
+      this.sevenFormGroup.get('apor'+posicion).disable();
+    }
+    
+  }
+
+  sumarTotal1(cantidad){
+   
+    this.sevenFormGroup.get('total1').setValue(Number(this.sevenFormGroup.get('apor1').value)+
+    Number(this.sevenFormGroup.get('apor2').value)+
+    Number(this.sevenFormGroup.get('apor3').value)+
+    Number(this.sevenFormGroup.get('apor4').value));
+    this.sumarTotal();
+  }
+
+  sumarTotal2(cantidad){
+   
+    this.sevenFormGroup.get('total2').setValue(Number(this.sevenFormGroup.get('apor5').value)+
+    Number(this.sevenFormGroup.get('apor6').value));
+    this.sumarTotal();
+  }
+
+  sumar(){
+   
+    this.sumarTotal();
+  }
+
+  
+  sumarTotal(){
+   
+    this.sevenFormGroup.get('total').setValue(
+    Number(this.sevenFormGroup.get('apor7').value)+
+    Number(this.sevenFormGroup.get('apor8').value)+
+    Number(this.sevenFormGroup.get('total1').value)+
+    Number(this.sevenFormGroup.get('total2').value));
+    
+  }
+
+  desahibilitarTodo(){
+    for (let i = 1; i < 9; i++) {
+      this.sevenFormGroup.get('desc'+i).disable();
+      this.sevenFormGroup.get('apor'+i).disable();
+      
+    }
+    this.sevenFormGroup.get('total1').disable();
+    this.sevenFormGroup.get('total2').disable();
+    this.sevenFormGroup.get('total3').disable();
+    this.sevenFormGroup.get('total4').disable();
+    this.sevenFormGroup.get('total1').setValue(0);
+    this.sevenFormGroup.get('total2').setValue(0);
+    this.sevenFormGroup.get('total3').setValue(0);
+    this.sevenFormGroup.get('total4').setValue(0);
+    this.sevenFormGroup.get('total').disable();
+    this.sevenFormGroup.get('total').setValue(0);
+    this.sevenFormGroup.get('apor1').setValue(0);
+    this.sevenFormGroup.get('apor2').setValue(0);
+    this.sevenFormGroup.get('apor3').setValue(0);
+    this.sevenFormGroup.get('apor4').setValue(0);
+    this.sevenFormGroup.get('apor5').setValue(0);
+    this.sevenFormGroup.get('apor6').setValue(0);
+    this.sevenFormGroup.get('apor7').setValue(0);
+    this.sevenFormGroup.get('apor8').setValue(0);
+      
+    
   }
 }

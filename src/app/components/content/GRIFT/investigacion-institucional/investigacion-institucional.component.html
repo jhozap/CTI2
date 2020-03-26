@@ -653,62 +653,240 @@
         <ng-template matStepLabel>Presupuesto Asignado</ng-template>
 
         <form [formGroup]="sevenFormGroup">
-          <div class="group">
+          <div class="group2">
+            <mat-label>Externo</mat-label>
             <!-- Categorización Colciencias -->
-            <div class="sub-group">
-              <div>
-                <mat-label>Externo</mat-label>
-                <div class="checks">
-                  <mat-checkbox (change)="productoInvestigacionChange($event, 0)"
+            <div class="sub-group2">
+             
+                  <mat-checkbox (change)="paso7Checked($event, 1)"
                     >Convocatoria Colciencias</mat-checkbox
                   >
-                  <mat-checkbox (change)="productoInvestigacionChange($event, 1)"
+                  <mat-form-field>
+                    <mat-label>Descripción</mat-label>
+                    <input
+                      matInput
+                      placeholder=""
+                      formControlName="desc1"
+                      
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>$Aporte</mat-label>
+                    <input
+                      matInput
+                      placeholder=""
+                      formControlName="apor1"
+                      (input)="sumarTotal1($event.target.value)"
+                    />
+                  </mat-form-field>
+      
+                  <mat-checkbox (change)="paso7Checked($event, 2)"
                     >Ministerios</mat-checkbox
                   >
-                  <mat-checkbox (change)="productoInvestigacionChange($event, 2)"
+                  <mat-form-field>
+                    <mat-label>Descripción</mat-label>
+                    <input
+                      matInput
+                      placeholder=""
+                      formControlName="desc2"
+                     
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>$Aporte</mat-label>
+                    <input
+                      matInput
+                      placeholder=""
+                      formControlName="apor2"
+                      (input)="sumarTotal1($event.target.value)"
+                    />
+                  </mat-form-field>
+                  <mat-checkbox (change)="paso7Checked($event, 3)"
                     >Entes Internacionales</mat-checkbox
                   >
-                  <mat-checkbox (change)="productoInvestigacionChange($event, 3)"
+                  <mat-form-field>
+                    <mat-label>Descripción</mat-label>
+                    <input
+                      matInput
+                      placeholder=""
+                      formControlName="desc3"
+                      
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>$Aporte</mat-label>
+                    <input
+                      matInput
+                      placeholder=""
+                      formControlName="apor3"
+                      (input)="sumarTotal1($event.target.value)"
+                    />
+                  </mat-form-field>
+                  <mat-checkbox (change)="paso7Checked($event, 4)"
                     >Otras Instituciones</mat-checkbox
                   >
+                  <mat-form-field>
+                    <mat-label>Descripción</mat-label>
+                    <input
+                      matInput
+                      placeholder=""
+                      formControlName="desc4"
+                      
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>$Aporte</mat-label>
+                    <input
+                      matInput
+                      placeholder=""
+                      formControlName="apor4"
+                      (input)="sumarTotal1($event.target.value)" 
+                    />
+                  </mat-form-field>
                 
-                </div>
-              </div>
+
+                  <div></div>
+                  <div></div>
+                
+                  <mat-form-field>
+                    <mat-label>TOTAL</mat-label>
+                    <input
+                      matInput
+                      placeholder=""
+                      formControlName="total1"
+                      
+                    />
+                  </mat-form-field>
+                
+              
             </div>
-            <div class="sub-group">
-              <div>
-                <mat-label>Interno</mat-label>
-                <div class="checks">
-                  <mat-checkbox (change)="productoInvestigacionChange($event, 0)"
+            <mat-label>Interno</mat-label>
+            <div class="sub-group2">
+              
+              <mat-checkbox (change)="paso7Checked($event, 5)"
                     >Rubro Presupuestal (OFPLA)</mat-checkbox
                   >
-                  <mat-checkbox (change)="productoInvestigacionChange($event, 1)"
+                  <div></div>
+
+                  <mat-form-field>
+                    <mat-label>$Aporte</mat-label>
+                    <input
+                      matInput
+                      placeholder=""
+                      formControlName="apor5"
+                      (input)="sumarTotal2($event.target.value)"
+                    />
+                  </mat-form-field>
+                
+
+                  <mat-checkbox (change)="paso7Checked($event, 6)"
                     >Convocatoria Interna (DINAE)</mat-checkbox
                   >
-                </div>
-              </div>
+                  <div></div>
+  
+                  <mat-form-field>
+                    <mat-label>$Aporte</mat-label>
+                    <input
+                      matInput
+                      placeholder=""
+                      formControlName="apor6"
+                      (input)="sumarTotal2($event.target.value)"
+                    />
+                  </mat-form-field>
+                 
+                
+                
+                <div></div>
+                <div></div>
+              
+                <mat-form-field>
+                  <mat-label>TOTAL</mat-label>
+                  <input
+                    matInput
+                    placeholder=""
+                    formControlName="total2"
+                    
+                  />
+                </mat-form-field>
+              
             </div>
-            <div class="sub-group">
-              <div>
-                <mat-label>Presupuesto Gestionado</mat-label>
-                <div class="checks">
-                  <mat-checkbox (change)="productoInvestigacionChange($event, 0)"
+            
+            <mat-label>Presupuesto Gestionado</mat-label>
+            <div class="sub-group2">
+              
+               
+              <mat-checkbox (change)="paso7Checked($event, 7)"
                     >Convenios Externos</mat-checkbox
                   >
                   
-                </div>
-              </div>
+                  <mat-form-field>
+                    <mat-label>Descripción</mat-label>
+                    <input
+                      matInput
+                      placeholder=""
+                      formControlName="desc7"
+                      
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>$Aporte</mat-label>
+                    <input
+                      matInput
+                      placeholder=""
+                      formControlName="apor7"
+                      (input)="sumar()"
+                    />
+                  </mat-form-field>
+                
+              
             </div>
-            <div class="sub-group">
-              <div>
-                <mat-label>Especie</mat-label>
-                <div class="checks">
-                  <mat-checkbox (change)="productoInvestigacionChange($event, 0)"
+            <mat-label>Especie</mat-label>
+            <div class="sub-group2">
+               
+                  
+              <mat-checkbox (change)="paso7Checked($event, 8)"
                     >Presupuesto Personal (Investigadores)</mat-checkbox
                   >
                   
-                </div>
-              </div>
+                  <mat-form-field>
+                    <mat-label>Descripción</mat-label>
+                    <input
+                      matInput
+                      placeholder=""
+                      formControlName="desc8"
+                      
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>$Aporte</mat-label>
+                    <input
+                      matInput
+                      placeholder=""
+                      formControlName="apor8"
+                      (input)="sumar()"
+                    />
+                  </mat-form-field>
+                
+                
+              
+            </div>
+            <div class="sub-group2">
+            <div></div>
+            <div></div>
+            <mat-form-field>
+              <mat-label><span>TOTAL</span></mat-label>
+              <input
+                matInput
+                placeholder=""
+                formControlName="total"
+              />
+            </mat-form-field>
             </div>
           </div>
         </form>
