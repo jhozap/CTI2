@@ -73,7 +73,7 @@
   <!-- Form Investigacion -->
   <ng-template #form>
     <mat-horizontal-stepper linear #stepper>
-      <mat-step [stepControl]="firstFormGroup" optional="false">
+      <mat-step [stepControl]="firstFormGroup" optional="true">
         <div class="first">
           <form [formGroup]="firstFormGroup">
             <div>
@@ -185,7 +185,7 @@
 
       <!--  2  -->
 
-      <mat-step [stepControl]="secondFormGroup" optional="true">
+      <mat-step [stepControl]="secondFormGroup">
         <div class="buttonsBegin">
           <button
             mat-raised-button
@@ -280,7 +280,7 @@
           <button mat-raised-button color="warn" mat-button matStepperPrevious>
             Atras
           </button>
-          <button mat-raised-button color="primary" mat-button matStepperNext>
+          <button mat-raised-button color="primary" disabled="validarInvestigadores()" mat-button matStepperNext>
             Siguiente
           </button>
         </div>

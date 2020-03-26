@@ -499,4 +499,12 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       
     
   }
+
+  validarInvestigadores(){
+    if(this.investigadoresSeleccionados.length>0){
+      return true;
+    }else{
+      return false;
+    }
+  }
 }
