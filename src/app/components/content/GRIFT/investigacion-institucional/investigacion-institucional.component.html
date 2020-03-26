@@ -321,7 +321,8 @@
           <button mat-raised-button color="warn" mat-button matStepperPrevious>
             Atras
           </button>
-          <button mat-raised-button color="primary" disabled="validarPaso3()" mat-button matStepperNext>
+          <button mat-raised-button color="primary" 
+          [disabled]="paso3valido ? 'disabled': null" mat-button matStepperNext>
             Siguiente
           </button>
         </div>

@@ -66,6 +66,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   ciudades = [];
   ciudadFiltro = [];
   nacional = false;
+  paso3valido = false; 
   
   detallesVisualizacion = [
     false,
@@ -260,6 +261,8 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     if(posicion==7 && !valor.checked){
       this.fourFormGroup.controls["instructivosForm"].setValidators([]);
     }
+
+    this.validarCheck();
     
   }
 
@@ -569,11 +572,11 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     
   }
 
-  validarInvestigadores(){
+  validarCheck(){
     if(this.investigadoresSeleccionados.length>0){
-      return false;
+      this.paso3valido = false;
     }else{
-      return true;
+      this.paso3valido = true;
     }
   }
 
