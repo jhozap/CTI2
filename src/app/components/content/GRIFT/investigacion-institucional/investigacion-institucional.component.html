@@ -144,7 +144,7 @@
                   matInput
                   placeholder=""
                   formControlName="aplicaForm"
-                  
+
                 />
               </mat-form-field>
             </div>
@@ -321,7 +321,7 @@
           <button mat-raised-button color="warn" mat-button matStepperPrevious>
             Atras
           </button>
-          <button mat-raised-button color="primary" 
+          <button mat-raised-button color="primary"
           [disabled]="paso3valido ? 'disabled': null" mat-button matStepperNext>
             Siguiente
           </button>
@@ -341,7 +341,7 @@
                   [nombreCampo]="'autorForm'"
                   [placeHolder]="'Autor'"
                   [form]="fourFormGroup"
-                  
+
                 >
                 </app-number>
               </div>
@@ -509,7 +509,7 @@
 
       <!-- 5 -->
       <mat-step>
-        <form [formGroup]="firstFormGroup">
+        <form [formGroup]="fifthFormGroup">
           <ng-template matStepLabel>Estímulos</ng-template>
           <div class="checks">
             <mat-checkbox (change)="estimulosChange($event, 0)"
@@ -535,7 +535,7 @@
             >
             <mat-form-field *ngIf="estimulosVisualizacion[6]">
               <mat-label>Capacitaciones</mat-label>
-              <mat-select formControlName="areasForm">
+              <mat-select formControlName="idCapacitacion">
                 <mat-option
                   (onSelectionChange)="seleccionarCapacitacion($event)"
                   *ngFor="let capacitacion of capacitaciones"
@@ -550,7 +550,7 @@
           <button mat-raised-button color="warn" mat-button matStepperPrevious>
             Atras
           </button>
-          <button mat-raised-button color="primary" 
+          <button mat-raised-button color="primary"
           [disabled]= "!capacitacionSeleccionadaCombo ? 'disabled': null"
           mat-button matStepperNext>
             Siguiente
@@ -597,7 +597,7 @@
 
             <mat-slide-toggle  [checked]="nacional"
             (change)="cambiarLugar($event)">Lugar: {{internacional()}}</mat-slide-toggle>
-            
+
             <mat-form-field *ngIf="nacional">
               <mat-label>País</mat-label>
               <mat-select formControlName="paisForm">
@@ -617,7 +617,7 @@
                 matInput
                 placeholder=""
                 formControlName="ciudadInternacionalForm"
-                
+
               />
             </mat-form-field>
 
@@ -625,7 +625,7 @@
               <mat-label>Departamento</mat-label>
               <mat-select formControlName="departamentoForm"  (selectionChange)="seleccionarDepartamento($event)">
                 <mat-option
-                 
+
                   *ngFor="let departamento of departamentos"
                   [value]="departamento.id"
                   >{{ departamento.departamento }}</mat-option
@@ -666,7 +666,7 @@
             <mat-label>Externo</mat-label>
             <!-- Categorización Colciencias -->
             <div class="sub-group2">
-             
+
                   <mat-checkbox (change)="paso7Checked($event, 1)"
                     >Convocatoria Colciencias</mat-checkbox
                   >
@@ -676,7 +676,7 @@
                       matInput
                       placeholder=""
                       formControlName="desc1"
-                      
+
                     />
                   </mat-form-field>
 
@@ -689,7 +689,7 @@
                       (input)="sumarTotal1($event.target.value)"
                     />
                   </mat-form-field>
-      
+
                   <mat-checkbox (change)="paso7Checked($event, 2)"
                     >Ministerios</mat-checkbox
                   >
@@ -699,7 +699,7 @@
                       matInput
                       placeholder=""
                       formControlName="desc2"
-                     
+
                     />
                   </mat-form-field>
 
@@ -721,7 +721,7 @@
                       matInput
                       placeholder=""
                       formControlName="desc3"
-                      
+
                     />
                   </mat-form-field>
 
@@ -743,7 +743,7 @@
                       matInput
                       placeholder=""
                       formControlName="desc4"
-                      
+
                     />
                   </mat-form-field>
 
@@ -753,29 +753,29 @@
                       matInput
                       placeholder=""
                       formControlName="apor4"
-                      (input)="sumarTotal1($event.target.value)" 
+                      (input)="sumarTotal1($event.target.value)"
                     />
                   </mat-form-field>
-                
+
 
                   <div></div>
                   <div></div>
-                
+
                   <mat-form-field>
                     <mat-label>TOTAL</mat-label>
                     <input
                       matInput
                       placeholder=""
                       formControlName="total1"
-                      
+
                     />
                   </mat-form-field>
-                
-              
+
+
             </div>
             <mat-label>Interno</mat-label>
             <div class="sub-group2">
-              
+
               <mat-checkbox (change)="paso7Checked($event, 5)"
                     >Rubro Presupuestal (OFPLA)</mat-checkbox
                   >
@@ -790,13 +790,13 @@
                       (input)="sumarTotal2($event.target.value)"
                     />
                   </mat-form-field>
-                
+
 
                   <mat-checkbox (change)="paso7Checked($event, 6)"
                     >Convocatoria Interna (DINAE)</mat-checkbox
                   >
                   <div></div>
-  
+
                   <mat-form-field>
                     <mat-label>$Aporte</mat-label>
                     <input
@@ -806,39 +806,39 @@
                       (input)="sumarTotal2($event.target.value)"
                     />
                   </mat-form-field>
-                 
-                
-                
+
+
+
                 <div></div>
                 <div></div>
-              
+
                 <mat-form-field>
                   <mat-label>TOTAL</mat-label>
                   <input
                     matInput
                     placeholder=""
                     formControlName="total2"
-                    
+
                   />
                 </mat-form-field>
-              
+
             </div>
-            
+
             <mat-label>Presupuesto Gestionado</mat-label>
             <div class="sub-group2">
-              
-               
+
+
               <mat-checkbox (change)="paso7Checked($event, 7)"
                     >Convenios Externos</mat-checkbox
                   >
-                  
+
                   <mat-form-field>
                     <mat-label>Descripción</mat-label>
                     <input
                       matInput
                       placeholder=""
                       formControlName="desc7"
-                      
+
                     />
                   </mat-form-field>
 
@@ -851,24 +851,24 @@
                       (input)="sumar()"
                     />
                   </mat-form-field>
-                
-              
+
+
             </div>
             <mat-label>Especie</mat-label>
             <div class="sub-group2">
-               
-                  
+
+
               <mat-checkbox (change)="paso7Checked($event, 8)"
                     >Presupuesto Personal (Investigadores)</mat-checkbox
                   >
-                  
+
                   <mat-form-field>
                     <mat-label>Descripción</mat-label>
                     <input
                       matInput
                       placeholder=""
                       formControlName="desc8"
-                      
+
                     />
                   </mat-form-field>
 
@@ -881,9 +881,9 @@
                       (input)="sumar()"
                     />
                   </mat-form-field>
-                
-                
-              
+
+
+
             </div>
             <div class="sub-group2">
             <div></div>
@@ -903,7 +903,7 @@
           <button mat-raised-button color="warn" mat-button matStepperPrevious>
             Atras
           </button>
-          <button mat-raised-button color="primary" 
+          <button mat-raised-button color="primary"
           [disabled] = " !verTotal ? 'disabled': null"
           mat-button matStepperNext>
             Siguiente

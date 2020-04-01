@@ -18,6 +18,8 @@ import { DialogService } from 'src/app/services/dialog.service';
 import { investigadores } from 'src/app/constants/mockData.class';
 import { paises } from 'src/app/models/paises';
 import { colombia } from 'src/app/models/colombia';
+import { InvestigacionInstitucional, InformacionBase, AreaLinea, Guia, Articulo, Autor, Libro, Estimulos, Eventos, Presupuesto } from 'src/app/models/investigacion.model';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 export interface DialogData {
   animal: string;
@@ -47,6 +49,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   fourFormGroup: FormGroup;
+  fifthFormGroup: FormGroup;
   sixFormGroup: FormGroup;
   sevenFormGroup: FormGroup;
   isOptional = false;
@@ -66,8 +69,8 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   ciudades = [];
   ciudadFiltro = [];
   nacional = false;
-  paso3valido = true; 
-  
+  paso3valido = true;
+
   detallesVisualizacion = [
     false,
     false,
@@ -84,7 +87,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   capacitacionSeleccionadaCombo = false;
   valorCapacitacion = "";
   investigadoresSeleccionados = [];
-  tipoEvento = [  
+  tipoEvento = [
     { ID: "1", DESCRIPCION: "Seminario" },
     { ID: "2", DESCRIPCION: "Simposio" },
     { ID: "3", DESCRIPCION: "Foro" },
@@ -101,6 +104,8 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   estimulosVisualizacion = [false,false,false,false,false,false,false];
   dataSource: MatTableDataSource<any>;
   dataSourceInvestigadores: MatTableDataSource<any>;
+
+  investigacion: InvestigacionInstitucional;
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
@@ -152,6 +157,10 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       fechaPublicacion: [""],
     });
 
+    this.fifthFormGroup = this._formBuilder.group({
+      idCapacitacion: [''],
+    });
+
     this.sixFormGroup  = this._formBuilder.group({
       tipoForm: ['', Validators.required],
       participacion: ['', Validators.required],
@@ -160,7 +169,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       paisForm: [''],
       departamentoForm:[''],
       ciudadInternacionalForm: ['']
-      
+
     });
 
     this.sixFormGroup.controls["ciudadInternacionalForm"].setValidators([]);
@@ -270,7 +279,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     }
 
     this.validarCheck();
-    
+
   }
 
   estimulosChange(valor, posicion){
@@ -435,26 +444,26 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     } else{
       this.capacitacionSeleccionadaCombo = false;
     }
-   
-   
+
+
   }
 
   mostrarLineas(event){
-    
+
     console.log(event.source.value, event.source.selected);
-   
+
     if(event.source.selected === false){
       this.lineas = this.lineas.filter(x=> x.AREA != event.source.value);
     } else {
       let linea = this.lineasOriginal.filter(x=>x.AREA == event.source.value);
       linea.forEach(element => {
-        this.lineas.push(element);  
+        this.lineas.push(element);
       });
-      
+
       console.log(this.lineas);
-      
+
     }
-    
+
   }
 
   view(e) {
@@ -472,13 +481,13 @@ export class InvestigacionInstitucionalComponent implements OnInit {
           console.log(response);
           if(response != null && response != undefined){
             this.investigadoresSeleccionados.push(response);
-     
+
             this.dataSourceInvestigadores = new MatTableDataSource(this.investigadoresSeleccionados);
             setTimeout(() => {
               this.dataSourceInvestigadores.paginator = this.paginator;
             }, 0);
           }
-     
+
         },
       error => {}
     );
@@ -494,7 +503,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
 
   seleccionarPais(event){
     console.log(event.source.value);
-   
+
   }
 
   seleccionarDepartamento(event){
@@ -502,7 +511,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     this.ciudades = [];
     this.ciudades = this.departamentos.find(x=>x.id === event.source.value).ciudades;
     console.log(this.ciudades);
-    
+
   }
 
   seleccionarCiudad(event){
@@ -514,9 +523,9 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     this.nacional = event.checked;
     console.log(event.checked);
 
-    
+
     if(this.nacional){
-      
+
       this.sixFormGroup.controls["departamentoForm"].setValidators([]);
       this.sixFormGroup.controls["ciudadForm"].setValidators([]);
       this.sixFormGroup.get("departamentoForm").setValue('');
@@ -550,11 +559,11 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       this.sevenFormGroup.get('desc'+posicion).disable();
       this.sevenFormGroup.get('apor'+posicion).disable();
     }
-    
+
   }
 
   sumarTotal1(cantidad){
-   
+
     this.sevenFormGroup.get('total1').setValue(Number(this.sevenFormGroup.get('apor1').value)+
     Number(this.sevenFormGroup.get('apor2').value)+
     Number(this.sevenFormGroup.get('apor3').value)+
@@ -563,26 +572,26 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   }
 
   sumarTotal2(cantidad){
-   
+
     this.sevenFormGroup.get('total2').setValue(Number(this.sevenFormGroup.get('apor5').value)+
     Number(this.sevenFormGroup.get('apor6').value));
     this.sumarTotal();
   }
 
   sumar(){
-   
+
     this.sumarTotal();
   }
 
-  
+
   sumarTotal(){
-   
+
     this.sevenFormGroup.get('total').setValue(
     Number(this.sevenFormGroup.get('apor7').value)+
     Number(this.sevenFormGroup.get('apor8').value)+
     Number(this.sevenFormGroup.get('total1').value)+
     Number(this.sevenFormGroup.get('total2').value));
-    
+
     if(Number(this.sevenFormGroup.get('total').value)>0){
       this.verTotal = true;
     }else{
@@ -594,7 +603,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     for (let i = 1; i < 9; i++) {
       this.sevenFormGroup.get('desc'+i).disable();
       this.sevenFormGroup.get('apor'+i).disable();
-      
+
     }
     this.sevenFormGroup.get('total1').disable();
     this.sevenFormGroup.get('total2').disable();
@@ -614,8 +623,8 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     this.sevenFormGroup.get('apor6').setValue(0);
     this.sevenFormGroup.get('apor7').setValue(0);
     this.sevenFormGroup.get('apor8').setValue(0);
-      
-    
+
+
   }
 
   validarCheck(){
@@ -633,6 +642,130 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       return false;
     }
   }
-  
- 
+
+
+  construirDTO(){
+
+    this.investigacion = new InvestigacionInstitucional();
+
+    let informacionBase = new InformacionBase();
+    informacionBase.tituloInvestigacion = this.firstFormGroup.get('tituloInvestigacionForm').value;
+    informacionBase.escuelas = this.firstFormGroup.get('escuelasForm').value;
+    informacionBase.entidadesExternas = this.firstFormGroup.get('aplicaForm').value;
+    informacionBase.direccionDuena = this.firstFormGroup.get('direccionDuenaForm').value;
+    informacionBase.anio = this.firstFormGroup.get('dateForm').value;
+    let areaLineas = new Array<AreaLinea>();
+    let areas = this.firstFormGroup.get('areasForm').value;
+    let lineas = this.firstFormGroup.get('lineasForm').value;
+
+    let guia = new Guia();
+    guia.check = this.detallesVisualizacion[0];
+    guia.autor = this.fourFormGroup.get('autorForm').value;
+
+    let articulo = new Articulo();
+    articulo.check = this.detallesVisualizacion[3];
+    articulo.anio = this.fourFormGroup.get('dateForm2').value;
+    articulo.autor = this.fourFormGroup.get('autorArticulo').value;
+    articulo.codigoISSN = this.fourFormGroup.get('codigoISSN').value;
+    articulo.nombreArticulo = this.fourFormGroup.get('nombreArticulo').value;
+    articulo.nombreRevista = this.fourFormGroup.get('nombreRevista').value;
+
+    let manuales = new Autor();
+    manuales.check = this.detallesVisualizacion[5];
+    manuales.autor = this.fourFormGroup.get('manualesForm').value;
+
+    let cartilla = new Autor();
+    cartilla.autor = this.fourFormGroup.get('cartillaForm').value;
+    cartilla.check = this.detallesVisualizacion[1];
+
+    let procedimientos = new Autor();
+    procedimientos.check = this.detallesVisualizacion[6];
+    procedimientos.autor = this.fourFormGroup.get('procedimientosForm').value;
+
+    let prototipo = new Autor();
+    prototipo.autor = this.fourFormGroup.get('prototipoForm').value;
+    prototipo.check = this.detallesVisualizacion[2];
+
+    let instructivos = new Autor();
+    instructivos.check = this.detallesVisualizacion[7];
+    instructivos.autor = this.fourFormGroup.get('instructivosForm').value;
+
+    let libro = new Libro();
+    libro.checkCapLibro = this.detallesVisualizacion[4];
+    libro.checkLibro = this.detallesVisualizacion[4];
+    libro.editorial = this.fourFormGroup.get('editorial').value;
+    libro.fechaPublicacion = this.fourFormGroup.get('dateForm3').value;
+    libro.nombreLibro = this.fourFormGroup.get('nombreLibro').value;
+    libro.paginaFinal = this.fourFormGroup.get('pagFinal').value;
+    libro.paginaLibro = this.fourFormGroup.get('pagInicio').value;
+
+    let estimulos = new Estimulos();
+    estimulos.capacitaciones = this.estimulosVisualizacion[6];
+    estimulos.condecoraciones = this.estimulosVisualizacion[0];
+    estimulos.estatuillas = this.estimulosVisualizacion[4];
+    estimulos.felicitaciones = this.estimulosVisualizacion[1];
+    estimulos.idCapacitacion = this.fifthFormGroup.get('idCapacitacion').value;
+    estimulos.monedas = this.estimulosVisualizacion[5];
+    estimulos.permiso = this.estimulosVisualizacion[3];
+    estimulos.personajeMes = this.estimulosVisualizacion[2];
+
+    let eventos = new Eventos();
+    eventos.pais = this.sixFormGroup.get('paisForm').value;
+    eventos.ciudad = this.sixFormGroup.get('ciudadInternacionalForm').value;
+    eventos.esNacional = !this.nacional;
+    eventos.fecha = this.sixFormGroup.get('fechaForm').value;
+    eventos.participacion = this.sixFormGroup.get('participacion').value;
+    eventos.tipo = this.sixFormGroup.get('tipoForm').value;
+    eventos.ciudadDpto = this.sixFormGroup.get('ciudadForm').value;
+    eventos.departamento = this.sixFormGroup.get('departamentoForm').value;
+
+    let convocatoriaColciencias = new Presupuesto();
+    convocatoriaColciencias.aporte = this.sevenFormGroup.get('apor1').value;
+    convocatoriaColciencias.descripcion = this.sevenFormGroup.get('desc1').value;
+    let ministerios = new Presupuesto();
+    ministerios.descripcion = this.sevenFormGroup.get('desc2').value;
+    ministerios.aporte = this.sevenFormGroup.get('apor2').value;
+    let entesInternacionales = new Presupuesto();
+    entesInternacionales.aporte = this.sevenFormGroup.get('apor3').value;
+    entesInternacionales.descripcion = this.sevenFormGroup.get('desc3').value;
+    let otrasInstituciones = new Presupuesto();
+    otrasInstituciones.descripcion = this.sevenFormGroup.get('desc4').value;
+    otrasInstituciones.aporte = this.sevenFormGroup.get('apor4').value;
+    let rubroPresupuestal = new Presupuesto();
+    rubroPresupuestal.descripcion = this.sevenFormGroup.get('desc5').value;
+    rubroPresupuestal.aporte = this.sevenFormGroup.get('apor5').value;
+    let convocatorioInterna = new Presupuesto();
+    convocatorioInterna.descripcion = this.sevenFormGroup.get('desc6').value;
+    convocatorioInterna.aporte = this.sevenFormGroup.get('apor6').value;
+    let conveniosExternos = new Presupuesto();
+    conveniosExternos.descripcion = this.sevenFormGroup.get('desc7').value;
+    conveniosExternos.aporte = this.sevenFormGroup.get('apor7').value;
+    let presupuestoPersonal = new Presupuesto();
+    presupuestoPersonal.descripcion = this.sevenFormGroup.get('desc8').value;
+    presupuestoPersonal.aporte = this.sevenFormGroup.get('apor8').value;
+
+    this.investigacion.informacionBase = informacionBase;
+    this.investigacion.investigadores = this.investigadoresSeleccionados;
+    this.investigacion.guia = guia;
+    this.investigacion.articulo  = articulo;
+    this.investigacion.manuales = manuales;
+    this.investigacion.cartilla = cartilla;
+    this.investigacion.procedimientos = procedimientos;
+    this.investigacion.prototipo = prototipo;
+    this.investigacion.instructivos = instructivos;
+    this.investigacion.libro = libro;
+    this.investigacion.estimulos = estimulos;
+    this.investigacion.eventos = eventos;
+    this.investigacion.convocatoriaColciencias = convocatoriaColciencias;
+    this.investigacion.ministerios = ministerios;
+    this.investigacion.entesInternacionales = entesInternacionales;
+    this.investigacion.otrasInstituciones = otrasInstituciones;
+    this.investigacion.rubroPresupuestal = rubroPresupuestal;
+    this.investigacion.convocatorioInterna = convocatorioInterna;
+    this.investigacion.conveniosExternos = conveniosExternos;
+    this.investigacion.presupuestoPersonal = presupuestoPersonal;
+
+
+  }
+
 }
