@@ -34,13 +34,13 @@ export class InformacionBase {
   escuelas: any;
   anio: any;
   entidadesExternas: any;
-  areaLinea: AreaLinea[];
+  areaLinea: AreaLineaa[];
 
 }
 
-export class AreaLinea {
+export class AreaLineaa {
   idArea: any;
-  idLinea: any[];
+  idLinea: any;
 }
 
 export class Guia {
@@ -95,6 +95,7 @@ export class Eventos {
 }
 
 export class Presupuesto{
+  nombre: any;
   descripcion: any;
   aporte: any;
 }

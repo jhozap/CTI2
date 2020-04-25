@@ -18,8 +18,9 @@ import { DialogService } from 'src/app/services/dialog.service';
 import { investigadores } from 'src/app/constants/mockData.class';
 import { paises } from 'src/app/models/paises';
 import { colombia } from 'src/app/models/colombia';
-import { InvestigacionInstitucional, InformacionBase, AreaLinea, Guia, Articulo, Autor, Libro, Estimulos, Eventos, Presupuesto } from 'src/app/models/investigacion.model';
+import { InvestigacionInstitucional, InformacionBase, AreaLineaa, Guia, Articulo, Autor, Libro, Estimulos, Eventos, Presupuesto } from 'src/app/models/investigacion.model';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { InvInstitucional, AreaLinea, Investigarores, Producto } from 'src/app/models/Investigacion-Institucional/InvInstitucional.model';
 
 export interface DialogData {
   animal: string;
@@ -81,6 +82,18 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     false,
     false
   ];
+  
+  paso3Validacion = [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ];
   ciudadSeleccionada: any;
   verTotal = false;
   paso7= [true,true,true,true,true,true,true,true];
@@ -106,6 +119,10 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   dataSourceInvestigadores: MatTableDataSource<any>;
 
   investigacion: InvestigacionInstitucional;
+
+  invInstitucional: InvInstitucional;
+
+
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
@@ -278,7 +295,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       this.fourFormGroup.controls["instructivosForm"].setValidators([]);
     }
 
-    this.validarCheck();
+    this.validarCheck(valor.checked, posicion);
 
   }
 
@@ -453,9 +470,9 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     console.log(event.source.value, event.source.selected);
 
     if(event.source.selected === false){
-      this.lineas = this.lineas.filter(x=> x.AREA != event.source.value);
+      this.lineas = this.lineas.filter(x=> x.AREA != event.source.value.ID_AREA);
     } else {
-      let linea = this.lineasOriginal.filter(x=>x.AREA == event.source.value);
+      let linea = this.lineasOriginal.filter(x=>x.AREA == event.source.value.ID_AREA);
       linea.forEach(element => {
         this.lineas.push(element);
       });
@@ -599,6 +616,8 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     }
   }
 
+
+
   desahibilitarTodo(){
     for (let i = 1; i < 9; i++) {
       this.sevenFormGroup.get('desc'+i).disable();
@@ -627,9 +646,17 @@ export class InvestigacionInstitucionalComponent implements OnInit {
 
   }
 
-  validarCheck(){
-    if(this.investigadoresSeleccionados.length>0){
-      this.paso3valido = false;
+  validarCheck(valor,posicion){
+  
+    if(valor){
+      this.paso3Validacion[posicion] = true;
+    } else {
+      this.paso3Validacion[posicion] = false;
+    }
+    console.log(this.paso3Validacion.filter(x => x === true));
+    
+    if(this.paso3Validacion.filter(x=> x === true).length>0){
+      this.paso3valido = !true;
     }else{
       this.paso3valido = true;
     }
@@ -646,6 +673,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
 
   construirDTO(){
 
+    
     this.investigacion = new InvestigacionInstitucional();
 
     let informacionBase = new InformacionBase();
@@ -654,9 +682,26 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     informacionBase.entidadesExternas = this.firstFormGroup.get('aplicaForm').value;
     informacionBase.direccionDuena = this.firstFormGroup.get('direccionDuenaForm').value;
     informacionBase.anio = this.firstFormGroup.get('dateForm').value;
-    let areaLineas = new Array<AreaLinea>();
-    let areas = this.firstFormGroup.get('areasForm').value;
-    let lineas = this.firstFormGroup.get('lineasForm').value;
+
+
+    
+    
+   
+    let areaLineass = new Array<AreaLineaa>();
+       this.firstFormGroup.get('areasForm').value.forEach(element => {
+       
+      let linea = this.firstFormGroup.get('lineasForm').value.filter(x => x.AREA == element.ID_AREA);
+      linea.forEach(lineaSeleccion => {
+      
+        let  area = new  AreaLineaa(); 
+        area.idArea = element.ID_AREA;
+        area.idLinea = lineaSeleccion.LINEA;;
+        areaLineass.push(area);
+      });  
+    });
+    informacionBase.areaLinea = areaLineass;
+
+    debugger;
 
     let guia = new Guia();
     guia.check = this.detallesVisualizacion[0];
@@ -766,6 +811,174 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     this.investigacion.presupuestoPersonal = presupuestoPersonal;
 
 
+
+    // Armado de objeto API
+    // Info Base
+    this.invInstitucional = new InvInstitucional();
+    this.invInstitucional.IdInvestigacion = "";
+    this.invInstitucional.Titulo = this.firstFormGroup.get('tituloInvestigacionForm').value;
+    this.invInstitucional.Direccion = this.firstFormGroup.get('direccionDuenaForm').value;
+    this.invInstitucional.Anio = this.firstFormGroup.get('dateForm').value;
+    this.invInstitucional.Participacion = this.firstFormGroup.get('aplicaForm').value;
+    this.invInstitucional.ExParticipa = "";
+    this.invInstitucional.Escuela = this.firstFormGroup.get('escuelasForm').value;
+    this.invInstitucional.Estado = 1;
+
+    //Area Linea
+
+    let areaLineas = new Array<AreaLinea>();
+       this.firstFormGroup.get('areasForm').value.forEach(element => {
+       
+      let linea = this.firstFormGroup.get('lineasForm').value.filter(x => x.AREA == element.ID_AREA);
+      linea.forEach(lineaSeleccion => {
+      
+        let  area = new  AreaLinea(); 
+        area.IdArea = element.ID_AREA;
+        area.IdLinea = lineaSeleccion.LINEA;;
+        areaLineas.push(area);
+      });  
+    });
+
+    this.invInstitucional.AreaLinea = areaLineas;
+
+    //Investigadores
+
+    let investigadoresSelected = new Array<Investigarores>();
+    this.investigadoresSeleccionados.forEach(element => {
+      let inv = new Investigarores();
+      inv.IdInvestigador = element.DOCUMENTO;
+      investigadoresSelected.push(inv);
+    });
+
+    this.invInstitucional.Investigadores = investigadoresSelected;
+
+    //Producto
+    debugger;
+    let productos = new Array<Producto>();
+    for(let i = 0; i< this.detallesVisualizacion.length; i++) {
+      if(this.detallesVisualizacion[i]) {
+        let product = new Producto();
+        switch(i) {
+          case 0: {
+            product.TipoProducto = "Guia";
+            product.Autor = this.fourFormGroup.get('autorForm').value;
+            product.NombreRevista = "";
+            product.NombreArticulo = "";
+            product.Anio = 0;
+            product.CodigoISSN = "";
+            product.NombreLibro = "";
+            product.PaginaInicio = 0;
+            product.PaginaFinal = 0;
+            product.Editorial = "";
+            product.FechaPublicacion = "";
+            break;
+          }
+          case 1: {
+            product.TipoProducto = "Cartilla";
+            product.Autor = this.fourFormGroup.get('cartillaForm').value;
+            product.NombreRevista = "";
+            product.NombreArticulo = "";
+            product.Anio = 0;
+            product.CodigoISSN = "";
+            product.NombreLibro = "";
+            product.PaginaInicio = 0;
+            product.PaginaFinal = 0;
+            product.Editorial = "";
+            product.FechaPublicacion = "";
+            break;
+          }
+          case 2: {
+            product.TipoProducto = "Prototipo";
+            product.Autor = this.fourFormGroup.get('prototipoForm').value;
+            product.NombreRevista = "";
+            product.NombreArticulo = "";
+            product.Anio = 0;
+            product.CodigoISSN = "";
+            product.NombreLibro = "";
+            product.PaginaInicio = 0;
+            product.PaginaFinal = 0;
+            product.Editorial = "";
+            product.FechaPublicacion = "";
+            break;
+          }
+          case 3: {
+            product.TipoProducto = "Articulo";
+            product.Autor = this.fourFormGroup.get('autorArticulo').value;
+            product.NombreRevista = this.fourFormGroup.get('nombreRevista').value;
+            product.NombreArticulo = this.fourFormGroup.get('nombreArticulo').value;
+            product.Anio = this.fourFormGroup.get('dateForm2').value;;
+            product.CodigoISSN = this.fourFormGroup.get('codigoISSN').value;
+            product.NombreLibro = "";
+            product.PaginaInicio = 0;
+            product.PaginaFinal = 0;
+            product.Editorial = "";
+            product.FechaPublicacion = "";
+            break;
+          }
+          case 4: {
+            product.TipoProducto = "Libro";
+            product.Autor = ""
+            product.NombreRevista = "";
+            product.NombreArticulo = "";
+            product.Anio = 0;
+            product.CodigoISSN = "";
+            product.NombreLibro = this.fourFormGroup.get('nombreLibro').value;
+            product.PaginaInicio = this.fourFormGroup.get('pagInicio').value;
+            product.PaginaFinal = this.fourFormGroup.get('pagFinal').value;
+            product.Editorial = this.fourFormGroup.get('editorial').value;
+            product.FechaPublicacion = this.fourFormGroup.get('dateForm3').value;
+            break;
+          }
+          case 5: {
+            product.TipoProducto = "Manuales";
+            product.Autor = this.fourFormGroup.get('manualesForm').value;
+            product.NombreRevista = "";
+            product.NombreArticulo = "";
+            product.Anio = 0;
+            product.CodigoISSN = "";
+            product.NombreLibro = "";
+            product.PaginaInicio = 0;
+            product.PaginaFinal = 0;
+            product.Editorial = "";
+            product.FechaPublicacion = "";
+            break;
+          }
+          case 6: {
+            product.TipoProducto = "Procedimientos";
+            product.Autor = this.fourFormGroup.get('procedimientosForm').value;
+            product.NombreRevista = "";
+            product.NombreArticulo = "";
+            product.Anio = 0;
+            product.CodigoISSN = "";
+            product.NombreLibro = "";
+            product.PaginaInicio = 0;
+            product.PaginaFinal = 0;
+            product.Editorial = "";
+            product.FechaPublicacion = "";
+            break;
+          }
+          case 7: {
+            product.TipoProducto = "Instructivos";
+            product.Autor = this.fourFormGroup.get('instructivosForm').value;
+            product.NombreRevista = "";
+            product.NombreArticulo = "";
+            product.Anio = 0;
+            product.CodigoISSN = "";
+            product.NombreLibro = "";
+            product.PaginaInicio = 0;
+            product.PaginaFinal = 0;
+            product.Editorial = "";
+            product.FechaPublicacion = "";
+            break;
+          }
+        }
+        productos.push(product);
+      }      
+    }
+
+    console.log(productos);
+
+    console.log(this.investigacion);
   }
 
 }

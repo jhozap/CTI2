@@ -156,7 +156,7 @@
                   <mat-option
                     (onSelectionChange)="mostrarLineas($event)"
                     *ngFor="let area of areas"
-                    [value]="area.ID_AREA"
+                    [value]="area"
                     >{{ area.NOMBRE }}</mat-option
                   >
                 </mat-select>
@@ -167,7 +167,7 @@
                 <mat-select formControlName="lineasForm" multiple>
                   <mat-option
                     *ngFor="let linea of lineas"
-                    [value]="linea.LINEA"
+                    [value]="linea"
                     >{{ linea.LINEA_NOMBRE }}</mat-option
                   >
                 </mat-select>
@@ -177,7 +177,7 @@
         </div>
 
         <div class="buttons">
-          <button mat-raised-button color="primary" mat-button matStepperNext>
+          <button mat-raised-button color="primary"  mat-button matStepperNext>
             Siguiente
           </button>
         </div>
@@ -186,6 +186,7 @@
       <!--  2  -->
 
       <mat-step [stepControl]="secondFormGroup">
+        <ng-template matStepLabel>Investigadores</ng-template>
         <div class="buttonsBegin">
           <button
             mat-raised-button
@@ -285,6 +286,7 @@
           </button>
         </div>
       </mat-step>
+
       <mat-step>
         <ng-template matStepLabel>Producto Investigación</ng-template>
         <div class="checks">
@@ -910,6 +912,7 @@
           </button>
         </div>
       </mat-step>
+      
       <mat-step>
         <ng-template matStepLabel>Confirmar</ng-template>
         <p>¿Esta seguro que desea guardar la Investigación?</p>
@@ -921,7 +924,7 @@
             mat-raised-button
             color="primary"
             mat-button
-            (click)="stepper.reset()"
+            (click)="construirDTO()"
           >
             Ir al inicio
           </button>
