@@ -1,3 +1,4 @@
+import { Presupuesto, Estimulos, Eventos } from './../../../../models/Investigacion-Institucional/InvInstitucional.model';
 import { Component, OnInit, ViewChild, Inject } from "@angular/core";
 import {
   FormBuilder,
@@ -675,7 +676,6 @@ export class InvestigacionInstitucionalComponent implements OnInit {
 
     
     this.investigacion = new InvestigacionInstitucional();
-
     let informacionBase = new InformacionBase();
     informacionBase.tituloInvestigacion = this.firstFormGroup.get('tituloInvestigacionForm').value;
     informacionBase.escuelas = this.firstFormGroup.get('escuelasForm').value;
@@ -683,16 +683,11 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     informacionBase.direccionDuena = this.firstFormGroup.get('direccionDuenaForm').value;
     informacionBase.anio = this.firstFormGroup.get('dateForm').value;
 
-
-    
-    
-   
     let areaLineass = new Array<AreaLineaa>();
        this.firstFormGroup.get('areasForm').value.forEach(element => {
        
       let linea = this.firstFormGroup.get('lineasForm').value.filter(x => x.AREA == element.ID_AREA);
       linea.forEach(lineaSeleccion => {
-      
         let  area = new  AreaLineaa(); 
         area.idArea = element.ID_AREA;
         area.idLinea = lineaSeleccion.LINEA;;
@@ -744,82 +739,85 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     libro.paginaFinal = this.fourFormGroup.get('pagFinal').value;
     libro.paginaLibro = this.fourFormGroup.get('pagInicio').value;
 
-    let estimulos = new Estimulos();
-    estimulos.capacitaciones = this.estimulosVisualizacion[6];
-    estimulos.condecoraciones = this.estimulosVisualizacion[0];
-    estimulos.estatuillas = this.estimulosVisualizacion[4];
-    estimulos.felicitaciones = this.estimulosVisualizacion[1];
-    estimulos.idCapacitacion = this.fifthFormGroup.get('idCapacitacion').value;
-    estimulos.monedas = this.estimulosVisualizacion[5];
-    estimulos.permiso = this.estimulosVisualizacion[3];
-    estimulos.personajeMes = this.estimulosVisualizacion[2];
+    // let estimulos = new Estimulos();
+    // estimulos.capacitaciones = this.estimulosVisualizacion[6];
+    // estimulos.condecoraciones = this.estimulosVisualizacion[0];
+    // estimulos.estatuillas = this.estimulosVisualizacion[4];
+    // estimulos.felicitaciones = this.estimulosVisualizacion[1];
+    // estimulos.idCapacitacion = this.fifthFormGroup.get('idCapacitacion').value;
+    // estimulos.monedas = this.estimulosVisualizacion[5];
+    // estimulos.permiso = this.estimulosVisualizacion[3];
+    // estimulos.personajeMes = this.estimulosVisualizacion[2];
 
-    let eventos = new Eventos();
-    eventos.pais = this.sixFormGroup.get('paisForm').value;
-    eventos.ciudad = this.sixFormGroup.get('ciudadInternacionalForm').value;
-    eventos.esNacional = !this.nacional;
-    eventos.fecha = this.sixFormGroup.get('fechaForm').value;
-    eventos.participacion = this.sixFormGroup.get('participacion').value;
-    eventos.tipo = this.sixFormGroup.get('tipoForm').value;
-    eventos.ciudadDpto = this.sixFormGroup.get('ciudadForm').value;
-    eventos.departamento = this.sixFormGroup.get('departamentoForm').value;
+    // let eventos = new Eventos();
+    // eventos.pais = this.sixFormGroup.get('paisForm').value;
+    // eventos.ciudad = this.sixFormGroup.get('ciudadInternacionalForm').value;
+    // eventos.esNacional = !this.nacional;
+    // eventos.fecha = this.sixFormGroup.get('fechaForm').value;
+    // eventos.participacion = this.sixFormGroup.get('participacion').value;
+    // eventos.tipo = this.sixFormGroup.get('tipoForm').value;
+    // eventos.ciudadDpto = this.sixFormGroup.get('ciudadForm').value;
+    // eventos.departamento = this.sixFormGroup.get('departamentoForm').value;
 
-    let convocatoriaColciencias = new Presupuesto();
-    convocatoriaColciencias.aporte = this.sevenFormGroup.get('apor1').value;
-    convocatoriaColciencias.descripcion = this.sevenFormGroup.get('desc1').value;
-    let ministerios = new Presupuesto();
-    ministerios.descripcion = this.sevenFormGroup.get('desc2').value;
-    ministerios.aporte = this.sevenFormGroup.get('apor2').value;
-    let entesInternacionales = new Presupuesto();
-    entesInternacionales.aporte = this.sevenFormGroup.get('apor3').value;
-    entesInternacionales.descripcion = this.sevenFormGroup.get('desc3').value;
-    let otrasInstituciones = new Presupuesto();
-    otrasInstituciones.descripcion = this.sevenFormGroup.get('desc4').value;
-    otrasInstituciones.aporte = this.sevenFormGroup.get('apor4').value;
-    let rubroPresupuestal = new Presupuesto();
-    rubroPresupuestal.descripcion = this.sevenFormGroup.get('desc5').value;
-    rubroPresupuestal.aporte = this.sevenFormGroup.get('apor5').value;
-    let convocatorioInterna = new Presupuesto();
-    convocatorioInterna.descripcion = this.sevenFormGroup.get('desc6').value;
-    convocatorioInterna.aporte = this.sevenFormGroup.get('apor6').value;
-    let conveniosExternos = new Presupuesto();
-    conveniosExternos.descripcion = this.sevenFormGroup.get('desc7').value;
-    conveniosExternos.aporte = this.sevenFormGroup.get('apor7').value;
-    let presupuestoPersonal = new Presupuesto();
-    presupuestoPersonal.descripcion = this.sevenFormGroup.get('desc8').value;
-    presupuestoPersonal.aporte = this.sevenFormGroup.get('apor8').value;
+    // let convocatoriaColciencias = new Presupuesto();
+    // convocatoriaColciencias.aporte = this.sevenFormGroup.get('apor1').value;
+    // convocatoriaColciencias.descripcion = this.sevenFormGroup.get('desc1').value;
+    // let ministerios = new Presupuesto();
+    // ministerios.descripcion = this.sevenFormGroup.get('desc2').value;
+    // ministerios.aporte = this.sevenFormGroup.get('apor2').value;
+    // let entesInternacionales = new Presupuesto();
+    // entesInternacionales.aporte = this.sevenFormGroup.get('apor3').value;
+    // entesInternacionales.descripcion = this.sevenFormGroup.get('desc3').value;
+    // let otrasInstituciones = new Presupuesto();
+    // otrasInstituciones.descripcion = this.sevenFormGroup.get('desc4').value;
+    // otrasInstituciones.aporte = this.sevenFormGroup.get('apor4').value;
+    // let rubroPresupuestal = new Presupuesto();
+    // rubroPresupuestal.descripcion = this.sevenFormGroup.get('desc5').value;
+    // rubroPresupuestal.aporte = this.sevenFormGroup.get('apor5').value;
+    // let convocatorioInterna = new Presupuesto();
+    // convocatorioInterna.descripcion = this.sevenFormGroup.get('desc6').value;
+    // convocatorioInterna.aporte = this.sevenFormGroup.get('apor6').value;
+    // let conveniosExternos = new Presupuesto();
+    // conveniosExternos.descripcion = this.sevenFormGroup.get('desc7').value;
+    // conveniosExternos.aporte = this.sevenFormGroup.get('apor7').value;
+    // let presupuestoPersonal = new Presupuesto();
+    // presupuestoPersonal.descripcion = this.sevenFormGroup.get('desc8').value;
+    // presupuestoPersonal.aporte = this.sevenFormGroup.get('apor8').value;
 
-    this.investigacion.informacionBase = informacionBase;
-    this.investigacion.investigadores = this.investigadoresSeleccionados;
-    this.investigacion.guia = guia;
-    this.investigacion.articulo  = articulo;
-    this.investigacion.manuales = manuales;
-    this.investigacion.cartilla = cartilla;
-    this.investigacion.procedimientos = procedimientos;
-    this.investigacion.prototipo = prototipo;
-    this.investigacion.instructivos = instructivos;
-    this.investigacion.libro = libro;
-    this.investigacion.estimulos = estimulos;
-    this.investigacion.eventos = eventos;
-    this.investigacion.convocatoriaColciencias = convocatoriaColciencias;
-    this.investigacion.ministerios = ministerios;
-    this.investigacion.entesInternacionales = entesInternacionales;
-    this.investigacion.otrasInstituciones = otrasInstituciones;
-    this.investigacion.rubroPresupuestal = rubroPresupuestal;
-    this.investigacion.convocatorioInterna = convocatorioInterna;
-    this.investigacion.conveniosExternos = conveniosExternos;
-    this.investigacion.presupuestoPersonal = presupuestoPersonal;
+    // this.investigacion.informacionBase = informacionBase;
+    // this.investigacion.investigadores = this.investigadoresSeleccionados;
+    // this.investigacion.guia = guia;
+    // this.investigacion.articulo  = articulo;
+    // this.investigacion.manuales = manuales;
+    // this.investigacion.cartilla = cartilla;
+    // this.investigacion.procedimientos = procedimientos;
+    // this.investigacion.prototipo = prototipo;
+    // this.investigacion.instructivos = instructivos;
+    // this.investigacion.libro = libro;
+    // this.investigacion.estimulos = estimulos;
+    // this.investigacion.eventos = eventos;
+    // this.investigacion.convocatoriaColciencias = convocatoriaColciencias;
+    // this.investigacion.ministerios = ministerios;
+    // this.investigacion.entesInternacionales = entesInternacionales;
+    // this.investigacion.otrasInstituciones = otrasInstituciones;
+    // this.investigacion.rubroPresupuestal = rubroPresupuestal;
+    // this.investigacion.convocatorioInterna = convocatorioInterna;
+    // this.investigacion.conveniosExternos = conveniosExternos;
+    // this.investigacion.presupuestoPersonal = presupuestoPersonal;
 
 
 
     // Armado de objeto API
     // Info Base
     this.invInstitucional = new InvInstitucional();
-    this.invInstitucional.IdInvestigacion = "";
+    this.invInstitucional.IdInvestigacion = "0";
     this.invInstitucional.Titulo = this.firstFormGroup.get('tituloInvestigacionForm').value;
     this.invInstitucional.Direccion = this.firstFormGroup.get('direccionDuenaForm').value;
-    this.invInstitucional.Anio = this.firstFormGroup.get('dateForm').value;
-    this.invInstitucional.Participacion = this.firstFormGroup.get('aplicaForm').value;
+    let anio = this.firstFormGroup.get('dateForm').value.toArray();
+    this.invInstitucional.Anio =  anio[2] + '/' + Number(anio[1] + 1) + '/' + anio[0];
+    this.aplica ? this.invInstitucional.Participacion = 'SI' : this.invInstitucional.Participacion = 'NO';
+    this.aplica ? this.invInstitucional.ExParticipa = this.firstFormGroup.controls.aplicaForm.value : null ;
+    // this.invInstitucional.Participacion = this.firstFormGroup.get('aplicaForm').value;
     this.invInstitucional.ExParticipa = "";
     this.invInstitucional.Escuela = this.firstFormGroup.get('escuelasForm').value;
     this.invInstitucional.Estado = 1;
@@ -835,6 +833,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
         let  area = new  AreaLinea(); 
         area.IdArea = element.ID_AREA;
         area.IdLinea = lineaSeleccion.LINEA;;
+        area.IdInvestigacion = '0';
         areaLineas.push(area);
       });  
     });
@@ -846,7 +845,8 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     let investigadoresSelected = new Array<Investigarores>();
     this.investigadoresSeleccionados.forEach(element => {
       let inv = new Investigarores();
-      inv.IdInvestigador = element.DOCUMENTO;
+      inv.IdInvestigador = element.ID_INVESTIGADOR;
+      inv.IdInvestigacion = '0';
       investigadoresSelected.push(inv);
     });
 
@@ -854,14 +854,16 @@ export class InvestigacionInstitucionalComponent implements OnInit {
 
     //Producto
     debugger;
-    let productos = new Array<Producto>();
-    for(let i = 0; i< this.detallesVisualizacion.length; i++) {
-      if(this.detallesVisualizacion[i]) {
+    let productos = new Array<Producto>();     
+    var self = this;
+    this.detallesVisualizacion.forEach(function(element, i) {
+      if (element) {
         let product = new Producto();
+        product.IdInvestigacion = '0';
         switch(i) {
           case 0: {
             product.TipoProducto = "Guia";
-            product.Autor = this.fourFormGroup.get('autorForm').value;
+            product.Autor = self.fourFormGroup.get('autorForm').value;
             product.NombreRevista = "";
             product.NombreArticulo = "";
             product.Anio = 0;
@@ -875,7 +877,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
           }
           case 1: {
             product.TipoProducto = "Cartilla";
-            product.Autor = this.fourFormGroup.get('cartillaForm').value;
+            product.Autor = self.fourFormGroup.get('cartillaForm').value;
             product.NombreRevista = "";
             product.NombreArticulo = "";
             product.Anio = 0;
@@ -889,7 +891,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
           }
           case 2: {
             product.TipoProducto = "Prototipo";
-            product.Autor = this.fourFormGroup.get('prototipoForm').value;
+            product.Autor = self.fourFormGroup.get('prototipoForm').value;
             product.NombreRevista = "";
             product.NombreArticulo = "";
             product.Anio = 0;
@@ -903,11 +905,11 @@ export class InvestigacionInstitucionalComponent implements OnInit {
           }
           case 3: {
             product.TipoProducto = "Articulo";
-            product.Autor = this.fourFormGroup.get('autorArticulo').value;
-            product.NombreRevista = this.fourFormGroup.get('nombreRevista').value;
-            product.NombreArticulo = this.fourFormGroup.get('nombreArticulo').value;
-            product.Anio = this.fourFormGroup.get('dateForm2').value;;
-            product.CodigoISSN = this.fourFormGroup.get('codigoISSN').value;
+            product.Autor = self.fourFormGroup.get('autorArticulo').value;
+            product.NombreRevista = self.fourFormGroup.get('nombreRevista').value;
+            product.NombreArticulo = self.fourFormGroup.get('nombreArticulo').value;
+            product.Anio = self.fourFormGroup.get('dateForm2').value;;
+            product.CodigoISSN = self.fourFormGroup.get('codigoISSN').value;
             product.NombreLibro = "";
             product.PaginaInicio = 0;
             product.PaginaFinal = 0;
@@ -922,16 +924,16 @@ export class InvestigacionInstitucionalComponent implements OnInit {
             product.NombreArticulo = "";
             product.Anio = 0;
             product.CodigoISSN = "";
-            product.NombreLibro = this.fourFormGroup.get('nombreLibro').value;
-            product.PaginaInicio = this.fourFormGroup.get('pagInicio').value;
-            product.PaginaFinal = this.fourFormGroup.get('pagFinal').value;
-            product.Editorial = this.fourFormGroup.get('editorial').value;
-            product.FechaPublicacion = this.fourFormGroup.get('dateForm3').value;
+            product.NombreLibro = self.fourFormGroup.get('nombreLibro').value;
+            product.PaginaInicio = self.fourFormGroup.get('pagInicio').value;
+            product.PaginaFinal = self.fourFormGroup.get('pagFinal').value;
+            product.Editorial = self.fourFormGroup.get('editorial').value;
+            product.FechaPublicacion = self.fourFormGroup.get('dateForm3').value;
             break;
           }
           case 5: {
             product.TipoProducto = "Manuales";
-            product.Autor = this.fourFormGroup.get('manualesForm').value;
+            product.Autor = self.fourFormGroup.get('manualesForm').value;
             product.NombreRevista = "";
             product.NombreArticulo = "";
             product.Anio = 0;
@@ -945,7 +947,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
           }
           case 6: {
             product.TipoProducto = "Procedimientos";
-            product.Autor = this.fourFormGroup.get('procedimientosForm').value;
+            product.Autor = self.fourFormGroup.get('procedimientosForm').value;
             product.NombreRevista = "";
             product.NombreArticulo = "";
             product.Anio = 0;
@@ -959,7 +961,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
           }
           case 7: {
             product.TipoProducto = "Instructivos";
-            product.Autor = this.fourFormGroup.get('instructivosForm').value;
+            product.Autor = self.fourFormGroup.get('instructivosForm').value;
             product.NombreRevista = "";
             product.NombreArticulo = "";
             product.Anio = 0;
@@ -972,13 +974,119 @@ export class InvestigacionInstitucionalComponent implements OnInit {
             break;
           }
         }
-        productos.push(product);
-      }      
+      productos.push(product);
+      }
+    });
+
+    this.invInstitucional.Producto = productos;
+    // 5 Estimulos 
+
+    this.invInstitucional.Estimulos = new Estimulos();
+    this.invInstitucional.Estimulos.IdInvestigacion = '0';
+    this.estimulosVisualizacion[0] ? this.invInstitucional.Estimulos.Condecoraciones = 1 : this.invInstitucional.Estimulos.Condecoraciones = 0; //condecoraciones
+    this.estimulosVisualizacion[1] ? this.invInstitucional.Estimulos.Felicitaciones = 1 : this.invInstitucional.Estimulos.Felicitaciones = 0; //felicitaciones
+    this.estimulosVisualizacion[2] ? this.invInstitucional.Estimulos.PersonajeMes = 1 : this.invInstitucional.Estimulos.PersonajeMes = 0; //personajeMes
+    this.estimulosVisualizacion[3] ? this.invInstitucional.Estimulos.Permiso = 1 : this.invInstitucional.Estimulos.Permiso = 0; //permiso
+    this.estimulosVisualizacion[4] ? this.invInstitucional.Estimulos.Estatuillas = 1 : this.invInstitucional.Estimulos.Estatuillas = 0; //estatuillas
+    this.estimulosVisualizacion[5] ? this.invInstitucional.Estimulos.Monedas = 1: this.invInstitucional.Estimulos.Monedas = 0; //monedas
+    this.estimulosVisualizacion[6] ? this.invInstitucional.Estimulos.Capacitaciones = 1  : this.invInstitucional.Estimulos.Capacitaciones = 0; //capacitaciones
+    //this.estimulosVisualizacion[6] ? this.invInstitucional.Estimulos.idCapacitacion =  this.valorCapacitacion : null ;
+    
+
+    // 6 Eventos
+
+    this.invInstitucional.Eventos = new Eventos();
+    this.invInstitucional.Eventos.IdInvestigacion = '0';
+    this.sixFormGroup.controls.tipoForm.value.ID > 0 ?  this.invInstitucional.Eventos.Tipo = this.sixFormGroup.controls.tipoForm.value.ID : null;
+    this.sixFormGroup.controls.participacion.value.ID > 0 ?  this.invInstitucional.Eventos.Participacion = this.sixFormGroup.controls.participacion.value.ID : null;
+    let fecha  = this.sixFormGroup.controls.fechaForm.value.toArray();
+    this.sixFormGroup.controls.fechaForm.value ?  this.invInstitucional.Eventos.Fecha = fecha[2] + '/' + Number(fecha[1]+1) + '/' + fecha[0] : null;  
+    this.sixFormGroup.controls.ciudadForm.value ?  this.invInstitucional.Eventos.DescSubRegion = this.sixFormGroup.controls.ciudadForm.value : null;
+    this.sixFormGroup.controls.departamentoForm.value ?  this.invInstitucional.Eventos.DescRegion = this.sixFormGroup.controls.departamentoForm.value : null;
+    this.sixFormGroup.controls.ciudadInternacionalForm.value ?  this.invInstitucional.Eventos.DescSubRegion = this.sixFormGroup.controls.ciudadInternacionalForm.value : null;
+    this.sixFormGroup.controls.paisForm.value ?  this.invInstitucional.Eventos.Pais = this.sixFormGroup.controls.paisForm.value : null;    
+    this.nacional ? this.invInstitucional.Eventos.esNacional  = true : this.invInstitucional.Eventos.esNacional = false ;
+
+    // 7 Presupuesto  Asignado
+    let presupuestos = new Array<Presupuesto>();
+
+    if (this.sevenFormGroup.controls.desc1.value != '' ) {
+      let presupuesto = new Presupuesto();  
+      presupuesto.NombrePresupuesto = 'Convocatoria Colciencias';
+      presupuesto.DescPresupuesto = this.sevenFormGroup.controls.desc1.value;
+      presupuesto.Aporte = this.sevenFormGroup.controls.apor1.value;
+      presupuesto.IdInvestigacion = '0';
+      presupuestos.push(presupuesto);
     }
+    if (this.sevenFormGroup.controls.desc2.value != '' ) {
+      let presupuesto = new Presupuesto();  
+      presupuesto.NombrePresupuesto = 'Ministerios';
+      presupuesto.DescPresupuesto = this.sevenFormGroup.controls.desc2.value;
+      presupuesto.Aporte = this.sevenFormGroup.controls.apor2.value;
+      presupuesto.IdInvestigacion = '0';
+      presupuestos.push(presupuesto);
+    }
+    if (this.sevenFormGroup.controls.desc3.value != '' ) {
+      let presupuesto = new Presupuesto();  
+      presupuesto.NombrePresupuesto = 'Entes Internacionales';
+      presupuesto.DescPresupuesto = this.sevenFormGroup.controls.desc3.value;
+      presupuesto.Aporte = this.sevenFormGroup.controls.apor3.value;
+      presupuesto.IdInvestigacion = '0';
+      presupuestos.push(presupuesto);
+    }
+    if (this.sevenFormGroup.controls.desc4.value != '' ) {
+      let presupuesto = new Presupuesto();  
+      presupuesto.NombrePresupuesto = 'Otras Instituciones';
+      presupuesto.DescPresupuesto = this.sevenFormGroup.controls.desc4.value;
+      presupuesto.Aporte = this.sevenFormGroup.controls.apor4.value;
+      presupuesto.IdInvestigacion = '0';
+      presupuestos.push(presupuesto);
+    }
+    if (this.sevenFormGroup.controls.desc5.value != '' ) {
+      let presupuesto = new Presupuesto();  
+      presupuesto.NombrePresupuesto = 'Rubro Presupuestal (OFPLA)';
+      presupuesto.DescPresupuesto = this.sevenFormGroup.controls.desc5.value;
+      presupuesto.Aporte = this.sevenFormGroup.controls.apor5.value;
+      presupuesto.IdInvestigacion = '0';
+      presupuestos.push(presupuesto);
+    }
+    if (this.sevenFormGroup.controls.desc6.value != '' ) {
+      let presupuesto = new Presupuesto();  
+      presupuesto.NombrePresupuesto = 'Convocatoria Interna (DINAE)';
+      presupuesto.DescPresupuesto = this.sevenFormGroup.controls.desc6.value;
+      presupuesto.Aporte = this.sevenFormGroup.controls.apor6.value;
+      presupuesto.IdInvestigacion = '0';
+      presupuestos.push(presupuesto);
+    }
+    if (this.sevenFormGroup.controls.desc7.value != '' ) {
+      let presupuesto = new Presupuesto();  
+      presupuesto.NombrePresupuesto = 'Convenios Externos';
+      presupuesto.DescPresupuesto = this.sevenFormGroup.controls.desc7.value;
+      presupuesto.Aporte = this.sevenFormGroup.controls.apor7.value;
+      presupuesto.IdInvestigacion = '0';
+      presupuestos.push(presupuesto);
+    }
+    if (this.sevenFormGroup.controls.desc8.value != '' ) {
+      let presupuesto = new Presupuesto();  
+      presupuesto.NombrePresupuesto = 'Presupuesto  Personal(Investigadores)';
+      presupuesto.DescPresupuesto = this.sevenFormGroup.controls.desc8.value;
+      presupuesto.Aporte = this.sevenFormGroup.controls.apor8.value;
+      presupuesto.IdInvestigacion = '0';
+      presupuestos.push(presupuesto);
+    }
+    
+    this.invInstitucional.Presupuesto = presupuestos;
 
+    
     console.log(productos);
+    console.log(this.invInstitucional);
 
-    console.log(this.investigacion);
+
+    this._dataService.MergeInvestigacion(this.invInstitucional).subscribe( data => {
+      console.log(data);
+    });
+
+
   }
 
 }

@@ -343,7 +343,6 @@
                   [nombreCampo]="'autorForm'"
                   [placeHolder]="'Autor'"
                   [form]="fourFormGroup"
-
                 >
                 </app-number>
               </div>
@@ -662,13 +661,11 @@
       <!-- 7-->
       <mat-step>
         <ng-template matStepLabel>Presupuesto Asignado</ng-template>
-
         <form [formGroup]="sevenFormGroup">
           <div class="group2">
             <mat-label>Externo</mat-label>
             <!-- Categorización Colciencias -->
             <div class="sub-group2">
-
                   <mat-checkbox (change)="paso7Checked($event, 1)"
                     >Convocatoria Colciencias</mat-checkbox
                   >

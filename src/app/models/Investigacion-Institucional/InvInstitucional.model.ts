@@ -9,7 +9,7 @@ export class InvInstitucional {
       Estado: number;
       AreaLinea: Array<AreaLinea>;
       Investigadores: Array<Investigarores>;
-      Producto: Producto;
+      Producto: Array<Producto>;
       Estimulos: Estimulos;
       Eventos: Eventos;
       Presupuesto: Array<Presupuesto>;
@@ -60,6 +60,8 @@ export class Eventos {
     TipoRegion: string;
     DescRegion: string;
     DescSubRegion: string;
+    Pais: string;
+    esNacional: boolean;
 }
 
 export class Presupuesto {

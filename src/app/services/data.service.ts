@@ -87,6 +87,12 @@ export class DataService {
     });
   }
 
+  public MergeInvestigacion(params: any) {
+    return this.http.post(environment.pathApi + '/Investigacion/MergeInvestigacion', params, {
+      headers: this.generateBasicHeaders()
+    });
+  }
+ 
   public deleteUser(id: number) {
     return this.http.delete(environment.pathApi + `/Usuario/EliminarUsuario?id=${id}`, {
       headers: this.generateBasicHeaders()
