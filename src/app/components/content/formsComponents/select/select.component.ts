@@ -15,8 +15,11 @@ export class SelectComponent implements OnInit {
   @Input() data: any[];
   @Input() icon: string;
   @Input() argument: string;
+  @Input() value: number;
   @Input()
   form: FormGroup;
+  @Input()
+  formcontrolname: FormControl;
   @Input()
   nombreCampo: any;
 

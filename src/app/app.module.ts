@@ -31,7 +31,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
-
+import {DatePipe} from '@angular/common';
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { ReactiveFormsModule } from "@angular/forms";
 import { ModalInvestigador } from './components/content/GRIFT/investigacion-institucional/modalInvestigador.component';
@@ -77,7 +77,7 @@ import { ModalInvestigador } from './components/content/GRIFT/investigacion-inst
 
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
   entryComponents: [ModalInvestigador]
 })

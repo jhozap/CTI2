@@ -1,10 +1,12 @@
+import {  MatCheckbox } from '@angular/material/checkbox';
 import { Presupuesto, Estimulos, Eventos } from './../../../../models/Investigacion-Institucional/InvInstitucional.model';
 import { Component, OnInit, ViewChild, Inject } from "@angular/core";
 import {
   FormBuilder,
   Validators,
   FormGroup,
-  FormControl
+  FormControl,
+  FormArray
 } from "@angular/forms";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
@@ -19,9 +21,10 @@ import { DialogService } from 'src/app/services/dialog.service';
 import { investigadores } from 'src/app/constants/mockData.class';
 import { paises } from 'src/app/models/paises';
 import { colombia } from 'src/app/models/colombia';
-import { InvestigacionInstitucional, InformacionBase, AreaLineaa, Guia, Articulo, Autor, Libro, Estimulos, Eventos, Presupuesto } from 'src/app/models/investigacion.model';
+import { InvestigacionInstitucional, InformacionBase, AreaLineaa, Guia, Articulo, Autor, Libro } from 'src/app/models/investigacion.model';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { InvInstitucional, AreaLinea, Investigarores, Producto } from 'src/app/models/Investigacion-Institucional/InvInstitucional.model';
+import {DatePipe} from '@angular/common';
 
 export interface DialogData {
   animal: string;
@@ -45,9 +48,12 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   displayedColumns: string[] = ["position", "escuela", "nombre", "ticket", "Acciones"];
   displayedColumnsIn: string[] = ["DOCUMENTO", "NOMBRES", "APELLIDOS", "DESC_GRADO", "EMAIL", "ACCIONES"];
 
+  ///
+  
+  ///
   public new = false;
   titleForm: string = "Investigación Institucional";
-
+ 
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   fourFormGroup: FormGroup;
@@ -96,6 +102,40 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     false
   ];
   ciudadSeleccionada: any;
+
+  /// Checks Producto Investigacion
+  checkguia = false;
+  checkcartilla = false;
+  checkprototipo = false;
+  checkarticulo = false;
+  checklibro = false;
+  checkCaplibros = false;
+  checkmanuales = false;
+  checkprocedimientos = false;
+  checkinstructivos = false;
+  ///
+
+  /// Checks Estimulos
+  checkcondecoraciones =false;
+  checkfelicitaciones =false;
+  checkpersonajemes = false;
+  checkpermiso = false;
+  checkestatuillas = false;
+  checkmonedas = false;
+  checkcapacitacion = false;
+  ///
+
+  ///  checks Externo
+  checkConvocatoria = false;
+  checkministerio = false;
+  checkEntesInternacionales = false;
+  checkOtrasIns = false;
+  checkRubropresupuestal = false;
+  checkconvocatoriainterna = false;
+  checkconvenioExterno = false;
+  checkPresupuestoPersonal = false;
+  /// 
+
   verTotal = false;
   paso7= [true,true,true,true,true,true,true,true];
   capacitacionSeleccionadaCombo = false;
@@ -126,12 +166,13 @@ export class InvestigacionInstitucionalComponent implements OnInit {
 
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-
+  // @ViewChild('checkguia', { static: true })  checkguia: MatCheckbox;
   constructor(
     private _formBuilder: FormBuilder,
     private _dataService: DataService,
     public dialog: MatDialog,
     private dialogService: DialogService,
+    private datePipe: DatePipe
   ) {}
 
   ngOnInit() {
@@ -146,7 +187,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       escuelasForm: ["", Validators.required],
       aplicasForm: ["", Validators.required],
       aplicaForm: ["", ],
-      areasForm: ["", Validators.required],
+      areasForm:  ["", Validators.required],
       lineasForm: ["", Validators.required],
       dateForm: ["", Validators.required],
     });
@@ -222,9 +263,10 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     this.desahibilitarTodo();
     this.getDirecciones();
     this.getEscuelas();
-    this.getInvestigadores();
     this.getAreas();
     this.getAreasXLinea();
+    this.getInvestigadores();
+    this.getInvestigacionesIns();
   }
 
   productoInvestigacionChange(valor, posicion) {
@@ -300,8 +342,94 @@ export class InvestigacionInstitucionalComponent implements OnInit {
 
   }
 
+
+  productoInvestigacionChangeDetail(valor, posicion) {
+    console.log(valor);
+    this.detallesVisualizacion[posicion] = valor;
+
+    if(posicion==0 && valor){
+      this.fourFormGroup.controls["autorForm"].setValidators([Validators.required]);
+    }
+    if(posicion==0 && !valor){
+      this.fourFormGroup.controls["autorForm"].setValidators([]);
+    }
+    if(posicion==1 && valor){
+      this.fourFormGroup.controls["cartillaForm"].setValidators([Validators.required]);
+    }
+    if(posicion==1 && !valor){
+      this.fourFormGroup.controls["cartillaForm"].setValidators([]);
+    }
+    if(posicion==2 && valor){
+      this.fourFormGroup.controls["prototipoForm"].setValidators([Validators.required]);
+    }
+    if(posicion==2 && !valor){
+      this.fourFormGroup.controls["prototipoForm"].setValidators([]);
+    }
+    if(posicion==3 && valor){
+      this.fourFormGroup.controls["nombreRevista"].setValidators([Validators.required]);
+      this.fourFormGroup.controls["nombreArticulo"].setValidators([Validators.required]);
+      this.fourFormGroup.controls["dateForm2"].setValidators([Validators.required]);
+      this.fourFormGroup.controls["codigoISSN"].setValidators([Validators.required]);
+      this.fourFormGroup.controls["autorArticulo"].setValidators([Validators.required]);
+    }
+    if(posicion==3 && !valor){
+      this.fourFormGroup.controls["nombreRevista"].setValidators([]);
+      this.fourFormGroup.controls["nombreArticulo"].setValidators([]);
+      this.fourFormGroup.controls["dateForm2"].setValidators([]);
+      this.fourFormGroup.controls["codigoISSN"].setValidators([]);
+      this.fourFormGroup.controls["autorArticulo"].setValidators([]);
+    }
+    if(posicion==4 && valor){
+      this.fourFormGroup.controls["nombreLibro"].setValidators([Validators.required]);
+      this.fourFormGroup.controls["pagInicio"].setValidators([Validators.required]);
+      this.fourFormGroup.controls["pagFinal"].setValidators([Validators.required]);
+      this.fourFormGroup.controls["editorial"].setValidators([Validators.required]);
+      this.fourFormGroup.controls["dateForm3"].setValidators([Validators.required]);
+    }
+    if(posicion==4 && !valor){
+      this.fourFormGroup.controls["nombreLibro"].setValidators([]);
+      this.fourFormGroup.controls["pagInicio"].setValidators([]);
+      this.fourFormGroup.controls["pagFinal"].setValidators([]);
+      this.fourFormGroup.controls["editorial"].setValidators([]);
+      this.fourFormGroup.controls["dateForm3"].setValidators([]);
+    }
+    if(posicion==5 && valor){
+      this.fourFormGroup.controls["manualesForm"].setValidators([Validators.required]);
+    }
+    if(posicion==5 && !valor){
+      this.fourFormGroup.controls["manualesForm"].setValidators([]);
+    }
+    if(posicion==6 && valor){
+      this.fourFormGroup.controls["procedimientosForm"].setValidators([Validators.required]);
+    }
+    if(posicion==6 && !valor){
+      this.fourFormGroup.controls["procedimientosForm"].setValidators([]);
+    }
+    if(posicion==7 && valor){
+      this.fourFormGroup.controls["instructivosForm"].setValidators([Validators.required]);
+    }
+    if(posicion==7 && !valor){
+      this.fourFormGroup.controls["instructivosForm"].setValidators([]);
+    }
+
+    this.validarCheck(valor, posicion);
+
+  }
+
   estimulosChange(valor, posicion){
     this.estimulosVisualizacion[posicion] = valor.checked;
+    if(this.estimulosVisualizacion.filter(x=>x == true).length>0){
+      this.capacitacionSeleccionadaCombo = true;
+    } else{
+      this.capacitacionSeleccionadaCombo = false;
+    }
+    if(posicion==6){
+      this.capacitacionSeleccionadaCombo = false;
+    }
+  }
+
+  estimulosChangeDetail(valor, posicion){
+    this.estimulosVisualizacion[posicion] = valor;
     if(this.estimulosVisualizacion.filter(x=>x == true).length>0){
       this.capacitacionSeleccionadaCombo = true;
     } else{
@@ -318,7 +446,8 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       this.firstFormGroup.controls["aplicaForm"].setValidators([Validators.required]);
     } else {
       this.aplica = false;
-      this.firstFormGroup.controls["aplicaForm"].setValidators([]);
+      this.firstFormGroup.controls["aplicaForm"].clearValidators();
+      this.firstFormGroup.controls["aplicaForm"].setValue(' ')
     }
   }
 
@@ -384,8 +513,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       .getInvestigadores()
       .toPromise()
       .then((data: any[]) => {
-        this.investigadores = data;
-        this.dataSource = new MatTableDataSource(data);
+        this.investigadores = data;                              
         setTimeout(() => {
           this.dataSource.paginator = this.paginator;
         }, 0);
@@ -394,6 +522,239 @@ export class InvestigacionInstitucionalComponent implements OnInit {
         console.log(error);
       });
   }
+
+  getDetailForm() {
+    let formdata = JSON.parse(sessionStorage.getItem('inves'));
+    try {
+        if (formdata) {
+        
+          this.firstFormGroup.patchValue({
+            tituloInvestigacionForm: formdata[0].tituloInvestigacionForm,
+            direccionDuenaForm: formdata[0].direccionDuenaForm,
+            escuelasForm: formdata[0].escuelasForm,
+            aplicasForm: formdata[0].aplicasForm,
+            aplicaForm: formdata[0].aplicaForm,
+            areasForm: formdata[0].areasForm,
+            lineasForm: formdata[0].lineasForm,
+            dateForm: this.getDate(formdata[0].dateForm),
+          });
+    
+          this.investigadores.forEach(x => {
+            formdata[1].forEach(y => {
+              if (x.ID_INVESTIGADOR == y) {
+                this.investigadoresSeleccionados.push(x);
+              }
+            });
+          });          
+          this.dataSourceInvestigadores = new MatTableDataSource(this.investigadoresSeleccionados);          
+          ///Checks Producto Investigacion      
+          let self = this;           
+          formdata[2].forEach(element => {
+              switch (element.TipoProducto) {
+                case 'Guia':   
+                  self.checkguia = true;
+                  self.productoInvestigacionChangeDetail(true,0);
+                  break;
+                  case 'Cartilla':
+                    self.checkcartilla = true;
+                    self.productoInvestigacionChangeDetail(true,1);
+                  break;
+                  case 'Prototipo':
+                    self.checkprototipo = true;
+                    self.productoInvestigacionChangeDetail(true,2);
+                  break;
+                  case 'Articulo':
+                    self.checkarticulo = true;
+                    self.productoInvestigacionChangeDetail(true,3);
+                  break;
+                  case 'Libro':
+                    self.checklibro = true;
+                    self.productoInvestigacionChangeDetail(true,4);
+                  break;
+                  case 'Manuales':
+                    self.checkmanuales = true;
+                    self.productoInvestigacionChangeDetail(true,5);
+                  break;
+                  case 'Procedimientos':
+                    self.checkprocedimientos = true;
+                    self.productoInvestigacionChangeDetail(true,6);
+                  break;
+                  case 'Instructivos':
+                    self.checkinstructivos = true;
+                    self.productoInvestigacionChangeDetail(true,7);
+                    break;                     
+                  }
+                });               
+          
+          this.fourFormGroup.patchValue(formdata[3]);
+                
+          if (formdata[4].Condecoraciones) {
+            this.checkcondecoraciones = true;
+            this.estimulosChangeDetail(true,0);
+          }
+          if (formdata[4].Felicitaciones) {
+            this.checkfelicitaciones = true;
+            this.estimulosChangeDetail(true,1);
+          }
+          if (formdata[4].PersonajeMes) {
+            this.checkpersonajemes = true;
+            this.estimulosChangeDetail(true,2);
+          }
+          if (formdata[4].Permiso) {
+            this.checkpermiso= true;
+            this.estimulosChangeDetail(true,3);
+          }
+          if (formdata[4].Estatuillas) {
+            this.checkestatuillas = true;
+            this.estimulosChangeDetail(true,4);
+          }
+          if (formdata[4].Monedas) {
+            this.checkmonedas = true;
+            this.estimulosChangeDetail(true,5);
+          }
+          if (formdata[4].Capacitaciones) {
+            this.checkcapacitacion = true;
+            this.estimulosChangeDetail(true,6);
+          }
+          this.fifthFormGroup.patchValue(formdata[5]);
+          this.sixFormGroup.patchValue({        
+            tipoForm: formdata[7].tipoForm,
+            participacion: formdata[7].participacion,
+            fechaForm : this.getDate(formdata[7].fechaForm),
+            ciudadForm: formdata[7].ciudadForm,
+            paisForm: formdata[7].paisForm,
+            departamentoForm: formdata[7].departamentoForm,
+            ciudadInternacionalForm: formdata[7].ciudadInternacionalForm
+          });          
+          if (formdata[7].departamentoForm) {
+            this.ciudades = this.departamentos.find(x=>x.id === formdata[7].departamentoForm).ciudades;
+          }                    
+          if (Number(formdata[8].apor1) > 0) {
+            this.checkConvocatoria = true;
+            this.paso7CheckedDetail(true,1);
+          }
+          if (Number(formdata[8].apor2) > 0) {
+            this.checkministerio = true;
+            this.paso7CheckedDetail(true,2);
+          }
+          if (Number(formdata[8].apor3) > 0) {
+            this.checkEntesInternacionales = true;
+            this.paso7CheckedDetail(true,3);
+          }
+          if (Number(formdata[8].apor4) > 0) {
+            this.checkOtrasIns = true;
+            this.paso7CheckedDetail(true,4);
+          }
+          if (Number(formdata[8].apor5) > 0) {
+            this.checkRubropresupuestal = true;
+            this.paso7CheckedDetail(true,5);
+          }
+          if (Number(formdata[8].apor6) > 0) {
+            this.checkconvocatoriainterna = true;
+            this.paso7CheckedDetail(true,6);
+          }
+          if (Number(formdata[8].apor7) > 0) {
+            this.checkconvocatoriainterna = true;
+            this.paso7CheckedDetail(true,6);
+          }
+          if (Number(formdata[8].apor7) > 0) {
+            this.checkconvenioExterno = true;
+            this.paso7CheckedDetail(true,7);
+          }
+          if (Number(formdata[8].apor8) > 0) {
+            this.checkPresupuestoPersonal = true;
+            this.paso7CheckedDetail(true,8);
+          }          
+          this.sevenFormGroup.patchValue(formdata[8]);
+          this.sumarTotal1(0);
+          this.sumarTotal2(0);
+          this.sumar();
+      
+      }
+
+    }
+    catch (error) {
+      console.log("getDetailForm -> error", error)      
+    }      
+    
+  }
+
+  getDate(fecha) {
+    let d = new Date(fecha);    
+    // this.datePipe.transform(d, 'dd-MM-yyyy')
+    // console.log("getDate -> this.datePipe.transform(d, 'MM-dd-yyyy')", this.datePipe.transform(d, 'MM-MM-yyyy'))
+    return d;
+  }
+
+  compareFn(x, y): boolean {
+    return x && y ? x.ID_AREA === y.ID_AREA : x === y;
+  }
+
+  compareFnlinea(x, y): boolean {
+    return x && y ? x.LINEA === y.LINEA : x === y;
+  }
+
+  compareFnTipo(x, y): boolean {
+    return x && y ? x.ID === y.ID : x === y;
+  }
+  
+    
+
+  getInvestigacionesIns() {
+    this._dataService.getInvestigacionesInstitucionales().subscribe( (x:any) => {
+      this.dataSource = new MatTableDataSource(x);      
+      this.dataSource.paginator = this.paginator;
+    })
+     setTimeout(() => {
+          this.dataSource.paginator = this.paginator;
+        }, 0);
+  }
+
+  eliminarInvestigacion(row) {    
+    if (row) {
+      swalWithBootstrapButtons
+      .fire({
+        title: "¿Esta seguro que desea eliminar este registro?",
+        text: "si acepta se perderan todos los datos de este registro",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Aceptar",
+        cancelButtonText: "Cancelar",
+        reverseButtons: true,
+        allowOutsideClick: false,
+        allowEscapeKey: false
+      })    
+      .then(result => {
+        if (result.value) {
+             this._dataService.deleteInvestigacionIns(row.TICKET).subscribe( (data:any) => {    
+            if (data[0].codigo > 0) {
+              Swal.fire({
+                icon: "success",
+                title: "Investigacion Eliminada Exitosamente",
+                showConfirmButton: false,
+                timer: 1500
+              });
+              this.getInvestigacionesIns();        
+            } else {
+              Swal.fire({
+                icon: "error",
+                title: "error al eliminar la investigacion",
+                showConfirmButton: false,
+                timer: 1500
+              });
+            }  
+          })
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+        }
+      });  
+    }
+    
+   
+  }
+
 
   closeTheForm() {
     if (this.new) {
@@ -414,6 +775,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
             console.log("cancel aceptado");
             this.new = !this.new;
             this.titleForm = "Investigación Institucional";
+            
           } else if (
             /* Read more about handling dismissals below */
             result.dismiss === Swal.DismissReason.cancel
@@ -450,7 +812,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   getAreasXLinea() {
     this._dataService.getAreasXLinea()
       .subscribe((data: [])=> {
-        this.lineasOriginal = data;
+        this.lineasOriginal = data;        
       });
   }
 
@@ -462,8 +824,6 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     } else{
       this.capacitacionSeleccionadaCombo = false;
     }
-
-
   }
 
   mostrarLineas(event){
@@ -485,7 +845,10 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   }
 
   view(e) {
-
+    debugger;
+    this.new = !this.new;
+    this.titleForm = "Detalle Investigación Institucional No: " + e.TICKET;
+    this.getDetailForm();        
   }
 
   applyFilter(event: Event) {
@@ -521,15 +884,13 @@ export class InvestigacionInstitucionalComponent implements OnInit {
 
   seleccionarPais(event){
     console.log(event.source.value);
-
+    // this.paises = event.source.value;
   }
 
   seleccionarDepartamento(event){
     console.log(event.source.value);
     this.ciudades = [];
     this.ciudades = this.departamentos.find(x=>x.id === event.source.value).ciudades;
-    console.log(this.ciudades);
-
   }
 
   seleccionarCiudad(event){
@@ -577,7 +938,17 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       this.sevenFormGroup.get('desc'+posicion).disable();
       this.sevenFormGroup.get('apor'+posicion).disable();
     }
+  }
 
+  paso7CheckedDetail(event, posicion){
+    if(event){
+      this.sevenFormGroup.get('desc'+posicion).enable();
+      this.sevenFormGroup.get('apor'+posicion).enable();
+    }
+    else {
+      this.sevenFormGroup.get('desc'+posicion).disable();
+      this.sevenFormGroup.get('apor'+posicion).disable();
+    }
   }
 
   sumarTotal1(cantidad){
@@ -601,7 +972,6 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     this.sumarTotal();
   }
 
-
   sumarTotal(){
 
     this.sevenFormGroup.get('total').setValue(
@@ -616,8 +986,6 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       this.verTotal = false;
     }
   }
-
-
 
   desahibilitarTodo(){
     for (let i = 1; i < 9; i++) {
@@ -675,153 +1043,83 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   construirDTO(){
 
     
-    this.investigacion = new InvestigacionInstitucional();
-    let informacionBase = new InformacionBase();
-    informacionBase.tituloInvestigacion = this.firstFormGroup.get('tituloInvestigacionForm').value;
-    informacionBase.escuelas = this.firstFormGroup.get('escuelasForm').value;
-    informacionBase.entidadesExternas = this.firstFormGroup.get('aplicaForm').value;
-    informacionBase.direccionDuena = this.firstFormGroup.get('direccionDuenaForm').value;
-    informacionBase.anio = this.firstFormGroup.get('dateForm').value;
+    // this.investigacion = new InvestigacionInstitucional();
+    // let informacionBase = new InformacionBase();
+    // informacionBase.tituloInvestigacion = this.firstFormGroup.get('tituloInvestigacionForm').value;
+    // informacionBase.escuelas = this.firstFormGroup.get('escuelasForm').value;
+    // informacionBase.entidadesExternas = this.firstFormGroup.get('aplicaForm').value;
+    // informacionBase.direccionDuena = this.firstFormGroup.get('direccionDuenaForm').value;
+    // informacionBase.anio = this.firstFormGroup.get('dateForm').value;
 
-    let areaLineass = new Array<AreaLineaa>();
-       this.firstFormGroup.get('areasForm').value.forEach(element => {
+    // let areaLineass = new Array<AreaLineaa>();
+    //    this.firstFormGroup.get('areasForm').value.forEach(element => {
        
-      let linea = this.firstFormGroup.get('lineasForm').value.filter(x => x.AREA == element.ID_AREA);
-      linea.forEach(lineaSeleccion => {
-        let  area = new  AreaLineaa(); 
-        area.idArea = element.ID_AREA;
-        area.idLinea = lineaSeleccion.LINEA;;
-        areaLineass.push(area);
-      });  
-    });
-    informacionBase.areaLinea = areaLineass;
+    //   let linea = this.firstFormGroup.get('lineasForm').value.filter(x => x.AREA == element.ID_AREA);
+    //   linea.forEach(lineaSeleccion => {
+    //     let  area = new  AreaLineaa(); 
+    //     area.idArea = element.ID_AREA;
+    //     area.idLinea = lineaSeleccion.LINEA;;
+    //     areaLineass.push(area);
+    //   });  
+    // });
+    // informacionBase.areaLinea = areaLineass;
 
-    debugger;
+    // debugger;
 
-    let guia = new Guia();
-    guia.check = this.detallesVisualizacion[0];
-    guia.autor = this.fourFormGroup.get('autorForm').value;
+    // let guia = new Guia();
+    // guia.check = this.detallesVisualizacion[0];
+    // guia.autor = this.fourFormGroup.get('autorForm').value;
 
-    let articulo = new Articulo();
-    articulo.check = this.detallesVisualizacion[3];
-    articulo.anio = this.fourFormGroup.get('dateForm2').value;
-    articulo.autor = this.fourFormGroup.get('autorArticulo').value;
-    articulo.codigoISSN = this.fourFormGroup.get('codigoISSN').value;
-    articulo.nombreArticulo = this.fourFormGroup.get('nombreArticulo').value;
-    articulo.nombreRevista = this.fourFormGroup.get('nombreRevista').value;
+    // let articulo = new Articulo();
+    // articulo.check = this.detallesVisualizacion[3];
+    // articulo.anio = this.fourFormGroup.get('dateForm2').value;
+    // articulo.autor = this.fourFormGroup.get('autorArticulo').value;
+    // articulo.codigoISSN = this.fourFormGroup.get('codigoISSN').value;
+    // articulo.nombreArticulo = this.fourFormGroup.get('nombreArticulo').value;
+    // articulo.nombreRevista = this.fourFormGroup.get('nombreRevista').value;
 
-    let manuales = new Autor();
-    manuales.check = this.detallesVisualizacion[5];
-    manuales.autor = this.fourFormGroup.get('manualesForm').value;
+    // let manuales = new Autor();
+    // manuales.check = this.detallesVisualizacion[5];
+    // manuales.autor = this.fourFormGroup.get('manualesForm').value;
 
-    let cartilla = new Autor();
-    cartilla.autor = this.fourFormGroup.get('cartillaForm').value;
-    cartilla.check = this.detallesVisualizacion[1];
+    // let cartilla = new Autor();
+    // cartilla.autor = this.fourFormGroup.get('cartillaForm').value;
+    // cartilla.check = this.detallesVisualizacion[1];
 
-    let procedimientos = new Autor();
-    procedimientos.check = this.detallesVisualizacion[6];
-    procedimientos.autor = this.fourFormGroup.get('procedimientosForm').value;
+    // let procedimientos = new Autor();
+    // procedimientos.check = this.detallesVisualizacion[6];
+    // procedimientos.autor = this.fourFormGroup.get('procedimientosForm').value;
 
-    let prototipo = new Autor();
-    prototipo.autor = this.fourFormGroup.get('prototipoForm').value;
-    prototipo.check = this.detallesVisualizacion[2];
+    // let prototipo = new Autor();
+    // prototipo.autor = this.fourFormGroup.get('prototipoForm').value;
+    // prototipo.check = this.detallesVisualizacion[2];
 
-    let instructivos = new Autor();
-    instructivos.check = this.detallesVisualizacion[7];
-    instructivos.autor = this.fourFormGroup.get('instructivosForm').value;
+    // let instructivos = new Autor();
+    // instructivos.check = this.detallesVisualizacion[7];
+    // instructivos.autor = this.fourFormGroup.get('instructivosForm').value;
 
-    let libro = new Libro();
-    libro.checkCapLibro = this.detallesVisualizacion[4];
-    libro.checkLibro = this.detallesVisualizacion[4];
-    libro.editorial = this.fourFormGroup.get('editorial').value;
-    libro.fechaPublicacion = this.fourFormGroup.get('dateForm3').value;
-    libro.nombreLibro = this.fourFormGroup.get('nombreLibro').value;
-    libro.paginaFinal = this.fourFormGroup.get('pagFinal').value;
-    libro.paginaLibro = this.fourFormGroup.get('pagInicio').value;
-
-    // let estimulos = new Estimulos();
-    // estimulos.capacitaciones = this.estimulosVisualizacion[6];
-    // estimulos.condecoraciones = this.estimulosVisualizacion[0];
-    // estimulos.estatuillas = this.estimulosVisualizacion[4];
-    // estimulos.felicitaciones = this.estimulosVisualizacion[1];
-    // estimulos.idCapacitacion = this.fifthFormGroup.get('idCapacitacion').value;
-    // estimulos.monedas = this.estimulosVisualizacion[5];
-    // estimulos.permiso = this.estimulosVisualizacion[3];
-    // estimulos.personajeMes = this.estimulosVisualizacion[2];
-
-    // let eventos = new Eventos();
-    // eventos.pais = this.sixFormGroup.get('paisForm').value;
-    // eventos.ciudad = this.sixFormGroup.get('ciudadInternacionalForm').value;
-    // eventos.esNacional = !this.nacional;
-    // eventos.fecha = this.sixFormGroup.get('fechaForm').value;
-    // eventos.participacion = this.sixFormGroup.get('participacion').value;
-    // eventos.tipo = this.sixFormGroup.get('tipoForm').value;
-    // eventos.ciudadDpto = this.sixFormGroup.get('ciudadForm').value;
-    // eventos.departamento = this.sixFormGroup.get('departamentoForm').value;
-
-    // let convocatoriaColciencias = new Presupuesto();
-    // convocatoriaColciencias.aporte = this.sevenFormGroup.get('apor1').value;
-    // convocatoriaColciencias.descripcion = this.sevenFormGroup.get('desc1').value;
-    // let ministerios = new Presupuesto();
-    // ministerios.descripcion = this.sevenFormGroup.get('desc2').value;
-    // ministerios.aporte = this.sevenFormGroup.get('apor2').value;
-    // let entesInternacionales = new Presupuesto();
-    // entesInternacionales.aporte = this.sevenFormGroup.get('apor3').value;
-    // entesInternacionales.descripcion = this.sevenFormGroup.get('desc3').value;
-    // let otrasInstituciones = new Presupuesto();
-    // otrasInstituciones.descripcion = this.sevenFormGroup.get('desc4').value;
-    // otrasInstituciones.aporte = this.sevenFormGroup.get('apor4').value;
-    // let rubroPresupuestal = new Presupuesto();
-    // rubroPresupuestal.descripcion = this.sevenFormGroup.get('desc5').value;
-    // rubroPresupuestal.aporte = this.sevenFormGroup.get('apor5').value;
-    // let convocatorioInterna = new Presupuesto();
-    // convocatorioInterna.descripcion = this.sevenFormGroup.get('desc6').value;
-    // convocatorioInterna.aporte = this.sevenFormGroup.get('apor6').value;
-    // let conveniosExternos = new Presupuesto();
-    // conveniosExternos.descripcion = this.sevenFormGroup.get('desc7').value;
-    // conveniosExternos.aporte = this.sevenFormGroup.get('apor7').value;
-    // let presupuestoPersonal = new Presupuesto();
-    // presupuestoPersonal.descripcion = this.sevenFormGroup.get('desc8').value;
-    // presupuestoPersonal.aporte = this.sevenFormGroup.get('apor8').value;
-
-    // this.investigacion.informacionBase = informacionBase;
-    // this.investigacion.investigadores = this.investigadoresSeleccionados;
-    // this.investigacion.guia = guia;
-    // this.investigacion.articulo  = articulo;
-    // this.investigacion.manuales = manuales;
-    // this.investigacion.cartilla = cartilla;
-    // this.investigacion.procedimientos = procedimientos;
-    // this.investigacion.prototipo = prototipo;
-    // this.investigacion.instructivos = instructivos;
-    // this.investigacion.libro = libro;
-    // this.investigacion.estimulos = estimulos;
-    // this.investigacion.eventos = eventos;
-    // this.investigacion.convocatoriaColciencias = convocatoriaColciencias;
-    // this.investigacion.ministerios = ministerios;
-    // this.investigacion.entesInternacionales = entesInternacionales;
-    // this.investigacion.otrasInstituciones = otrasInstituciones;
-    // this.investigacion.rubroPresupuestal = rubroPresupuestal;
-    // this.investigacion.convocatorioInterna = convocatorioInterna;
-    // this.investigacion.conveniosExternos = conveniosExternos;
-    // this.investigacion.presupuestoPersonal = presupuestoPersonal;
-
-
+    // let libro = new Libro();
+    // libro.checkCapLibro = this.detallesVisualizacion[4];
+    // libro.checkLibro = this.detallesVisualizacion[4];
+    // libro.editorial = this.fourFormGroup.get('editorial').value;
+    // libro.fechaPublicacion = this.fourFormGroup.get('dateForm3').value;
+    // libro.nombreLibro = this.fourFormGroup.get('nombreLibro').value;
+    // libro.paginaFinal = this.fourFormGroup.get('pagFinal').value;
+    // libro.paginaLibro = this.fourFormGroup.get('pagInicio').value;
 
     // Armado de objeto API
     // Info Base
     this.invInstitucional = new InvInstitucional();
     this.invInstitucional.IdInvestigacion = "0";
     this.invInstitucional.Titulo = this.firstFormGroup.get('tituloInvestigacionForm').value;
-    this.invInstitucional.Direccion = this.firstFormGroup.get('direccionDuenaForm').value;
-    let anio = this.firstFormGroup.get('dateForm').value.toArray();
-    this.invInstitucional.Anio =  anio[2] + '/' + Number(anio[1] + 1) + '/' + anio[0];
+    this.invInstitucional.Direccion = this.firstFormGroup.get('direccionDuenaForm').value;    
+    this.invInstitucional.Anio =  this.firstFormGroup.get('dateForm').value.getDate() + 
+    '/' + Number(this.firstFormGroup.get('dateForm').value.getMonth() + 1) + '/' + this.firstFormGroup.get('dateForm').value.getFullYear();
     this.aplica ? this.invInstitucional.Participacion = 'SI' : this.invInstitucional.Participacion = 'NO';
-    this.aplica ? this.invInstitucional.ExParticipa = this.firstFormGroup.controls.aplicaForm.value : null ;
-    // this.invInstitucional.Participacion = this.firstFormGroup.get('aplicaForm').value;
-    this.invInstitucional.ExParticipa = "";
+    this.aplica ? this.invInstitucional.ExParticipa = this.firstFormGroup.controls.aplicaForm.value : '' ;  
+    // this.invInstitucional.ExParticipa = "";
     this.invInstitucional.Escuela = this.firstFormGroup.get('escuelasForm').value;
     this.invInstitucional.Estado = 1;
-
     //Area Linea
 
     let areaLineas = new Array<AreaLinea>();
@@ -853,7 +1151,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     this.invInstitucional.Investigadores = investigadoresSelected;
 
     //Producto
-    debugger;
+    
     let productos = new Array<Producto>();     
     var self = this;
     this.detallesVisualizacion.forEach(function(element, i) {
@@ -999,8 +1297,8 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     this.invInstitucional.Eventos.IdInvestigacion = '0';
     this.sixFormGroup.controls.tipoForm.value.ID > 0 ?  this.invInstitucional.Eventos.Tipo = this.sixFormGroup.controls.tipoForm.value.ID : null;
     this.sixFormGroup.controls.participacion.value.ID > 0 ?  this.invInstitucional.Eventos.Participacion = this.sixFormGroup.controls.participacion.value.ID : null;
-    let fecha  = this.sixFormGroup.controls.fechaForm.value.toArray();
-    this.sixFormGroup.controls.fechaForm.value ?  this.invInstitucional.Eventos.Fecha = fecha[2] + '/' + Number(fecha[1]+1) + '/' + fecha[0] : null;  
+    this.sixFormGroup.controls.fechaForm.value ?  this.invInstitucional.Eventos.Fecha = this.sixFormGroup.controls.fechaForm.value.getDate() +
+     '/' + Number(this.sixFormGroup.controls.fechaForm.value.getMonth() + 1) + '/' + this.sixFormGroup.controls.fechaForm.value.getFullYear() : null;  
     this.sixFormGroup.controls.ciudadForm.value ?  this.invInstitucional.Eventos.DescSubRegion = this.sixFormGroup.controls.ciudadForm.value : null;
     this.sixFormGroup.controls.departamentoForm.value ?  this.invInstitucional.Eventos.DescRegion = this.sixFormGroup.controls.departamentoForm.value : null;
     this.sixFormGroup.controls.ciudadInternacionalForm.value ?  this.invInstitucional.Eventos.DescSubRegion = this.sixFormGroup.controls.ciudadInternacionalForm.value : null;
@@ -1042,6 +1340,9 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       presupuesto.IdInvestigacion = '0';
       presupuestos.push(presupuesto);
     }
+
+    // INTERNO 
+
     if (this.sevenFormGroup.controls.desc5.value != '' ) {
       let presupuesto = new Presupuesto();  
       presupuesto.NombrePresupuesto = 'Rubro Presupuestal (OFPLA)';
@@ -1058,6 +1359,9 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       presupuesto.IdInvestigacion = '0';
       presupuestos.push(presupuesto);
     }
+
+    //Presupuesto Gestionado 
+
     if (this.sevenFormGroup.controls.desc7.value != '' ) {
       let presupuesto = new Presupuesto();  
       presupuesto.NombrePresupuesto = 'Convenios Externos';
@@ -1066,6 +1370,9 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       presupuesto.IdInvestigacion = '0';
       presupuestos.push(presupuesto);
     }
+
+    // Especie
+    
     if (this.sevenFormGroup.controls.desc8.value != '' ) {
       let presupuesto = new Presupuesto();  
       presupuesto.NombrePresupuesto = 'Presupuesto  Personal(Investigadores)';
@@ -1077,16 +1384,48 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     
     this.invInstitucional.Presupuesto = presupuestos;
 
-    
-    console.log(productos);
+    debugger;    
     console.log(this.invInstitucional);
 
-
-    this._dataService.MergeInvestigacion(this.invInstitucional).subscribe( data => {
-      console.log(data);
-    });
-
+    let formularios = [];
+    formularios.push(this.firstFormGroup.getRawValue());
+    formularios.push(this.investigadoresSeleccionados.map(x => x.ID_INVESTIGADOR));    
+    formularios.push(this.invInstitucional.Producto);
+    formularios.push(this.fourFormGroup.getRawValue());
+    formularios.push(this.invInstitucional.Estimulos);
+    formularios.push(this.fifthFormGroup.getRawValue());
+    formularios.push(this.invInstitucional.Eventos);
+    formularios.push(this.sixFormGroup.getRawValue());
+    formularios.push(this.sevenFormGroup.getRawValue());
+    sessionStorage.setItem('inves', JSON.stringify(formularios));   
+    Swal.fire({
+            icon: "success",
+            title: "Investigacion Creada Exitosamente",
+            showConfirmButton: false,
+            timer: 1500
+          });
+    // this._dataService.MergeInvestigacion(this.invInstitucional).subscribe( (data:any) => {
+    //   debugger;
+    //   if (data.m_Item1 > 0) {
+    //     Swal.fire({
+    //       icon: "success",
+    //       title: "Investigacion Creada Exitosamente",
+    //       showConfirmButton: false,
+    //       timer: 1500
+    //     });
+    //     this.getInvestigacionesIns();        
+    //   } else {
+    //     Swal.fire({
+    //       icon: "error",
+    //       title: "Hubo un error al guaradar la investigación",
+    //       showConfirmButton: false,
+    //       timer: 1500
+    //     });
+    //   }  
+    // });
 
   }
+
+  
 
 }

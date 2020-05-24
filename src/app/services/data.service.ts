@@ -104,5 +104,17 @@ export class DataService {
       headers: this.generateBasicHeaders()
     });
   }
+
+  public getInvestigacionesInstitucionales() {    
+    return this.http.get(environment.pathApi + '/Investigacion/ConsultarInvestigacionesIns', {
+      headers: this.generateBasicHeaders()
+    });
+  }
+
+  public deleteInvestigacionIns(investigacion: string) {
+    return this.http.delete(environment.pathApi + `/Investigacion/EliminarInvestigacionInstitucional?investigacion=${investigacion}`, {
+      headers: this.generateBasicHeaders()
+    }); 
+  }
   
 }

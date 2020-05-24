@@ -28,40 +28,46 @@
         class="mat-elevation-z8"
         style="width: 100%;"
       >
-        <!-- Position Column -->
+        <!-- Position Column -->  
         <ng-container matColumnDef="position">
-          <th mat-header-cell *matHeaderCellDef>No.</th>
-          <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+          <th mat-header-cell *matHeaderCellDef>Ticket</th>
+          <td mat-cell *matCellDef="let element">{{ element.TICKET }}</td>
         </ng-container>
 
         <!-- Name Column -->
         <ng-container matColumnDef="nombre">
           <th mat-header-cell *matHeaderCellDef>Nombre Investigacion</th>
-          <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.NOMBRE }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="FECHA">
+          <th mat-header-cell *matHeaderCellDef>FECHA</th>
+          <td mat-cell *matCellDef="let element">{{ element.FECHA }}</td>
         </ng-container>
 
         <!-- Weight Column -->
         <ng-container matColumnDef="escuela">
-          <th mat-header-cell *matHeaderCellDef>Escuela</th>
-          <td mat-cell *matCellDef="let element">{{ element.escuela }}</td>
+          <th mat-header-cell *matHeaderCellDef>Nombre Escuela</th>
+          <td mat-cell *matCellDef="let element">{{ element.NOMBRE_ESCUELA }}</td>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="ticket">
-          <th mat-header-cell *matHeaderCellDef>Ticket</th>
-          <td mat-cell *matCellDef="let element">{{ element.ticket }}</td>
+          <th mat-header-cell *matHeaderCellDef>Direccion</th>
+          <td mat-cell *matCellDef="let element">{{ element.NOMBRE_DIRECCION }}</td>
         </ng-container>
 
         <!-- Acciones Column -->
         <ng-container matColumnDef="Acciones">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
           <td mat-cell *matCellDef="let row">
-            <button mat-icon-button color="accent" (click)="view(row)">
+            <button mat-icon-button color="accent" matTooltip="Ver detalle" (click)="view(row)">
               <mat-icon>search</mat-icon>
             </button>
-          </td>
+            <button mat-icon-button color="warn" matTooltip="Eliminar" (click)="eliminarInvestigacion(row)" ><mat-icon>delete</mat-icon></button>
+          </td>        
         </ng-container>
-
+            
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
@@ -152,7 +158,7 @@
             <div>
               <mat-form-field>
                 <mat-label>Areas</mat-label>
-                <mat-select formControlName="areasForm" multiple>
+                <mat-select formControlName="areasForm" multiple [compareWith]="compareFn">
                   <mat-option
                     (onSelectionChange)="mostrarLineas($event)"
                     *ngFor="let area of areas"
@@ -164,8 +170,9 @@
 
               <mat-form-field>
                 <mat-label>Lineas</mat-label>
-                <mat-select formControlName="lineasForm" multiple>
+                <mat-select formControlName="lineasForm" [compareWith]="compareFnlinea"  multiple>                  
                   <mat-option
+                                
                     *ngFor="let linea of lineas"
                     [value]="linea"
                     >{{ linea.LINEA_NOMBRE }}</mat-option
@@ -180,6 +187,10 @@
           <button mat-raised-button color="primary"  mat-button matStepperNext>
             Siguiente
           </button>
+
+          {{firstFormGroup.value | json}}
+          {{firstFormGroup.status | json}}
+         
         </div>
       </mat-step>
 
@@ -290,31 +301,31 @@
       <mat-step>
         <ng-template matStepLabel>Producto Investigación</ng-template>
         <div class="checks">
-          <mat-checkbox (change)="productoInvestigacionChange($event, 0)"
+          <mat-checkbox [checked]="checkguia"  (change)="productoInvestigacionChange($event, 0)"
             >Guía</mat-checkbox
           >
-          <mat-checkbox (change)="productoInvestigacionChange($event, 1)"
+          <mat-checkbox  [checked]="checkcartilla" (change)="productoInvestigacionChange($event, 1)"
             >Cartilla</mat-checkbox
           >
-          <mat-checkbox (change)="productoInvestigacionChange($event, 2)"
+          <mat-checkbox [checked]="checkprototipo" (change)="productoInvestigacionChange($event, 2)"
             >Prototipo</mat-checkbox
           >
-          <mat-checkbox (change)="productoInvestigacionChange($event, 3)"
+          <mat-checkbox  [checked]="checkarticulo" (change)="productoInvestigacionChange($event, 3)"
             >Artículo</mat-checkbox
           >
-          <mat-checkbox (change)="productoInvestigacionChange($event, 4)"
+          <mat-checkbox  [checked]="checklibro" (change)="productoInvestigacionChange($event, 4)"
             >Libro</mat-checkbox
           >
-          <mat-checkbox (change)="productoInvestigacionChange($event, 4)"
+          <mat-checkbox [checked]="checkCaplibros" (change)="productoInvestigacionChange($event, 4)"
             >Cap. Libro</mat-checkbox
           >
-          <mat-checkbox (change)="productoInvestigacionChange($event, 5)"
+          <mat-checkbox [checked]="checkmanuales" (change)="productoInvestigacionChange($event, 5)"
             >Manuales</mat-checkbox
           >
-          <mat-checkbox (change)="productoInvestigacionChange($event, 6)"
+          <mat-checkbox [checked]="checkprocedimientos" (change)="productoInvestigacionChange($event, 6)"
             >Procedimientos</mat-checkbox
           >
-          <mat-checkbox (change)="productoInvestigacionChange($event, 7)"
+          <mat-checkbox  [checked]="checkinstructivos" (change)="productoInvestigacionChange($event, 7)"
             >Instructivos</mat-checkbox
           >
         </div>
@@ -326,7 +337,7 @@
           <button mat-raised-button color="primary"
           [disabled]="paso3valido ? 'disabled': null" mat-button matStepperNext>
             Siguiente
-          </button>
+          </button>          
         </div>
       </mat-step>
 
@@ -513,25 +524,25 @@
         <form [formGroup]="fifthFormGroup">
           <ng-template matStepLabel>Estímulos</ng-template>
           <div class="checks">
-            <mat-checkbox (change)="estimulosChange($event, 0)"
+            <mat-checkbox [checked]="checkcondecoraciones"   (change)="estimulosChange($event, 0)"
               >Condecoraciones</mat-checkbox
             >
-            <mat-checkbox (change)="estimulosChange($event, 1)"
+            <mat-checkbox [checked]="checkfelicitaciones" (change)="estimulosChange($event, 1)"
               >Felicitaciones</mat-checkbox
             >
-            <mat-checkbox (change)="estimulosChange($event, 2)"
+            <mat-checkbox [checked]="checkpersonajemes" (change)="estimulosChange($event, 2)"
               >Personaje del Mes</mat-checkbox
             >
-            <mat-checkbox (change)="estimulosChange($event, 3)"
+            <mat-checkbox [checked]="checkpermiso" (change)="estimulosChange($event, 3)"
               >Permiso</mat-checkbox
             >
-            <mat-checkbox (change)="estimulosChange($event, 4)"
+            <mat-checkbox  [checked]="checkestatuillas" (change)="estimulosChange($event, 4)"
               >Estatuillas</mat-checkbox
             >
-            <mat-checkbox (change)="estimulosChange($event, 5)"
+            <mat-checkbox [checked]="checkmonedas" (change)="estimulosChange($event, 5)"
               >Monedas</mat-checkbox
             >
-            <mat-checkbox (change)="estimulosChange($event, 6)"
+            <mat-checkbox [checked]="checkcapacitacion" (change)="estimulosChange($event, 6)"
               >Capacitaciones</mat-checkbox
             >
             <mat-form-field *ngIf="estimulosVisualizacion[6]">
@@ -564,22 +575,46 @@
         <ng-template matStepLabel>Eventos</ng-template>
 
         <form [formGroup]="sixFormGroup">
+       
           <div class="group">
-            <app-select
+            <mat-form-field>
+              <mat-label>Tipo</mat-label>
+              <mat-select formControlName="tipoForm" [compareWith]="compareFnTipo" >                  
+                <mat-option                            
+                  *ngFor="let tipo of tipoEvento"
+                  [value]="tipo"
+                  >{{ tipo.DESCRIPCION }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Participación</mat-label>
+              <mat-select formControlName="participacion" [compareWith]="compareFnTipo">                  
+                <mat-option                            
+                  *ngFor="let participa of participaciones"
+                  [value]="participa"
+                  >{{ participa.DESCRIPCION }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+            <!-- <app-select 
+                  
               [placeholder]="'Tipo.'"
               [data]="tipoEvento"
               [argument]="'DESCRIPCION'"
-              [nombreCampo]="'tipoForm'"
+              [nombreCampo]="'tipoForm'"          
               [form]="sixFormGroup"
-            ></app-select>
-
+              [formcontrolname]="sixFormGroup.controls.tipoForm"
+            ></app-select> -->
+<!-- 
             <app-select
               [placeholder]="'Participación.'"
               [data]="participaciones"
               [argument]="'DESCRIPCION'"
               [nombreCampo]="'participacion'"
               [form]="sixFormGroup"
-            ></app-select>
+            ></app-select> -->
 
             <mat-form-field style="margin-right: 20px;" id="3">
               <input
@@ -655,6 +690,7 @@
           <button mat-raised-button color="primary" mat-button matStepperNext>
             Siguiente
           </button>
+          {{sixFormGroup.value | json}}
         </div>
       </mat-step>
 
@@ -666,7 +702,7 @@
             <mat-label>Externo</mat-label>
             <!-- Categorización Colciencias -->
             <div class="sub-group2">
-                  <mat-checkbox (change)="paso7Checked($event, 1)"
+                  <mat-checkbox [checked]="checkConvocatoria" (change)="paso7Checked($event, 1)"
                     >Convocatoria Colciencias</mat-checkbox
                   >
                   <mat-form-field>
@@ -689,7 +725,7 @@
                     />
                   </mat-form-field>
 
-                  <mat-checkbox (change)="paso7Checked($event, 2)"
+                  <mat-checkbox  [checked]="checkministerio" (change)="paso7Checked($event, 2)"
                     >Ministerios</mat-checkbox
                   >
                   <mat-form-field>
@@ -711,7 +747,7 @@
                       (input)="sumarTotal1($event.target.value)"
                     />
                   </mat-form-field>
-                  <mat-checkbox (change)="paso7Checked($event, 3)"
+                  <mat-checkbox [checked]="checkEntesInternacionales" (change)="paso7Checked($event, 3)"
                     >Entes Internacionales</mat-checkbox
                   >
                   <mat-form-field>
@@ -733,7 +769,7 @@
                       (input)="sumarTotal1($event.target.value)"
                     />
                   </mat-form-field>
-                  <mat-checkbox (change)="paso7Checked($event, 4)"
+                  <mat-checkbox [checked]="checkOtrasIns" (change)="paso7Checked($event, 4)"
                     >Otras Instituciones</mat-checkbox
                   >
                   <mat-form-field>
@@ -775,7 +811,7 @@
             <mat-label>Interno</mat-label>
             <div class="sub-group2">
 
-              <mat-checkbox (change)="paso7Checked($event, 5)"
+              <mat-checkbox [checked]="checkRubropresupuestal" (change)="paso7Checked($event, 5)"
                     >Rubro Presupuestal (OFPLA)</mat-checkbox
                   >
                   <div></div>
@@ -791,7 +827,7 @@
                   </mat-form-field>
 
 
-                  <mat-checkbox (change)="paso7Checked($event, 6)"
+                  <mat-checkbox [checked]="checkconvocatoriainterna" (change)="paso7Checked($event, 6)"
                     >Convocatoria Interna (DINAE)</mat-checkbox
                   >
                   <div></div>
@@ -827,7 +863,7 @@
             <div class="sub-group2">
 
 
-              <mat-checkbox (change)="paso7Checked($event, 7)"
+              <mat-checkbox [checked]="checkconvenioExterno" (change)="paso7Checked($event, 7)"
                     >Convenios Externos</mat-checkbox
                   >
 
@@ -857,7 +893,7 @@
             <div class="sub-group2">
 
 
-              <mat-checkbox (change)="paso7Checked($event, 8)"
+              <mat-checkbox  [checked]="checkPresupuestoPersonal" (change)="paso7Checked($event, 8)"
                     >Presupuesto Personal (Investigadores)</mat-checkbox
                   >
 
