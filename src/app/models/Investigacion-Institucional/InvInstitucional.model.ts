@@ -13,6 +13,7 @@ export class InvInstitucional {
       Estimulos: Estimulos;
       Eventos: Eventos;
       Presupuesto: Array<Presupuesto>;
+      formulario: string;
 }
 
 export class AreaLinea {

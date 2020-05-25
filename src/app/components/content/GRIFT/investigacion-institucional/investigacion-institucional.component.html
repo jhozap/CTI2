@@ -186,10 +186,7 @@
         <div class="buttons">
           <button mat-raised-button color="primary"  mat-button matStepperNext>
             Siguiente
-          </button>
-
-          {{firstFormGroup.value | json}}
-          {{firstFormGroup.status | json}}
+          </button>      
          
         </div>
       </mat-step>
@@ -689,8 +686,7 @@
           </button>
           <button mat-raised-button color="primary" mat-button matStepperNext>
             Siguiente
-          </button>
-          {{sixFormGroup.value | json}}
+          </button>  
         </div>
       </mat-step>
 
@@ -953,13 +949,13 @@
           <button mat-raised-button color="warn" mat-button matStepperPrevious>
             Atras
           </button>
-          <button
-            mat-raised-button
+          <button 
+            mat-raised-button           
             color="primary"
             mat-button
             (click)="construirDTO()"
           >
-            Ir al inicio
+          {{ !detalle ? "Guardar" : "Ir al inicio" }}
           </button>
         </div>
       </mat-step>
