@@ -866,6 +866,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
             this.new = !this.new;
             this.titleForm = "Investigación Institucional";
             this.clean();
+            this.getInvestigacionesIns();
           } else if (
             /* Read more about handling dismissals below */
             result.dismiss === Swal.DismissReason.cancel
