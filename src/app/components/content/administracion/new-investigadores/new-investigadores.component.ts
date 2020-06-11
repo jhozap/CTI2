@@ -303,6 +303,7 @@ export class NewInvestigadoresComponent implements OnInit {
 
           this._dataService.deleteInvestigador(i.ID_INVESTIGADOR)
             .subscribe((data)=> {
+              debugger;
               if (data[0].codigo > 0) {
                 Swal.fire({
                   icon: "success",
@@ -313,7 +314,7 @@ export class NewInvestigadoresComponent implements OnInit {
               } else {
                 Swal.fire({
                   icon: "error",
-                  title: "error al eliminar el investigador",
+                  title: data[0].mensaje,
                   showConfirmButton: false,
                   timer: 1500
                 });

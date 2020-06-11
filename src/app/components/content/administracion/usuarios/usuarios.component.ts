@@ -356,7 +356,7 @@ export class UsuariosComponent implements OnInit {
             allowEscapeKey: false,
             timer: 1500
           });
-          this.getUsers();
+          
         } else if (
           /* Read more about handling dismissals below */
           result.dismiss === Swal.DismissReason.cancel
