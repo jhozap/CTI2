@@ -300,7 +300,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   }
 
   productoInvestigacionChange(valor, posicion) {
-    console.log(valor.checked);
+    // console.log(valor.checked);
     this.detallesVisualizacion[posicion] = valor.checked;
 
     if (posicion == 0 && valor.checked) {
@@ -404,7 +404,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   }
 
   productoInvestigacionChangeDetail(valor, posicion) {
-    console.log(valor);
+    // console.log(valor);
     this.detallesVisualizacion[posicion] = valor;
 
     if (posicion == 0 && valor) {
@@ -948,7 +948,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   }
 
   seleccionarCapacitacion(event) {
-    console.log(event.source.value);
+    // console.log(event.source.value);
     this.valorCapacitacion = event.source.value;
     if (this.estimulosVisualizacion.filter((x) => x == true).length > 0) {
       this.capacitacionSeleccionadaCombo = true;
@@ -958,7 +958,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   }
 
   mostrarLineas(event) {
-    console.log(event.source.value, event.source.selected);
+    // console.log(event.source.value, event.source.selected);
 
     if (event.source.selected === false) {
       this.lineas = this.lineas.filter(
@@ -972,7 +972,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
         this.lineas.push(element);
       });
 
-      console.log(this.lineas);
+      // console.log(this.lineas);
     }
   }
 
@@ -995,7 +995,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       .openInvestigador(this.investigadores, this.investigadoresSeleccionados)
       .subscribe(
         (response) => {
-          console.log(response);
+          // console.log(response);
           if (response != null && response != undefined) {
             this.investigadoresSeleccionados.push(response);
 
@@ -1024,12 +1024,12 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   }
 
   seleccionarPais(event) {
-    console.log(event.source.value);
+    // console.log(event.source.value);
     // this.paises = event.source.value;
   }
 
   seleccionarDepartamento(event) {
-    console.log(event.source.value);
+    // console.log(event.source.value);
     this.ciudades = [];
     this.ciudades = this.departamentos.find(
       (x) => x.id === event.source.value
@@ -1037,13 +1037,13 @@ export class InvestigacionInstitucionalComponent implements OnInit {
   }
 
   seleccionarCiudad(event) {
-    console.log(event.source.value);
+    // console.log(event.source.value);
     this.ciudadSeleccionada = event.source.value;
   }
 
   cambiarLugar(event) {
     this.nacional = event.checked;
-    console.log(event.checked);
+    // console.log(event.checked);
 
     if (this.nacional) {
       this.sixFormGroup.controls["departamentoForm"].setValidators([]);
@@ -1200,7 +1200,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
     } else {
       this.paso3Validacion[posicion] = false;
     }
-    console.log(this.paso3Validacion.filter((x) => x === true));
+    // console.log(this.paso3Validacion.filter((x) => x === true));
 
     if (this.paso3Validacion.filter((x) => x === true).length > 0) {
       this.paso3valido = !true;
@@ -1594,7 +1594,7 @@ export class InvestigacionInstitucionalComponent implements OnInit {
       this._dataService
         .MergeInvestigacion(this.invInstitucional)
         .subscribe((data: any) => {
-          debugger;
+          // debugger;
           if (data.m_Item1 > 0) {
             Swal.fire({
               icon: "success",

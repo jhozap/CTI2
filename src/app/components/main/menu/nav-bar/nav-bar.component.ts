@@ -30,7 +30,7 @@ export class NavBarComponent implements OnInit {
     }
     
     this.cargo = values.DESC_GRADO;
-    console.log(values);
+    // console.log(values);
     this._componentservice.user.subscribe(user => {     
       if (user) {
         this.user = user.NOMBRES + " " + user.APELLIDOS;

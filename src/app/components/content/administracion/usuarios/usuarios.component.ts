@@ -160,7 +160,7 @@ export class UsuariosComponent implements OnInit {
         })
         .then(result => {
           if (result.value) {
-            console.log("cancel aceptado");
+            // console.log("cancel aceptado");
             this.new = !this.new;
             this.titleForm = "Usuarios";
             this.getUsers();
@@ -183,7 +183,7 @@ export class UsuariosComponent implements OnInit {
       .getUsers()
       .toPromise()
       .then((data: User[]) => {
-        console.log(data);
+        // console.log(data);
         this.dataSource = new MatTableDataSource(data);
         setTimeout(() => {
           this.dataSource.paginator = this.paginator;
@@ -219,7 +219,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   guardar() {
-    console.log(this.formulario.value);
+    // console.log(this.formulario.value);
     const newUser = this.formulario.value;
     const query = {
       ID_USUARIO: this.idUsuario,
@@ -260,7 +260,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   updateUser(user: User) {
-    console.log("Update", user);
+    // console.log("Update", user);
     if (!this.new) {
       this.titleForm = "Actualizar Usuario";
       this.new = !this.new;
@@ -308,7 +308,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   deleteUser(user: User) {
-    console.log("delete", user);
+    // console.log("delete", user);
     swalWithBootstrapButtons
       .fire({
         title: "Eliminar Usuario",

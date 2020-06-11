@@ -145,7 +145,7 @@ export class GraficaProductoComponent implements OnInit {
   }
 
   cambiar(tipo) {
-    console.log(tipo);
+    // console.log(tipo);
     if(tipo === 'Barras'){
       this.cd.detectChanges();
       this.graficas[0] = new ChartDTO();

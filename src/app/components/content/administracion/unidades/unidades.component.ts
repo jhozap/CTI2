@@ -82,8 +82,8 @@ export class UnidadesComponent implements OnInit {
   getUnidades() {
     this._dataService.getUnidades()
       .subscribe((data: any[]) => {
-        debugger;
-        console.log(data);
+        // debugger;
+        // console.log(data);
         this.dataSource = new MatTableDataSource(data);
         setTimeout(() => {
           this.dataSource.paginator = this.paginator;
@@ -107,7 +107,7 @@ export class UnidadesComponent implements OnInit {
         })
         .then(result => {
           if (result.value) {
-            console.log("cancel aceptado");
+            // console.log("cancel aceptado");
             this.new = !this.new;
             this.titleForm = "Unidades";
             this.getUnidades();

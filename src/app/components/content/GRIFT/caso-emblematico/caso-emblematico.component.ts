@@ -78,7 +78,7 @@ export class CasoEmblematicoComponent implements OnInit {
         })
         .then(result => {
           if (result.value) {
-            console.log("cancel aceptado");
+            // console.log("cancel aceptado");
             this.new = !this.new;
             this.titleForm = "Caso emblematico";
             
@@ -97,7 +97,7 @@ export class CasoEmblematicoComponent implements OnInit {
   getCasoEmblematico() {
     this._dataService.getCasoEmblematico()
       .subscribe((data: any[])=> {
-        console.log(data);
+        // console.log(data);
         this.dataSource = new MatTableDataSource(data);
         setTimeout(() => {
           this.dataSource.paginator = this.paginator;

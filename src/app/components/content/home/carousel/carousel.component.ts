@@ -35,7 +35,7 @@ export class CarouselComponent implements OnInit {
   }
 
   prev() {
-    console.log('prev');
+    // console.log('prev');
     this.active = this.active > 0 ? this.active -= 1 : this.items.length - 1;
   }
 

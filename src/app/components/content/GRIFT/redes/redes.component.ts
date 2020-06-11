@@ -99,7 +99,7 @@ export class RedesComponent implements OnInit {
         })
         .then(result => {
           if (result.value) {
-            console.log("cancel aceptado");
+            // console.log("cancel aceptado");
             this.new = !this.new;
             this.titleForm = "Redes de Investigacion";
           } else if (
@@ -115,7 +115,7 @@ export class RedesComponent implements OnInit {
   }
 
   departamentoSeleccionado(dpto) {
-    console.log(dpto);
+    // console.log(dpto);
     this.colombia
       .filter(x => x.id == dpto)
       .forEach(element => {
@@ -125,12 +125,12 @@ export class RedesComponent implements OnInit {
   }
 
   seleccionarCiudad(ciudad) {
-    console.log(ciudad);
+    // console.log(ciudad);
   }
 
   getRedes() {
     this._dataService.getRedes().subscribe((data: any[]) => {
-      console.log(data);
+      // console.log(data);
       this.dataSource = new MatTableDataSource(data);
       setTimeout(() => {
         this.dataSource.paginator = this.paginator;

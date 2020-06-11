@@ -152,7 +152,7 @@ export class GraficaInvestigacionComponent implements OnInit {
 
   cambiar(tipo) {
    
-      console.log(tipo);
+      // console.log(tipo);
       if(tipo === 'Barras'){
         this.graficas[0] = new ChartDTO();
         this.graficas[0].canvas = document.getElementById("investigacionesInstitucionalesChart");

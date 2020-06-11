@@ -117,7 +117,7 @@ export class NewInvestigadoresComponent implements OnInit {
       .getInvestigadores()
       .toPromise()
       .then((data: any[]) => {
-        console.log(data);
+        // console.log(data);
         this.dataSource = new MatTableDataSource(data);
         setTimeout(() => {
           this.dataSource.paginator = this.paginator;
@@ -144,7 +144,7 @@ export class NewInvestigadoresComponent implements OnInit {
         })
         .then(result => {
           if (result.value) {
-            console.log("cancel aceptado");
+            // console.log("cancel aceptado");
             this.new = !this.new;
             this.titleForm = "Investigadores";
             
@@ -162,7 +162,7 @@ export class NewInvestigadoresComponent implements OnInit {
   }
 
   enableTipo(event){
-    console.log(event);
+    // console.log(event);
     if (event) {
       this.formulario.get('Tipo').enable();
     } else {
@@ -188,7 +188,7 @@ export class NewInvestigadoresComponent implements OnInit {
       .getGrados()
       .toPromise()
       .then((data: any[]) => {
-        debugger;
+        // debugger;
         this.grado = data;
       })
       .catch(error => {
@@ -197,8 +197,8 @@ export class NewInvestigadoresComponent implements OnInit {
   }
 
   guardar() {
-    debugger;
-    console.log(JSON.stringify(this.formulario.value));
+    // debugger;
+    // console.log(JSON.stringify(this.formulario.value));
     const newInvestigador = this.formulario.value;
     const query = {
       ID_INVESTIGADOR: this.idInvestigador,
@@ -216,8 +216,8 @@ export class NewInvestigadoresComponent implements OnInit {
       PROFESOR: newInvestigador.Investigador ? 1 : 0,
       ESTUDIANTE: newInvestigador.Estudiante ? 1 : 0
     };
-    debugger;
-    console.log(JSON.stringify(query));
+    // debugger;
+    // console.log(JSON.stringify(query));
     this._dataService.newInvestigador(query).subscribe(data => {
       if (data[0].codigo > 0) {
         Swal.fire({
@@ -303,7 +303,7 @@ export class NewInvestigadoresComponent implements OnInit {
 
           this._dataService.deleteInvestigador(i.ID_INVESTIGADOR)
             .subscribe((data)=> {
-              debugger;
+              // debugger;
               if (data[0].codigo > 0) {
                 Swal.fire({
                   icon: "success",
